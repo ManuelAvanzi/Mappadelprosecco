@@ -1,10 +1,10 @@
 {
   "titolo": "Mappa turistica del Prosecco",
   "bbox": {
-    "w": 11.909385,
-    "e": 12.423022,
-    "n": 46.018856,
-    "s": 45.789202
+    "w": 11.909887,
+    "e": 12.427427,
+    "n": 46.019553,
+    "s": 45.788152
   },
   "mappePx": {
     "w": 12292,
@@ -46,8 +46,8 @@
     "file": "altimetria.png",
     "larghezza": 1536,
     "altezza": 987,
-    "quotaMin": 13,
-    "quotaMax": 1550,
+    "quotaMin": 12,
+    "quotaMax": 1551,
     "zoomTile": 12,
     "fonte": "Mapzen/AWS Terrain Tiles (terrarium), dati SRTM/EU-DEM"
   },
@@ -55,5 +55,17 @@
     "file": "colori.jpg",
     "larghezza": 3072,
     "altezza": 1974
+  },
+  "calibrazione": {
+    "metodo": "registrazione automatica su vettori OSM (tema strade)",
+    "scala": 1.0076,
+    "coincidenza": 33.2,
+    "data": "2026-11-08",
+    "riquadroPrecedente": {
+      "w": 11.909385,
+      "e": 12.423022,
+      "n": 46.018856,
+      "s": 45.789202
+    }
   }
 }

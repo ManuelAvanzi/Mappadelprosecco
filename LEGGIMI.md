@@ -40,6 +40,8 @@ tools/
   luoghi.mjs               ELENCO CURATO: i tre livelli del brief, coordinate stimate, i 15 monumenti, gli itinerari (tappe)
   build-data.mjs           costruzione dati (vedi §4)
   importa-materiali.mjs    importa mappe, GLB e foto dei monumenti dalla cartella dei materiali
+  calibra-mappe.mjs        calibrazione automatica delle mappe fornite sui vettori OSM (vedi §4)
+  geometria.mjs            funzioni condivise: Mercator, Overpass → poligoni/linee, rasterizzatore
 AVVIA.bat                  avvio con doppio clic su Windows
 ```
 
@@ -59,9 +61,13 @@ Nell'anteprima del Code tab il server si chiama `mappa-prosecco` (porta 5800). N
 ## 4. Da dove vengono i dati
 
 - **Riquadro del plastico**: è quello delle tre mappe fornite (screenshot Google Maps 12292×7898 px in Web Mercator, stesso
-  inquadramento). La calibrazione è in `tools/build-data.mjs` (`ANCORE`: pixel delle etichette di Valdobbiadene, Conegliano e
-  Vittorio Veneto ↔ nodi OSM). Precisione attuale ≈ 100–400 m: si può affinare aggiungendo ancore o correggendo il riquadro
-  nel backend (Impostazioni) e rigenerando terreno e colori.
+  inquadramento). Prima stima in `tools/build-data.mjs` (`ANCORE`: pixel delle etichette di tre città ↔ nodi OSM), poi
+  **calibrazione automatica** con `node tools/calibra-mappe.mjs --tema=strade --applica`: registra la maschera delle strade grigie
+  della mappa stradale sui vettori stradali OpenStreetMap (scala conforme + spostamento) e scrive `bbox` e `calibrazione` in
+  config.json; i ritagli `data/cache/calibrazione-controllo-*.jpg` mostrano i vettori OSM in rosso sulla mappa per il controllo
+  visivo. Precisione ottenuta ≈ 10–20 m (le strade coincidono); i laghi di Revine appaiono leggermente diversi perché Google e
+  OSM hanno contorni diversi, non per errore di calibrazione. Dopo una nuova calibrazione rigenerare terreno e colori
+  (`--solo=terreno`, `--solo=colori`). Il tema "acqua" (fiumi) è meno affidabile: i letti del Piave differiscono tra le fonti.
 - **Rilievo**: tile terrarium zoom 12 (≈27 m/px) ricampionati sul riquadro. Quote 13–1550 m. Esagerazione predefinita 1,7.
 - **Colori**: vettori OpenStreetMap via Overpass (vigneti `landuse=vineyard`, boschi, abitati, industriali, acque, fiumi,
   strade principali, ferrovie) rasterizzati con tavolozza "mappa di carta" (`COLORI` in build-data.mjs). La base cambia tinta per
@@ -89,7 +95,7 @@ Nell'anteprima del Code tab il server si chiama `mappa-prosecco` (porta 5800). N
 
 ## 6. Limiti noti / prossimi passi
 
-- La calibrazione delle mappe fornite va affinata (vedi §4); il riquadro è modificabile dal backend ma richiede rigenerazione.
+- Il riquadro è modificabile anche a mano dal backend (Impostazioni), ma poi richiede la rigenerazione di terreno e colori.
 - La texture dei colori (13 m/px) è sfocata a bassa quota nel percorso animato: si può aumentare `W` in `colori()` (es. 6144)
   o aggiungere tile raster per lo zoom alto.
 - Nessuna foto 360 è ancora caricata (il committente non ne ha fornite): si aggiungono dal backend.
