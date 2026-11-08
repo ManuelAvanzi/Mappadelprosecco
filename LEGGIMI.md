@@ -96,7 +96,11 @@ ombre), **Effetti** (miniatura tilt-shift, vignettatura, saturazione, contrasto,
 **Acqua e vegetazione "vive"**: lo shader del terreno (`terreno.js`, `vivacizza`) legge `data/maschera.png` e, dove c'è acqua,
 scurisce il colore, abbassa la ruvidità (riflessi del sole) e increspa la normale con un rumore in movimento; sui vigneti aggiunge
 screziature e filari, sui boschi chiazze di chiome con un leggero rilievo. Tutto sfuma con la distanza (fwidth) per non sfarfallare
-nella veduta aerea. Il cursore "Vivacità" (Ambiente) regola l'insieme, 0 = colori piatti.
+nella veduta aerea. La sezione **Acqua e vegetazione** del pannello regola tutto: "Vivacità generale" (0 = colori piatti) e, per
+acqua, vigneti e boschi, la **tinta** (selettore colore) con la sua intensità e le proprietà: acqua → lucentezza, onde, velocità e
+ampiezza delle onde; vigneti → screziatura, filari e passo dei filari in metri; boschi → chiazze, rilievo e dimensione delle chiome.
+I valori si salvano con "Salva come predefinito" insieme al resto (`vista` in config.json); in `terreno.js` arrivano come uniform
+(`impostaVegetazione`).
 
 ## 5. Backend
 

@@ -92,6 +92,8 @@ button { cursor: pointer; }
 .ctrl input[type=range] { grid-column: 1 / -1; width: 100%; accent-color: var(--verde); margin: 0; }
 .ctrl select { grid-column: 1 / -1; border: 1px solid var(--bordo); border-radius: 8px; padding: 5px 8px; background: #fff; font-size: 13px; }
 .ctrl.check { grid-template-columns: 1fr auto; }
+.ctrl.color { grid-template-columns: 1fr auto auto; }
+.ctrl.color input { width: 34px; height: 24px; padding: 0; border: 1px solid var(--bordo); border-radius: 6px; background: #fff; cursor: pointer; }
 .ctrl.check input { width: 18px; height: 18px; accent-color: var(--verde); }
 .ctrl.spento { opacity: .4; pointer-events: none; }
 #vista-corpo .azioni { flex-direction: column; align-items: stretch; margin-top: 10px; }

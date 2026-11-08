@@ -7,7 +7,11 @@ export const PREDEFINITI = {
   ora: 15.5, sole: 1, ambiente: 1, ombre: !mobile, esposizione: 1.05,
   effetti: !mobile, miniatura: 0.35, vignetta: 0.25, saturazione: 1.1, contrasto: 1.05, temperatura: 0, bagliore: 0.15, contorni: 0, grana: 0,
   proiezione: 'orto', elevazione: 42, azimut: 0, zoom: 1, focale: 45, esagerazione: 1.7, vivacita: 0.7,
+  acquaTinta: '#8fc0e4', acquaForza: 0.45, acquaLucentezza: 0.88, acquaOnde: 1, acquaVelocita: 1, acquaScala: 38,
+  vigneTinta: '#c3cf78', vigneForza: 0.3, vigneScrezio: 1, vigneFilari: 1, vignePasso: 8,
+  boscoTinta: '#4b7a3d', boscoForza: 0.4, boscoChiazze: 1, boscoRilievo: 1, boscoScala: 140,
 };
+const pct = (v) => Math.round(v * 100);
 const NOMI_TAVOLO = { legno: 'legno chiaro', noce: 'noce', feltro: 'feltro verde', grigio: 'grigio studio', carta: 'carta millimetrata', nero: 'nero', nessuno: 'nessun tavolo' };
 
 // sezione → controlli: [chiave, etichetta, tipo, min, max, passo, formato]
@@ -17,7 +21,25 @@ const SCHEMA = [
     ['tavolo', 'Tavolo', 'select', Object.fromEntries([...OPZIONI.tavolo, 'nessuno'].map((k) => [k, NOMI_TAVOLO[k] || k]))],
     ['nuvole', 'Nuvole', 'range', 0, 1, 0.05, (v) => Math.round(v * 100)],
     ['nebbia', 'Foschia in lontananza', 'range', 0, 1, 0.05, (v) => Math.round(v * 100)],
-    ['vivacita', 'Vivacità di acqua e vegetazione', 'range', 0, 1.5, 0.05, (v) => Math.round(v * 100)],
+  ]],
+  ['Acqua e vegetazione', [
+    ['vivacita', 'Vivacità generale', 'range', 0, 1.5, 0.05, pct],
+    ['acquaTinta', 'Acqua: tinta', 'color'],
+    ['acquaForza', 'Acqua: intensità della tinta', 'range', 0, 1, 0.05, pct],
+    ['acquaLucentezza', 'Acqua: lucentezza', 'range', 0, 1, 0.05, pct],
+    ['acquaOnde', 'Acqua: onde', 'range', 0, 2, 0.05, pct],
+    ['acquaVelocita', 'Acqua: velocità delle onde', 'range', 0, 3, 0.1, (v) => v.toFixed(1) + '×'],
+    ['acquaScala', 'Acqua: ampiezza delle onde', 'range', 6, 120, 2, (v) => v + ' m'],
+    ['vigneTinta', 'Vigneti: tinta', 'color'],
+    ['vigneForza', 'Vigneti: intensità della tinta', 'range', 0, 1, 0.05, pct],
+    ['vigneScrezio', 'Vigneti: screziatura', 'range', 0, 2, 0.05, pct],
+    ['vigneFilari', 'Vigneti: filari', 'range', 0, 2, 0.05, pct],
+    ['vignePasso', 'Vigneti: passo dei filari', 'range', 3, 30, 0.5, (v) => v.toFixed(1) + ' m'],
+    ['boscoTinta', 'Boschi: tinta', 'color'],
+    ['boscoForza', 'Boschi: intensità della tinta', 'range', 0, 1, 0.05, pct],
+    ['boscoChiazze', 'Boschi: chiazze di chiome', 'range', 0, 2, 0.05, pct],
+    ['boscoRilievo', 'Boschi: rilievo delle chiome', 'range', 0, 2, 0.05, pct],
+    ['boscoScala', 'Boschi: dimensione delle chiome', 'range', 40, 400, 10, (v) => v + ' m'],
   ]],
   ['Luce', [
     ['ora', 'Ora del giorno', 'range', 5, 21, 0.25, (v) => `${String(Math.floor(v)).padStart(2, '0')}:${String(Math.round((v % 1) * 60)).padStart(2, '0')}`],
@@ -57,7 +79,7 @@ export class Vista {
   costruisci() {
     const c = this.corpo; c.innerHTML = '';
     for (const [titolo, controlli] of SCHEMA) {
-      const det = document.createElement('details'); det.open = titolo === 'Luce' || titolo === 'Ambiente';
+      const det = document.createElement('details'); det.open = titolo === 'Ambiente' || titolo === 'Acqua e vegetazione';
       det.innerHTML = `<summary>${titolo}</summary>`;
       for (const [k, nome, tipo, a, b, passo, fmt] of controlli) {
         const lab = document.createElement('label'); lab.className = 'ctrl ' + tipo; lab.dataset.k = k;
@@ -66,6 +88,11 @@ export class Vista {
           const inp = lab.querySelector('input'), out = lab.querySelector('output');
           inp.value = this.valori[k]; out.textContent = fmt(+inp.value);
           inp.addEventListener('input', () => { this.valori[k] = +inp.value; out.textContent = fmt(+inp.value); this.applica(k); });
+        } else if (tipo === 'color') {
+          lab.innerHTML = `<span>${nome}</span><output></output><input type="color">`;
+          const inp = lab.querySelector('input'), out = lab.querySelector('output');
+          inp.value = this.valori[k]; out.textContent = inp.value;
+          inp.addEventListener('input', () => { this.valori[k] = inp.value; out.textContent = inp.value; this.applica(k); });
         } else if (tipo === 'check') {
           lab.innerHTML = `<span>${nome}</span><input type="checkbox">`;
           const inp = lab.querySelector('input'); inp.checked = !!this.valori[k];
@@ -95,6 +122,7 @@ export class Vista {
     if (!k || !CAMERA.has(k) && k !== 'esagerazione') { this.app.ambiente.applica(v); this.app.post.setLook(v); }
     if (k === 'esagerazione') this.app.impostaEsagerazione(v.esagerazione);
     this.app.terreno.impostaVivacita(v.vivacita ?? 0.7);
+    this.app.terreno.impostaVegetazione(v);
     if (k && CAMERA.has(k)) this.app.vedutaAerea(true);
     this.corpo.querySelector('[data-k=focale]')?.classList.toggle('spento', v.proiezione !== 'prospettiva');
     for (const kk of ['miniatura', 'vignetta', 'saturazione', 'contrasto', 'temperatura', 'bagliore', 'contorni', 'grana']) this.corpo.querySelector(`[data-k=${kk}]`)?.classList.toggle('spento', !v.effetti);
