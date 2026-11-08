@@ -1,0 +1,47 @@
+{
+  "generato": "2026-11-08T13:22:01.068Z",
+  "larghezza": 3072,
+  "altezza": 1974,
+  "temi": {
+    "boschi": {
+      "poligoni": 4294,
+      "linee": 0
+    },
+    "vigneti": {
+      "poligoni": 8999,
+      "linee": 0
+    },
+    "abitati": {
+      "poligoni": 7147,
+      "linee": 0
+    },
+    "acque": {
+      "poligoni": 333,
+      "linee": 2166
+    },
+    "strade": {
+      "poligoni": 0,
+      "linee": 5387
+    }
+  },
+  "colori": {
+    "pianura": "#ece7d3",
+    "collina": "#e3e4c6",
+    "montagna": "#d6dac2",
+    "roccia": "#d9d6cf",
+    "vigneto": "#c3d57f",
+    "bosco": "#86a86a",
+    "frutteto": "#b9cf8a",
+    "prato": "#dfe6b8",
+    "abitato": "#dad3cb",
+    "industriale": "#cfc9c3",
+    "acqua": "#8fc2dd",
+    "fiume": "#8fc2dd",
+    "torrente": "#a5cde0",
+    "autostrada": "#f4b26b",
+    "strada": "#ffffff",
+    "stradaBordo": "#c9c1b2",
+    "ferrovia": "#8a8a8a"
+  },
+  "fonte": "OpenStreetMap (ODbL) via Overpass"
+}

@@ -1,0 +1,146 @@
+// Il plastico: terreno da data/altimetria.png (codifica terrarium), basamento, texture dei colori e mappe sovrapponibili.
+import * as THREE from 'three';
+
+export class Terreno {
+  constructor(geo, cfg) {
+    this.geo = geo; this.cfg = cfg;
+    this.esagerazione = cfg.esagerazione || 1.7;
+    this.gruppo = new THREE.Group();
+    this.gruppo.name = 'plastico';
+    this.quote = null; this.W = 0; this.H = 0;
+    this.texture = new Map();
+  }
+
+  async carica(onProgress = () => {}) {
+    onProgress('Lettura del rilievo…');
+    const img = await caricaImmagine('data/' + (this.cfg.terreno?.file || 'altimetria.png'));
+    this.W = img.naturalWidth; this.H = img.naturalHeight;
+    const cv = document.createElement('canvas'); cv.width = this.W; cv.height = this.H;
+    const ctx = cv.getContext('2d', { willReadFrequently: true });
+    ctx.drawImage(img, 0, 0);
+    const px = ctx.getImageData(0, 0, this.W, this.H).data;
+    const q = new Float32Array(this.W * this.H);
+    let hmin = Infinity, hmax = -Infinity;
+    for (let i = 0; i < this.W * this.H; i++) {
+      const h = px[i * 4] * 256 + px[i * 4 + 1] + px[i * 4 + 2] / 256 - 32768;
+      q[i] = h; if (h < hmin) hmin = h; if (h > hmax) hmax = h;
+    }
+    this.quote = q; this.quotaMin = hmin; this.quotaMax = hmax;
+    this.base = Math.floor(hmin / 50) * 50 - 60; // quota del basamento (m)
+
+    onProgress('Modellazione delle colline…');
+    const mobile = Math.min(innerWidth, innerHeight) < 760 || /Android|iPhone|iPad/i.test(navigator.userAgent);
+    const segX = mobile ? 384 : 768;
+    const segZ = Math.round(segX * this.geo.altezza / this.geo.larghezza);
+    const geom = new THREE.PlaneGeometry(this.geo.larghezza, this.geo.altezza, segX, segZ);
+    geom.rotateX(-Math.PI / 2); // piano XZ, normale +Y; dopo la rotazione v cresce verso sud (z+)
+    const pos = geom.attributes.position;
+    const uv = geom.attributes.uv;
+    for (let i = 0; i < pos.count; i++) {
+      const u = uv.getX(i), v = 1 - uv.getY(i);
+      pos.setY(i, this.quotaUV(u, v) * this.esagerazione);
+      uv.setY(i, 1 - v); // texture con origine in alto a sinistra → three vuole v=1 in alto
+    }
+    geom.computeVertexNormals();
+    this.materiale = new THREE.MeshStandardMaterial({ color: 0xffffff, roughness: 0.95, metalness: 0 });
+    this.mesh = new THREE.Mesh(geom, this.materiale);
+    this.mesh.name = 'terreno';
+    this.mesh.receiveShadow = true;
+    this.gruppo.add(this.mesh);
+
+    // mappa sovrapposta (trasparente) sulla stessa geometria
+    this.materialeSovra = new THREE.MeshStandardMaterial({ transparent: true, opacity: 0, roughness: 0.95, polygonOffset: true, polygonOffsetFactor: -2, polygonOffsetUnits: -2, depthWrite: false });
+    this.meshSovra = new THREE.Mesh(geom, this.materialeSovra);
+    this.meshSovra.visible = false;
+    this.gruppo.add(this.meshSovra);
+
+    this.costruisciBasamento(geom, segX, segZ);
+    onProgress('Colori della mappa…');
+    const pred = (this.cfg.mappe || []).find((m) => m.predefinita) || { id: 'colori', file: 'data/colori.jpg' };
+    await this.impostaMappa(pred.id, pred.file);
+    return this;
+  }
+
+  /** quota (m, non esagerata) alle coordinate UV del riquadro, interpolazione bilineare */
+  quotaUV(u, v) {
+    const x = Math.min(Math.max(u * (this.W - 1), 0), this.W - 1.001), y = Math.min(Math.max(v * (this.H - 1), 0), this.H - 1.001);
+    const i = Math.floor(x), j = Math.floor(y), ax = x - i, ay = y - j, q = this.quote, W = this.W;
+    return q[j * W + i] * (1 - ax) * (1 - ay) + q[j * W + i + 1] * ax * (1 - ay) + q[(j + 1) * W + i] * (1 - ax) * ay + q[(j + 1) * W + i + 1] * ax * ay;
+  }
+  /** quota del plastico (già esagerata, in unità scena) in lon/lat */
+  quotaScena(lon, lat) { const [u, v] = this.geo.aUV(lon, lat); return this.quotaUV(u, v) * this.esagerazione; }
+  /** quota del plastico in coordinate locali x,z */
+  quotaLocale(x, z) { const [lon, lat] = this.geo.aGeo(x, z); return this.quotaScena(lon, lat); }
+  /** posizione 3D sul terreno con un'altezza aggiuntiva (metri di scena) */
+  posizione(lon, lat, sopra = 0) { const [x, z] = this.geo.aLocale(lon, lat); return new THREE.Vector3(x, this.quotaScena(lon, lat) + sopra, z); }
+
+  costruisciBasamento(geom, segX, segZ) {
+    // pareti laterali dal bordo del terreno al basamento + fondo
+    const pos = geom.attributes.position;
+    const yb = this.base * this.esagerazione;
+    const idx = (i, j) => j * (segX + 1) + i;
+    const verts = [], indici = [];
+    const bordo = [];
+    for (let i = 0; i <= segX; i++) bordo.push(idx(i, 0));
+    for (let j = 1; j <= segZ; j++) bordo.push(idx(segX, j));
+    for (let i = segX - 1; i >= 0; i--) bordo.push(idx(i, segZ));
+    for (let j = segZ - 1; j >= 1; j--) bordo.push(idx(0, j));
+    for (let k = 0; k < bordo.length; k++) {
+      const a = bordo[k], b = bordo[(k + 1) % bordo.length];
+      const ax = pos.getX(a), ay = pos.getY(a), az = pos.getZ(a), bx = pos.getX(b), by = pos.getY(b), bz = pos.getZ(b);
+      const n = verts.length / 3;
+      verts.push(ax, ay, az, bx, by, bz, bx, yb, bz, ax, yb, az);
+      indici.push(n, n + 2, n + 1, n, n + 3, n + 2);
+    }
+    const g = new THREE.BufferGeometry();
+    g.setAttribute('position', new THREE.Float32BufferAttribute(verts, 3));
+    g.setIndex(indici); g.computeVertexNormals();
+    const mat = new THREE.MeshStandardMaterial({ color: 0xcdbb9a, roughness: 0.85 });
+    const pareti = new THREE.Mesh(g, mat); pareti.name = 'basamento';
+    this.gruppo.add(pareti);
+    const fondo = new THREE.Mesh(new THREE.PlaneGeometry(this.geo.larghezza, this.geo.altezza), new THREE.MeshStandardMaterial({ color: 0xb9a683, roughness: 0.9 }));
+    fondo.rotateX(Math.PI / 2); fondo.position.y = yb - 0.1;
+    this.gruppo.add(fondo);
+    // cornice sottile
+    const spess = this.geo.larghezza * 0.012;
+    const cornice = new THREE.Mesh(new THREE.BoxGeometry(this.geo.larghezza + spess * 2, spess * 0.6, this.geo.altezza + spess * 2), new THREE.MeshStandardMaterial({ color: 0x8c7355, roughness: 0.7 }));
+    cornice.position.y = yb - spess * 0.3; this.gruppo.add(cornice);
+    this.cornice = cornice;
+  }
+
+  async texturaDi(id, file) {
+    if (this.texture.has(id)) return this.texture.get(id);
+    const t = await new THREE.TextureLoader().loadAsync(file);
+    t.colorSpace = THREE.SRGBColorSpace; t.anisotropy = 8; t.minFilter = THREE.LinearMipmapLinearFilter; t.generateMipmaps = true;
+    this.texture.set(id, t);
+    return t;
+  }
+  /** mappa principale drappeggiata sul plastico */
+  async impostaMappa(id, file) {
+    const t = await this.texturaDi(id, file);
+    this.materiale.map = t; this.materiale.needsUpdate = true; this.mappaAttiva = id;
+  }
+  /** mappa sovrapposta con opacità 0..1 (null per toglierla) */
+  async impostaSovrapposta(id, file, opacita = 0.6) {
+    if (!id) { this.meshSovra.visible = false; this.materialeSovra.opacity = 0; this.sovraAttiva = null; return; }
+    const t = await this.texturaDi(id, file);
+    this.materialeSovra.map = t; this.materialeSovra.opacity = opacita; this.materialeSovra.needsUpdate = true;
+    this.meshSovra.visible = opacita > 0; this.sovraAttiva = id;
+  }
+  opacitaSovrapposta(o) { this.materialeSovra.opacity = o; this.meshSovra.visible = o > 0 && !!this.sovraAttiva; }
+
+  /** cambia l'esagerazione verticale ricalcolando le quote dei vertici e il basamento */
+  impostaEsagerazione(e) {
+    const fattore = e / this.esagerazione; this.esagerazione = e;
+    const pos = this.mesh.geometry.attributes.position;
+    for (let i = 0; i < pos.count; i++) pos.setY(i, pos.getY(i) * fattore);
+    pos.needsUpdate = true; this.mesh.geometry.computeVertexNormals(); this.mesh.geometry.computeBoundingSphere();
+    const segX = this.mesh.geometry.parameters.widthSegments, segZ = this.mesh.geometry.parameters.heightSegments;
+    for (const o of [...this.gruppo.children]) if (o !== this.mesh && o !== this.meshSovra) { this.gruppo.remove(o); o.geometry.dispose(); }
+    this.costruisciBasamento(this.mesh.geometry, segX, segZ);
+  }
+}
+
+function caricaImmagine(url) {
+  return new Promise((ok, ko) => { const i = new Image(); i.onload = () => ok(i); i.onerror = () => ko(new Error('immagine non caricata: ' + url)); i.src = url; });
+}

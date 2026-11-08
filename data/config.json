@@ -1,0 +1,59 @@
+{
+  "titolo": "Mappa turistica del Prosecco",
+  "bbox": {
+    "w": 11.909385,
+    "e": 12.423022,
+    "n": 46.018856,
+    "s": 45.789202
+  },
+  "mappePx": {
+    "w": 12292,
+    "h": 7898
+  },
+  "livelli": {
+    "2": 26000,
+    "3": 11000
+  },
+  "esagerazione": 1.7,
+  "modelli": {
+    "fattoreDistanza": 0.035,
+    "scalaMinima": 1
+  },
+  "mappe": [
+    {
+      "id": "colori",
+      "nome": "Mappa dei colori (vettoriale)",
+      "file": "data/colori.jpg",
+      "predefinita": true
+    },
+    {
+      "id": "stradale",
+      "nome": "Mappa stradale",
+      "file": "mappe/stradale.jpg"
+    },
+    {
+      "id": "rilievo",
+      "nome": "Mappa del rilievo",
+      "file": "mappe/rilievo.jpg"
+    },
+    {
+      "id": "satellite",
+      "nome": "Mappa satellitare",
+      "file": "mappe/satellite.jpg"
+    }
+  ],
+  "terreno": {
+    "file": "altimetria.png",
+    "larghezza": 1536,
+    "altezza": 987,
+    "quotaMin": 13,
+    "quotaMax": 1550,
+    "zoomTile": 12,
+    "fonte": "Mapzen/AWS Terrain Tiles (terrarium), dati SRTM/EU-DEM"
+  },
+  "colori": {
+    "file": "colori.jpg",
+    "larghezza": 3072,
+    "altezza": 1974
+  }
+}

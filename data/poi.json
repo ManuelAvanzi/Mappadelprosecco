@@ -1,0 +1,1784 @@
+[
+  {
+    "id": "conegliano",
+    "nome": "Conegliano",
+    "tipo": "citta",
+    "categoria": "Città e paesi",
+    "livello": 1,
+    "visibile": true,
+    "lat": 45.88622,
+    "lon": 12.29776,
+    "descrizione": "Capoluogo orientale della Denominazione. Città murata ai piedi del Castello, patria di Giovanni Battista Cima; qui ha sede la Scuola Enologica più antica d’Italia (1876).",
+    "media": [],
+    "modello": null,
+    "ordine": 0
+  },
+  {
+    "id": "valdobbiadene",
+    "nome": "Valdobbiadene",
+    "tipo": "citta",
+    "categoria": "Città e paesi",
+    "livello": 1,
+    "visibile": true,
+    "lat": 45.90141,
+    "lon": 11.99551,
+    "descrizione": "Capoluogo occidentale della Denominazione, ai piedi delle Prealpi. Attorno al paese si aprono le colline del Cartizze e il cuore storico del Prosecco Superiore.",
+    "media": [],
+    "modello": null,
+    "ordine": 1
+  },
+  {
+    "id": "vittorio-veneto",
+    "nome": "Vittorio Veneto",
+    "tipo": "citta",
+    "categoria": "Città e paesi",
+    "livello": 1,
+    "visibile": true,
+    "lat": 45.98982,
+    "lon": 12.29585,
+    "descrizione": "Nata nel 1866 dall’unione di Serravalle e Ceneda. Porta d’accesso alle Prealpi e alla Val Lapisina; il nome ricorda la vittoria del 1918.",
+    "media": [],
+    "modello": null,
+    "ordine": 2
+  },
+  {
+    "id": "pieve-di-soligo",
+    "nome": "Pieve di Soligo",
+    "tipo": "paese",
+    "categoria": "Città e paesi",
+    "livello": 1,
+    "visibile": true,
+    "lat": 45.89976,
+    "lon": 12.17308,
+    "descrizione": "Centro del Quartier del Piave, paese natale del poeta Andrea Zanzotto. Mercato, botteghe e il fiume Soligo tra le colline.",
+    "media": [],
+    "modello": null,
+    "ordine": 3
+  },
+  {
+    "id": "follina",
+    "nome": "Follina",
+    "tipo": "paese",
+    "categoria": "Città e paesi",
+    "livello": 1,
+    "visibile": true,
+    "lat": 45.95307,
+    "lon": 12.11814,
+    "descrizione": "Borgo di lanifici lungo il torrente Soligo, cresciuto attorno all’Abbazia cistercense di Santa Maria.",
+    "media": [],
+    "modello": null,
+    "ordine": 4
+  },
+  {
+    "id": "susegana",
+    "nome": "Susegana",
+    "tipo": "paese",
+    "categoria": "Città e paesi",
+    "livello": 1,
+    "visibile": true,
+    "lat": 45.85091,
+    "lon": 12.25001,
+    "descrizione": "Sul Piave, con il Castello di San Salvatore dei Collalto e la frazione di Collalto.",
+    "media": [],
+    "modello": null,
+    "ordine": 5
+  },
+  {
+    "id": "nervesa-della-battaglia",
+    "nome": "Nervesa della Battaglia",
+    "tipo": "paese",
+    "categoria": "Città e paesi",
+    "livello": 1,
+    "visibile": true,
+    "lat": 45.82537,
+    "lon": 12.2092,
+    "descrizione": "Ai piedi del Montello, sulla riva destra del Piave. Teatro della Battaglia del Solstizio (1918); l’Abbazia di Sant’Eustachio e il Sacrario del Montello.",
+    "media": [],
+    "modello": null,
+    "ordine": 6
+  },
+  {
+    "id": "vidor",
+    "nome": "Vidor",
+    "tipo": "paese",
+    "categoria": "Città e paesi",
+    "livello": 2,
+    "visibile": true,
+    "lat": 45.86164,
+    "lon": 12.03875,
+    "descrizione": "Alla confluenza con il Piave; l’Abbazia di Santa Bona e il ponte della Grande Guerra.",
+    "media": [],
+    "modello": null,
+    "ordine": 7
+  },
+  {
+    "id": "col-san-martino",
+    "nome": "Col San Martino",
+    "tipo": "paese",
+    "categoria": "Città e paesi",
+    "livello": 2,
+    "visibile": true,
+    "lat": 45.89443,
+    "lon": 12.08575,
+    "descrizione": "Borgo dei vigneti più ripidi; la chiesetta di San Vigilio domina il paese dalla collina.",
+    "media": [],
+    "modello": null,
+    "ordine": 8
+  },
+  {
+    "id": "sernaglia-della-battaglia",
+    "nome": "Sernaglia della Battaglia",
+    "tipo": "paese",
+    "categoria": "Città e paesi",
+    "livello": 2,
+    "visibile": true,
+    "lat": 45.87473,
+    "lon": 12.13316,
+    "descrizione": "Nel Quartier del Piave, tra le Fontane Bianche e la riva del fiume.",
+    "media": [],
+    "modello": null,
+    "ordine": 9
+  },
+  {
+    "id": "farra-di-soligo",
+    "nome": "Farra di Soligo",
+    "tipo": "paese",
+    "categoria": "Città e paesi",
+    "livello": 2,
+    "visibile": true,
+    "lat": 45.90538,
+    "lon": 12.12543,
+    "descrizione": "Al centro della Strada, ai piedi delle Torri di Credazzo. Frazioni di Soligo e Col San Martino.",
+    "media": [],
+    "modello": null,
+    "ordine": 10
+  },
+  {
+    "id": "soligo",
+    "nome": "Soligo",
+    "tipo": "frazione",
+    "categoria": "Città e paesi",
+    "livello": 2,
+    "visibile": true,
+    "lat": 45.91279,
+    "lon": 12.15506,
+    "descrizione": "Frazione di Farra di Soligo sotto il colle di San Gallo.",
+    "media": [],
+    "modello": null,
+    "ordine": 11
+  },
+  {
+    "id": "falze-di-piave",
+    "nome": "Falzè di Piave",
+    "tipo": "frazione",
+    "categoria": "Città e paesi",
+    "livello": 2,
+    "visibile": true,
+    "lat": 45.86072,
+    "lon": 12.16771,
+    "descrizione": "Frazione di Sernaglia sulla riva del Piave, con il ponte verso il Montello.",
+    "media": [],
+    "modello": null,
+    "ordine": 12
+  },
+  {
+    "id": "refrontolo",
+    "nome": "Refrontolo",
+    "tipo": "paese",
+    "categoria": "Città e paesi",
+    "livello": 2,
+    "visibile": true,
+    "lat": 45.92486,
+    "lon": 12.20783,
+    "descrizione": "Patria del Refrontolo Passito (Marzemino). Nella valle del Lierza, il Molinetto della Croda.",
+    "media": [],
+    "modello": null,
+    "ordine": 13
+  },
+  {
+    "id": "ponte-della-priula",
+    "nome": "Ponte della Priula",
+    "tipo": "frazione",
+    "categoria": "Città e paesi",
+    "livello": 2,
+    "visibile": true,
+    "lat": 45.82235,
+    "lon": 12.25471,
+    "descrizione": "Frazione di Susegana al ponte sul Piave della Pontebbana.",
+    "media": [],
+    "modello": null,
+    "ordine": 14
+  },
+  {
+    "id": "santa-lucia-di-piave",
+    "nome": "Santa Lucia di Piave",
+    "tipo": "paese",
+    "categoria": "Città e paesi",
+    "livello": 2,
+    "visibile": true,
+    "lat": 45.84917,
+    "lon": 12.28493,
+    "descrizione": "Comune di pianura sulla riva sinistra del Piave, famoso per l’antica Fiera di Santa Lucia.",
+    "media": [],
+    "modello": null,
+    "ordine": 15
+  },
+  {
+    "id": "miane",
+    "nome": "Miane",
+    "tipo": "paese",
+    "categoria": "Città e paesi",
+    "livello": 2,
+    "visibile": true,
+    "lat": 45.94432,
+    "lon": 12.09386,
+    "descrizione": "Tra Combai e Follina, alle pendici del Monte Cesen. Terra di marroni e di vigneti terrazzati.",
+    "media": [],
+    "modello": null,
+    "ordine": 16
+  },
+  {
+    "id": "cison-di-valmarino",
+    "nome": "Cison di Valmarino",
+    "tipo": "paese",
+    "categoria": "Città e paesi",
+    "livello": 2,
+    "visibile": true,
+    "lat": 45.96999,
+    "lon": 12.14314,
+    "descrizione": "Uno dei Borghi più belli d’Italia, dominato da CastelBrando. Via dei Mulini, Palazzo Brandolini e la festa Artigianato Vivo.",
+    "media": [],
+    "modello": null,
+    "ordine": 17
+  },
+  {
+    "id": "tovena",
+    "nome": "Tovena",
+    "tipo": "frazione",
+    "categoria": "Città e paesi",
+    "livello": 2,
+    "visibile": true,
+    "lat": 45.97927,
+    "lon": 12.17505,
+    "descrizione": "Frazione di Cison ai piedi del passo San Boldo, con la strada dei 18 tornanti in galleria.",
+    "media": [],
+    "modello": null,
+    "ordine": 18
+  },
+  {
+    "id": "tarzo",
+    "nome": "Tarzo",
+    "tipo": "paese",
+    "categoria": "Città e paesi",
+    "livello": 2,
+    "visibile": true,
+    "lat": 45.97352,
+    "lon": 12.23161,
+    "descrizione": "Affacciato sulla Vallata e sui laghi di Revine. Borghi sparsi, pievi e vigne alte.",
+    "media": [],
+    "modello": null,
+    "ordine": 19
+  },
+  {
+    "id": "san-giacomo-di-veglia",
+    "nome": "San Giacomo di Veglia",
+    "tipo": "frazione",
+    "categoria": "Città e paesi",
+    "livello": 2,
+    "visibile": true,
+    "lat": 45.96376,
+    "lon": 12.32322,
+    "descrizione": "Frazione meridionale di Vittorio Veneto.",
+    "media": [],
+    "modello": null,
+    "ordine": 20
+  },
+  {
+    "id": "cappella-maggiore",
+    "nome": "Cappella Maggiore",
+    "tipo": "paese",
+    "categoria": "Città e paesi",
+    "livello": 2,
+    "visibile": true,
+    "lat": 45.96954,
+    "lon": 12.36167,
+    "descrizione": "Comune pedemontano tra Vittorio Veneto e Sarmede.",
+    "media": [],
+    "modello": null,
+    "ordine": 21
+  },
+  {
+    "id": "cordignano",
+    "nome": "Cordignano",
+    "tipo": "paese",
+    "categoria": "Città e paesi",
+    "livello": 2,
+    "visibile": true,
+    "lat": 45.94897,
+    "lon": 12.41602,
+    "descrizione": "Al confine con il Friuli, ai piedi del Cansiglio.",
+    "media": [],
+    "modello": null,
+    "ordine": 22
+  },
+  {
+    "id": "orsago",
+    "nome": "Orsago",
+    "tipo": "paese",
+    "categoria": "Città e paesi",
+    "livello": 2,
+    "visibile": true,
+    "lat": 45.93086,
+    "lon": 12.42359,
+    "descrizione": "Comune di pianura lungo la Pontebbana, all’estremità orientale del territorio.",
+    "media": [],
+    "modello": null,
+    "ordine": 23
+  },
+  {
+    "id": "godega-di-sant-urbano",
+    "nome": "Godega di Sant’Urbano",
+    "tipo": "paese",
+    "categoria": "Città e paesi",
+    "livello": 2,
+    "visibile": true,
+    "lat": 45.92985,
+    "lon": 12.39811,
+    "descrizione": "Comune di pianura noto per la Fiera di Godega.",
+    "media": [],
+    "modello": null,
+    "ordine": 24
+  },
+  {
+    "id": "mareno-di-piave",
+    "nome": "Mareno di Piave",
+    "tipo": "paese",
+    "categoria": "Città e paesi",
+    "livello": 2,
+    "visibile": true,
+    "lat": 45.84086,
+    "lon": 12.35126,
+    "descrizione": "Comune di pianura a sud-est di Conegliano, lungo il Monticano.",
+    "media": [],
+    "modello": null,
+    "ordine": 25
+  },
+  {
+    "id": "saccol",
+    "nome": "Saccol",
+    "tipo": "frazione",
+    "categoria": "Città e paesi",
+    "livello": 3,
+    "visibile": true,
+    "lat": 45.89064,
+    "lon": 12.00342,
+    "descrizione": "",
+    "media": [],
+    "modello": null,
+    "ordine": 26
+  },
+  {
+    "id": "santo-stefano",
+    "nome": "Santo Stefano",
+    "tipo": "frazione",
+    "categoria": "Città e paesi",
+    "livello": 3,
+    "visibile": true,
+    "lat": 45.90557,
+    "lon": 12.03778,
+    "descrizione": "",
+    "media": [],
+    "modello": null,
+    "ordine": 27
+  },
+  {
+    "id": "guia",
+    "nome": "Guia",
+    "tipo": "frazione",
+    "categoria": "Città e paesi",
+    "livello": 3,
+    "visibile": true,
+    "lat": 45.91158,
+    "lon": 12.05458,
+    "descrizione": "",
+    "media": [],
+    "modello": null,
+    "ordine": 28
+  },
+  {
+    "id": "combai",
+    "nome": "Combai",
+    "tipo": "frazione",
+    "categoria": "Città e paesi",
+    "livello": 3,
+    "visibile": true,
+    "lat": 45.93012,
+    "lon": 12.07201,
+    "descrizione": "",
+    "media": [],
+    "modello": null,
+    "ordine": 29
+  },
+  {
+    "id": "mura",
+    "nome": "Mura",
+    "tipo": "frazione",
+    "categoria": "Città e paesi",
+    "livello": 3,
+    "visibile": true,
+    "lat": 45.97127,
+    "lon": 12.16336,
+    "descrizione": "",
+    "media": [],
+    "modello": null,
+    "ordine": 30
+  },
+  {
+    "id": "lago",
+    "nome": "Lago",
+    "tipo": "frazione",
+    "categoria": "Città e paesi",
+    "livello": 3,
+    "visibile": true,
+    "lat": 45.98633,
+    "lon": 12.21656,
+    "descrizione": "",
+    "media": [],
+    "modello": null,
+    "ordine": 31
+  },
+  {
+    "id": "fratta",
+    "nome": "Fratta",
+    "tipo": "frazione",
+    "categoria": "Città e paesi",
+    "livello": 3,
+    "visibile": true,
+    "lat": 45.97834,
+    "lon": 12.22384,
+    "descrizione": "",
+    "media": [],
+    "modello": null,
+    "ordine": 32
+  },
+  {
+    "id": "santa-maria",
+    "nome": "Santa Maria",
+    "tipo": "frazione",
+    "categoria": "Città e paesi",
+    "livello": 3,
+    "visibile": true,
+    "lat": 45.99203,
+    "lon": 12.23188,
+    "descrizione": "",
+    "media": [],
+    "modello": null,
+    "ordine": 33
+  },
+  {
+    "id": "colmaggiore",
+    "nome": "Colmaggiore",
+    "tipo": "frazione",
+    "categoria": "Città e paesi",
+    "livello": 3,
+    "visibile": true,
+    "lat": 45.98517,
+    "lon": 12.23419,
+    "descrizione": "",
+    "media": [],
+    "modello": null,
+    "ordine": 34
+  },
+  {
+    "id": "bigolino",
+    "nome": "Bigolino",
+    "tipo": "frazione",
+    "categoria": "Città e paesi",
+    "livello": 3,
+    "visibile": true,
+    "lat": 45.86859,
+    "lon": 12.01277,
+    "descrizione": "",
+    "media": [],
+    "modello": null,
+    "ordine": 35
+  },
+  {
+    "id": "colbertaldo",
+    "nome": "Colbertaldo",
+    "tipo": "frazione",
+    "categoria": "Città e paesi",
+    "livello": 3,
+    "visibile": true,
+    "lat": 45.87737,
+    "lon": 12.04538,
+    "descrizione": "",
+    "media": [],
+    "modello": null,
+    "ordine": 36
+  },
+  {
+    "id": "moriago-della-battaglia",
+    "nome": "Moriago della Battaglia",
+    "tipo": "paese",
+    "categoria": "Città e paesi",
+    "livello": 3,
+    "visibile": true,
+    "lat": 45.86736,
+    "lon": 12.10377,
+    "descrizione": "",
+    "media": [],
+    "modello": null,
+    "ordine": 37
+  },
+  {
+    "id": "barbisano",
+    "nome": "Barbisano",
+    "tipo": "frazione",
+    "categoria": "Città e paesi",
+    "livello": 3,
+    "visibile": true,
+    "lat": 45.88005,
+    "lon": 12.18351,
+    "descrizione": "",
+    "media": [],
+    "modello": null,
+    "ordine": 38
+  },
+  {
+    "id": "collalto",
+    "nome": "Collalto",
+    "tipo": "frazione",
+    "categoria": "Città e paesi",
+    "livello": 3,
+    "visibile": true,
+    "lat": 45.8731,
+    "lon": 12.19697,
+    "descrizione": "",
+    "media": [],
+    "modello": null,
+    "ordine": 39
+  },
+  {
+    "id": "solighetto",
+    "nome": "Solighetto",
+    "tipo": "frazione",
+    "categoria": "Città e paesi",
+    "livello": 3,
+    "visibile": true,
+    "lat": 45.91476,
+    "lon": 12.16927,
+    "descrizione": "",
+    "media": [],
+    "modello": null,
+    "ordine": 40
+  },
+  {
+    "id": "pedeguarda",
+    "nome": "Pedeguarda",
+    "tipo": "frazione",
+    "categoria": "Città e paesi",
+    "livello": 3,
+    "visibile": true,
+    "lat": 45.92795,
+    "lon": 12.15234,
+    "descrizione": "",
+    "media": [],
+    "modello": null,
+    "ordine": 41
+  },
+  {
+    "id": "premaor",
+    "nome": "Premaor",
+    "tipo": "frazione",
+    "categoria": "Città e paesi",
+    "livello": 3,
+    "visibile": true,
+    "lat": 45.93852,
+    "lon": 12.12682,
+    "descrizione": "",
+    "media": [],
+    "modello": null,
+    "ordine": 42
+  },
+  {
+    "id": "campea",
+    "nome": "Campea",
+    "tipo": "frazione",
+    "categoria": "Città e paesi",
+    "livello": 3,
+    "visibile": true,
+    "lat": 45.93032,
+    "lon": 12.10727,
+    "descrizione": "",
+    "media": [],
+    "modello": null,
+    "ordine": 43
+  },
+  {
+    "id": "rolle",
+    "nome": "Rolle",
+    "tipo": "frazione",
+    "categoria": "Città e paesi",
+    "livello": 3,
+    "visibile": true,
+    "lat": 45.95143,
+    "lon": 12.16867,
+    "descrizione": "Borgo FAI tra le vigne: “una cartolina che gli dei si sono mandati”, scriveva Zanzotto.",
+    "media": [],
+    "modello": null,
+    "ordine": 44
+  },
+  {
+    "id": "arfanta",
+    "nome": "Arfanta",
+    "tipo": "frazione",
+    "categoria": "Città e paesi",
+    "livello": 3,
+    "visibile": true,
+    "lat": 45.96204,
+    "lon": 12.20329,
+    "descrizione": "",
+    "media": [],
+    "modello": null,
+    "ordine": 45
+  },
+  {
+    "id": "san-pietro-di-feletto",
+    "nome": "San Pietro di Feletto",
+    "tipo": "paese",
+    "categoria": "Città e paesi",
+    "livello": 3,
+    "visibile": true,
+    "lat": 45.90905,
+    "lon": 12.24063,
+    "descrizione": "Comune sparso sulle colline tra Conegliano e Refrontolo. La Pieve romanica è il suo simbolo.",
+    "media": [],
+    "modello": null,
+    "ordine": 46
+  },
+  {
+    "id": "rua",
+    "nome": "Rua",
+    "tipo": "frazione",
+    "categoria": "Città e paesi",
+    "livello": 3,
+    "visibile": true,
+    "lat": 45.91494,
+    "lon": 12.25036,
+    "descrizione": "",
+    "media": [],
+    "modello": null,
+    "ordine": 47
+  },
+  {
+    "id": "bagnolo",
+    "nome": "Bagnolo",
+    "tipo": "frazione",
+    "categoria": "Città e paesi",
+    "livello": 3,
+    "visibile": true,
+    "lat": 45.91043,
+    "lon": 12.2749,
+    "descrizione": "",
+    "media": [],
+    "modello": null,
+    "ordine": 48
+  },
+  {
+    "id": "pare",
+    "nome": "Parè",
+    "tipo": "frazione",
+    "categoria": "Città e paesi",
+    "livello": 3,
+    "visibile": true,
+    "lat": 45.86947,
+    "lon": 12.27032,
+    "descrizione": "",
+    "media": [],
+    "modello": null,
+    "ordine": 49
+  },
+  {
+    "id": "colfosco",
+    "nome": "Colfosco",
+    "tipo": "frazione",
+    "categoria": "Città e paesi",
+    "livello": 3,
+    "visibile": true,
+    "lat": 45.83402,
+    "lon": 12.22065,
+    "descrizione": "",
+    "media": [],
+    "modello": null,
+    "ordine": 50
+  },
+  {
+    "id": "santa-maria-del-piave",
+    "nome": "Santa Maria del Piave",
+    "tipo": "frazione",
+    "categoria": "Città e paesi",
+    "livello": 3,
+    "visibile": true,
+    "lat": 45.8191,
+    "lon": 12.30956,
+    "descrizione": "",
+    "media": [],
+    "modello": null,
+    "ordine": 51
+  },
+  {
+    "id": "saccon",
+    "nome": "Saccon",
+    "tipo": "frazione",
+    "categoria": "Città e paesi",
+    "livello": 3,
+    "visibile": true,
+    "lat": 45.87504,
+    "lon": 12.34741,
+    "descrizione": "",
+    "media": [],
+    "modello": null,
+    "ordine": 52
+  },
+  {
+    "id": "ramera",
+    "nome": "Ramera",
+    "tipo": "frazione",
+    "categoria": "Città e paesi",
+    "livello": 3,
+    "visibile": true,
+    "lat": 45.85943,
+    "lon": 12.33249,
+    "descrizione": "",
+    "media": [],
+    "modello": null,
+    "ordine": 53
+  },
+  {
+    "id": "ogliano",
+    "nome": "Ogliano",
+    "tipo": "frazione",
+    "categoria": "Città e paesi",
+    "livello": 3,
+    "visibile": true,
+    "lat": 45.92497,
+    "lon": 12.30427,
+    "descrizione": "",
+    "media": [],
+    "modello": null,
+    "ordine": 54
+  },
+  {
+    "id": "carpesica",
+    "nome": "Carpesica",
+    "tipo": "frazione",
+    "categoria": "Città e paesi",
+    "livello": 3,
+    "visibile": true,
+    "lat": 45.9479,
+    "lon": 12.29186,
+    "descrizione": "",
+    "media": [],
+    "modello": null,
+    "ordine": 55
+  },
+  {
+    "id": "cozzuolo",
+    "nome": "Cozzuolo",
+    "tipo": "frazione",
+    "categoria": "Città e paesi",
+    "livello": 3,
+    "visibile": true,
+    "lat": 45.96238,
+    "lon": 12.28486,
+    "descrizione": "",
+    "media": [],
+    "modello": null,
+    "ordine": 56
+  },
+  {
+    "id": "san-lorenzo",
+    "nome": "San Lorenzo",
+    "tipo": "frazione",
+    "categoria": "Città e paesi",
+    "livello": 3,
+    "visibile": true,
+    "lat": 45.98902,
+    "lon": 12.27395,
+    "descrizione": "",
+    "media": [],
+    "modello": null,
+    "ordine": 57
+  },
+  {
+    "id": "colle-umberto",
+    "nome": "Colle Umberto",
+    "tipo": "paese",
+    "categoria": "Città e paesi",
+    "livello": 3,
+    "visibile": true,
+    "lat": 45.94098,
+    "lon": 12.34097,
+    "descrizione": "",
+    "media": [],
+    "modello": null,
+    "ordine": 58
+  },
+  {
+    "id": "castello-roganzuolo",
+    "nome": "Castello Roganzuolo",
+    "tipo": "frazione",
+    "categoria": "Città e paesi",
+    "livello": 3,
+    "visibile": true,
+    "lat": 45.92198,
+    "lon": 12.33631,
+    "descrizione": "",
+    "media": [],
+    "modello": null,
+    "ordine": 59
+  },
+  {
+    "id": "zoppe",
+    "nome": "Zoppè",
+    "tipo": "frazione",
+    "categoria": "Città e paesi",
+    "livello": 3,
+    "visibile": true,
+    "lat": 45.88762,
+    "lon": 12.36035,
+    "descrizione": "",
+    "media": [],
+    "modello": null,
+    "ordine": 60
+  },
+  {
+    "id": "montaner",
+    "nome": "Montaner",
+    "tipo": "frazione",
+    "categoria": "Città e paesi",
+    "livello": 3,
+    "visibile": true,
+    "lat": 45.999,
+    "lon": 12.37882,
+    "descrizione": "",
+    "media": [],
+    "modello": null,
+    "ordine": 61
+  },
+  {
+    "id": "sarmede",
+    "nome": "Sarmede",
+    "tipo": "paese",
+    "categoria": "Città e paesi",
+    "livello": 3,
+    "visibile": true,
+    "lat": 45.97888,
+    "lon": 12.38609,
+    "descrizione": "Il paese della fiaba: murales e la Mostra internazionale d’illustrazione per l’infanzia.",
+    "media": [],
+    "modello": null,
+    "ordine": 62
+  },
+  {
+    "id": "rugolo",
+    "nome": "Rugolo",
+    "tipo": "frazione",
+    "categoria": "Città e paesi",
+    "livello": 3,
+    "visibile": true,
+    "lat": 45.98578,
+    "lon": 12.39695,
+    "descrizione": "",
+    "media": [],
+    "modello": null,
+    "ordine": 63
+  },
+  {
+    "id": "villa-di-villa",
+    "nome": "Villa di Villa",
+    "tipo": "frazione",
+    "categoria": "Città e paesi",
+    "livello": 3,
+    "visibile": true,
+    "lat": 45.96572,
+    "lon": 12.41545,
+    "descrizione": "",
+    "media": [],
+    "modello": null,
+    "ordine": 64
+  },
+  {
+    "id": "san-fior-di-sotto",
+    "nome": "San Fior di Sotto",
+    "tipo": "frazione",
+    "categoria": "Città e paesi",
+    "livello": 3,
+    "visibile": true,
+    "lat": 45.90372,
+    "lon": 12.3741,
+    "descrizione": "",
+    "media": [],
+    "modello": null,
+    "ordine": 65
+  },
+  {
+    "id": "collalbrigo",
+    "nome": "Collalbrigo",
+    "tipo": "frazione",
+    "categoria": "Città e paesi",
+    "livello": 3,
+    "visibile": false,
+    "lat": 45.88516,
+    "lon": 12.26541,
+    "descrizione": "",
+    "media": [],
+    "modello": null,
+    "ordine": 66
+  },
+  {
+    "id": "follo",
+    "nome": "Follo",
+    "tipo": "frazione",
+    "categoria": "Città e paesi",
+    "livello": 3,
+    "visibile": false,
+    "lat": 45.90291,
+    "lon": 12.03703,
+    "descrizione": "",
+    "media": [],
+    "modello": null,
+    "ordine": 67
+  },
+  {
+    "id": "san-pietro-di-barbozza",
+    "nome": "San Pietro di Barbozza",
+    "tipo": "frazione",
+    "categoria": "Città e paesi",
+    "livello": 3,
+    "visibile": false,
+    "lat": 45.90058,
+    "lon": 12.01878,
+    "descrizione": "",
+    "media": [],
+    "modello": null,
+    "ordine": 68
+  },
+  {
+    "id": "farro",
+    "nome": "Farrò",
+    "tipo": "frazione",
+    "categoria": "Città e paesi",
+    "livello": 3,
+    "visibile": false,
+    "lat": 45.94092,
+    "lon": 12.14552,
+    "descrizione": "",
+    "media": [],
+    "modello": null,
+    "ordine": 69
+  },
+  {
+    "id": "costa-di-la",
+    "nome": "Costa di Là",
+    "tipo": "frazione",
+    "categoria": "Città e paesi",
+    "livello": 3,
+    "visibile": false,
+    "lat": 45.95733,
+    "lon": 12.18683,
+    "descrizione": "",
+    "media": [],
+    "modello": null,
+    "ordine": 70
+  },
+  {
+    "id": "corbanese",
+    "nome": "Corbanese",
+    "tipo": "frazione",
+    "categoria": "Città e paesi",
+    "livello": 3,
+    "visibile": false,
+    "lat": 45.94991,
+    "lon": 12.23649,
+    "descrizione": "",
+    "media": [],
+    "modello": null,
+    "ordine": 71
+  },
+  {
+    "id": "soller",
+    "nome": "Soller",
+    "tipo": "frazione",
+    "categoria": "Città e paesi",
+    "livello": 3,
+    "visibile": false,
+    "lat": 45.97818,
+    "lon": 12.19297,
+    "descrizione": "",
+    "media": [],
+    "modello": null,
+    "ordine": 72
+  },
+  {
+    "id": "revine-lago",
+    "nome": "Revine Lago",
+    "tipo": "paese",
+    "categoria": "Città e paesi",
+    "livello": 3,
+    "visibile": false,
+    "lat": 46.00103,
+    "lon": 12.22555,
+    "descrizione": "",
+    "media": [],
+    "modello": null,
+    "ordine": 73
+  },
+  {
+    "id": "serravalle",
+    "nome": "Serravalle",
+    "tipo": "frazione",
+    "categoria": "Città e paesi",
+    "livello": 3,
+    "visibile": false,
+    "lat": 45.9993,
+    "lon": 12.29016,
+    "descrizione": "",
+    "media": [],
+    "modello": null,
+    "ordine": 74
+  },
+  {
+    "id": "anzano",
+    "nome": "Anzano",
+    "tipo": "frazione",
+    "categoria": "Città e paesi",
+    "livello": 3,
+    "visibile": false,
+    "lat": 45.98596,
+    "lon": 12.3289,
+    "descrizione": "",
+    "media": [],
+    "modello": null,
+    "ordine": 75
+  },
+  {
+    "id": "fregona",
+    "nome": "Fregona",
+    "tipo": "paese",
+    "categoria": "Città e paesi",
+    "livello": 3,
+    "visibile": false,
+    "lat": 46.00022,
+    "lon": 12.33896,
+    "descrizione": "",
+    "media": [],
+    "modello": null,
+    "ordine": 76
+  },
+  {
+    "id": "osigo",
+    "nome": "Osigo",
+    "tipo": "frazione",
+    "categoria": "Città e paesi",
+    "livello": 3,
+    "visibile": false,
+    "lat": 46.01126,
+    "lon": 12.35148,
+    "descrizione": "",
+    "media": [],
+    "modello": null,
+    "ordine": 77
+  },
+  {
+    "id": "castello-conegliano",
+    "nome": "Castello di Conegliano",
+    "tipo": "monumento",
+    "categoria": "Castelli",
+    "livello": 2,
+    "visibile": true,
+    "lat": 45.88935,
+    "lon": 12.29459,
+    "descrizione": "Sul colle di Giano, con la Torre della Campana e il Museo Civico. Dalle mura la vista abbraccia tutta la pianura e le colline.",
+    "media": [
+      {
+        "tipo": "immagine",
+        "url": "uploads/poi/castello-conegliano/castello-di-conegliano-fronte.jpg",
+        "titolo": "CASTELLO DI CONEGLIANO FRONTE"
+      },
+      {
+        "tipo": "immagine",
+        "url": "uploads/poi/castello-conegliano/castel-de-conejan.jpg",
+        "titolo": "Castel de Conejan"
+      },
+      {
+        "tipo": "immagine",
+        "url": "uploads/poi/castello-conegliano/castello-di-conegliano.jpg",
+        "titolo": "Castello Di Conegliano"
+      },
+      {
+        "tipo": "immagine",
+        "url": "uploads/poi/castello-conegliano/castello-di-conegliano-01.jpg",
+        "titolo": "Castello di Conegliano 01"
+      },
+      {
+        "tipo": "immagine",
+        "url": "uploads/poi/castello-conegliano/conegliano-castello-2007.jpg",
+        "titolo": "Conegliano Castello 2007"
+      },
+      {
+        "tipo": "immagine",
+        "url": "uploads/poi/castello-conegliano/conegliano-vista-dal-castello.jpg",
+        "titolo": "Conegliano vista dal Castello"
+      }
+    ],
+    "modello": {
+      "tipo": "castello",
+      "glb": null,
+      "scala": 1,
+      "rotazione": 0
+    },
+    "ordine": 78,
+    "copertina": "uploads/poi/castello-conegliano/castello-di-conegliano-fronte.jpg"
+  },
+  {
+    "id": "villa-dei-cedri",
+    "nome": "Villa dei Cedri",
+    "tipo": "monumento",
+    "categoria": "Palazzi e ville",
+    "livello": 2,
+    "visibile": true,
+    "lat": 45.90183,
+    "lon": 12.0016,
+    "descrizione": "Villa ottocentesca con parco monumentale nel centro di Valdobbiadene; sede della Mostra del Prosecco e di eventi del Consorzio.",
+    "media": [
+      {
+        "tipo": "immagine",
+        "url": "uploads/poi/villa-dei-cedri/3840px-villa-dei-cedri-valdobbiadene-abc3.jpg",
+        "titolo": "3840px-Villa dei Cedri - Valdobbiadene abc3"
+      },
+      {
+        "tipo": "immagine",
+        "url": "uploads/poi/villa-dei-cedri/valdobiadene-schloss-bildid-15673094.jpg",
+        "titolo": "Valdobiadene, Schloss. (BildID 15673094)"
+      },
+      {
+        "tipo": "immagine",
+        "url": "uploads/poi/villa-dei-cedri/villa-dei-cedri-esterno-dettaglio-affreschi-valdobbiadene-01.jpg",
+        "titolo": "Villa dei Cedri, esterno, dettaglio affreschi (Valdobbiadene) 01"
+      },
+      {
+        "tipo": "immagine",
+        "url": "uploads/poi/villa-dei-cedri/villa-dei-cedri-valdobbiadene-parco-01.jpg",
+        "titolo": "Villa dei Cedri (Valdobbiadene) - Parco 01"
+      },
+      {
+        "tipo": "immagine",
+        "url": "uploads/poi/villa-dei-cedri/villa-dei-cedri-valdobbiadene-abc21.jpg",
+        "titolo": "Villa dei Cedri - Valdobbiadene abc21"
+      },
+      {
+        "tipo": "immagine",
+        "url": "uploads/poi/villa-dei-cedri/villa-dei-cedri-valdobbiadene-abc5.jpg",
+        "titolo": "Villa dei Cedri - Valdobbiadene abc5"
+      },
+      {
+        "tipo": "immagine",
+        "url": "uploads/poi/villa-dei-cedri/villa-dei-cedri-valdobbiadene-abc6.jpg",
+        "titolo": "Villa dei Cedri - Valdobbiadene abc6"
+      },
+      {
+        "tipo": "immagine",
+        "url": "uploads/poi/villa-dei-cedri/villa-dei-cedri-valdobbiadene-abc8.jpg",
+        "titolo": "Villa dei Cedri - Valdobbiadene abc8"
+      }
+    ],
+    "modello": {
+      "tipo": "villa",
+      "glb": null,
+      "scala": 1,
+      "rotazione": 0
+    },
+    "ordine": 79,
+    "copertina": "uploads/poi/villa-dei-cedri/3840px-villa-dei-cedri-valdobbiadene-abc3.jpg"
+  },
+  {
+    "id": "abbazia-follina",
+    "nome": "Abbazia di Follina",
+    "tipo": "monumento",
+    "categoria": "Abbazie e chiese",
+    "livello": 2,
+    "visibile": true,
+    "lat": 45.95395,
+    "lon": 12.11803,
+    "descrizione": "Abbazia cistercense del XII secolo con uno dei chiostri romanici più belli del Veneto.",
+    "media": [
+      {
+        "tipo": "immagine",
+        "url": "uploads/poi/abbazia-follina/abbazia-di-santa-maria-di-follina-wikiraduno-alle-colline-del-prosecco-abc10.jpg",
+        "titolo": "Abbazia di Santa Maria di Follina - wikiraduno Alle colline del prosecco abc10"
+      },
+      {
+        "tipo": "immagine",
+        "url": "uploads/poi/abbazia-follina/basilica-follina-interno-01.jpg",
+        "titolo": "Basilica Follina interno 01"
+      },
+      {
+        "tipo": "immagine",
+        "url": "uploads/poi/abbazia-follina/basilica-di-follina-e-scalinata-del-borromeo.jpg",
+        "titolo": "Basilica di Follina e scalinata del Borromeo"
+      },
+      {
+        "tipo": "immagine",
+        "url": "uploads/poi/abbazia-follina/follinaabbazia1.jpg",
+        "titolo": "FollinaAbbazia1"
+      },
+      {
+        "tipo": "immagine",
+        "url": "uploads/poi/abbazia-follina/follinaabbazia2.jpg",
+        "titolo": "FollinaAbbazia2"
+      },
+      {
+        "tipo": "immagine",
+        "url": "uploads/poi/abbazia-follina/follinachiostro.jpg",
+        "titolo": "FollinaChiostro"
+      },
+      {
+        "tipo": "immagine",
+        "url": "uploads/poi/abbazia-follina/follina-facciata-abbazia.jpg",
+        "titolo": "Follina Facciata abbazia"
+      },
+      {
+        "tipo": "immagine",
+        "url": "uploads/poi/abbazia-follina/follina-scorcio-complesso-abbaziale-1.jpg",
+        "titolo": "Follina scorcio complesso abbaziale"
+      }
+    ],
+    "modello": {
+      "tipo": "abbazia",
+      "glb": null,
+      "scala": 1,
+      "rotazione": 0
+    },
+    "ordine": 80,
+    "copertina": "uploads/poi/abbazia-follina/abbazia-di-santa-maria-di-follina-wikiraduno-alle-colline-del-prosecco-abc10.jpg"
+  },
+  {
+    "id": "castelbrando",
+    "nome": "CastelBrando",
+    "tipo": "monumento",
+    "categoria": "Castelli",
+    "livello": 2,
+    "visibile": true,
+    "lat": 45.96823,
+    "lon": 12.13572,
+    "descrizione": "Tra i castelli più grandi d’Europa, dei Brandolini dal 1436; oggi albergo, museo e teatro, raggiungibile con la funicolare.",
+    "media": [
+      {
+        "tipo": "immagine",
+        "url": "uploads/poi/castelbrando/castel-brando-6-6073450375.jpg",
+        "titolo": "Castel Brando-6"
+      },
+      {
+        "tipo": "immagine",
+        "url": "uploads/poi/castelbrando/castelbrando.jpg",
+        "titolo": "Castelbrando"
+      },
+      {
+        "tipo": "immagine",
+        "url": "uploads/poi/castelbrando/castelbrando2.jpg",
+        "titolo": "Castelbrando2"
+      },
+      {
+        "tipo": "immagine",
+        "url": "uploads/poi/castelbrando/castelbrando-aerial-view.jpg",
+        "titolo": "Castelbrando Aerial View"
+      },
+      {
+        "tipo": "immagine",
+        "url": "uploads/poi/castelbrando/castelbrando-funicolare-cison.jpg",
+        "titolo": "Castelbrando Funicolare Cison"
+      },
+      {
+        "tipo": "immagine",
+        "url": "uploads/poi/castelbrando/castelbrando-cison-di-valmarino.jpg",
+        "titolo": "Castelbrando cison di valmarino"
+      }
+    ],
+    "modello": {
+      "tipo": "castello",
+      "glb": null,
+      "scala": 1,
+      "rotazione": 0
+    },
+    "ordine": 81,
+    "copertina": "uploads/poi/castelbrando/castel-brando-6-6073450375.jpg"
+  },
+  {
+    "id": "loggia-serravalle",
+    "nome": "Loggia di Serravalle",
+    "tipo": "monumento",
+    "categoria": "Palazzi e ville",
+    "livello": 2,
+    "visibile": true,
+    "lat": 45.99923,
+    "lon": 12.28956,
+    "descrizione": "La Loggia della Comunità (1462) nel borgo medievale di Serravalle ospita il Museo del Cenedese.",
+    "media": [
+      {
+        "tipo": "immagine",
+        "url": "uploads/poi/loggia-serravalle/4472vittoriovenetologgiaserravalle.jpg",
+        "titolo": "4472VittorioVenetoLoggiaSerravalle"
+      }
+    ],
+    "modello": {
+      "tipo": "loggia",
+      "glb": null,
+      "scala": 1,
+      "rotazione": 0
+    },
+    "ordine": 82,
+    "copertina": "uploads/poi/loggia-serravalle/4472vittoriovenetologgiaserravalle.jpg"
+  },
+  {
+    "id": "grotte-caglieron",
+    "nome": "Grotte del Caglieron",
+    "tipo": "monumento",
+    "categoria": "Natura",
+    "livello": 2,
+    "visibile": true,
+    "lat": 46.00727,
+    "lon": 12.33097,
+    "descrizione": "Forra scavata dal torrente Caglieron tra cascate e antiche cave di arenaria; percorso su passerelle.",
+    "media": [
+      {
+        "tipo": "immagine",
+        "url": "uploads/poi/grotte-caglieron/grotte-del-caglieron-1.jpg",
+        "titolo": "Grotte del Caglieron 1"
+      },
+      {
+        "tipo": "immagine",
+        "url": "uploads/poi/grotte-caglieron/grotte-del-caglieron-2.jpg",
+        "titolo": "Grotte del Caglieron 2"
+      },
+      {
+        "tipo": "immagine",
+        "url": "uploads/poi/grotte-caglieron/grotte-del-caglieron-3.jpg",
+        "titolo": "Grotte del Caglieron 3"
+      },
+      {
+        "tipo": "immagine",
+        "url": "uploads/poi/grotte-caglieron/grotte-del-caglieron-4.jpg",
+        "titolo": "Grotte del Caglieron 4"
+      },
+      {
+        "tipo": "immagine",
+        "url": "uploads/poi/grotte-caglieron/grotte-del-caglieron-5.jpg",
+        "titolo": "Grotte del Caglieron 5"
+      },
+      {
+        "tipo": "immagine",
+        "url": "uploads/poi/grotte-caglieron/grotte-del-caglieron-6.jpg",
+        "titolo": "Grotte del Caglieron 6"
+      },
+      {
+        "tipo": "immagine",
+        "url": "uploads/poi/grotte-caglieron/grotte-del-caglieron-7.jpg",
+        "titolo": "Grotte del Caglieron 7"
+      }
+    ],
+    "modello": {
+      "tipo": "grotta",
+      "glb": null,
+      "scala": 1,
+      "rotazione": 0
+    },
+    "ordine": 83,
+    "copertina": "uploads/poi/grotte-caglieron/grotte-del-caglieron-1.jpg"
+  },
+  {
+    "id": "laghi-revine",
+    "nome": "Lago di Revine e Parco del Livelet",
+    "tipo": "monumento",
+    "categoria": "Natura",
+    "livello": 2,
+    "visibile": true,
+    "lat": 45.98472,
+    "lon": 12.22248,
+    "descrizione": "I due laghi di origine glaciale della Vallata. Sulla riva, il Parco archeologico didattico del Livelet ricostruisce le palafitte preistoriche.",
+    "media": [
+      {
+        "tipo": "immagine",
+        "url": "uploads/poi/laghi-revine/lago-di-lago.jpg",
+        "titolo": "Lago di Lago"
+      },
+      {
+        "tipo": "immagine",
+        "url": "uploads/poi/laghi-revine/lago-di-santa-maria.jpg",
+        "titolo": "Lago di Santa Maria"
+      },
+      {
+        "tipo": "immagine",
+        "url": "uploads/poi/laghi-revine/revine.jpg",
+        "titolo": "Revine"
+      }
+    ],
+    "modello": {
+      "tipo": "lago",
+      "glb": null,
+      "scala": 1,
+      "rotazione": 0
+    },
+    "ordine": 84,
+    "copertina": "uploads/poi/laghi-revine/lago-di-lago.jpg"
+  },
+  {
+    "id": "molinetto-croda",
+    "nome": "Molinetto della Croda",
+    "tipo": "monumento",
+    "categoria": "Luoghi della tradizione",
+    "livello": 2,
+    "visibile": true,
+    "lat": 45.937,
+    "lon": 12.2,
+    "descrizione": "Mulino ad acqua del Seicento addossato alla roccia, con la ruota ancora in funzione. Uno dei luoghi più fotografati del territorio.",
+    "media": [
+      {
+        "tipo": "immagine",
+        "url": "uploads/poi/molinetto-croda/molinetto-della-croda-front.jpg",
+        "titolo": "Molinetto della Croda (Front)"
+      },
+      {
+        "tipo": "immagine",
+        "url": "uploads/poi/molinetto-croda/molinetto-della-croda-refrontolo.jpg",
+        "titolo": "Molinetto della Croda (Refrontolo)"
+      },
+      {
+        "tipo": "immagine",
+        "url": "uploads/poi/molinetto-croda/refrontolo-molinetto-della-croda-fono.jpg",
+        "titolo": "Refrontolo Molinetto della Croda FoNo"
+      }
+    ],
+    "modello": {
+      "tipo": "mulino",
+      "glb": null,
+      "scala": 1,
+      "rotazione": 0
+    },
+    "ordine": 85,
+    "copertina": "uploads/poi/molinetto-croda/molinetto-della-croda-front.jpg"
+  },
+  {
+    "id": "villa-brandolini",
+    "nome": "Villa Brandolini",
+    "tipo": "monumento",
+    "categoria": "Palazzi e ville",
+    "livello": 2,
+    "visibile": true,
+    "lat": 45.91549,
+    "lon": 12.16809,
+    "descrizione": "Villa veneta del Settecento a Solighetto, sede del Consorzio di Tutela e del Centro culturale Fabbri (Toti Dal Monte).",
+    "media": [
+      {
+        "tipo": "immagine",
+        "url": "uploads/poi/villa-brandolini/solighetto-2008-04-25-villa.jpg",
+        "titolo": "Solighetto 2008-04-25 Villa"
+      }
+    ],
+    "modello": {
+      "tipo": "villa",
+      "glb": null,
+      "scala": 1,
+      "rotazione": 0
+    },
+    "ordine": 86,
+    "copertina": "uploads/poi/villa-brandolini/solighetto-2008-04-25-villa.jpg"
+  },
+  {
+    "id": "pieve-feletto",
+    "nome": "Pieve di San Pietro di Feletto",
+    "tipo": "monumento",
+    "categoria": "Abbazie e chiese",
+    "livello": 2,
+    "visibile": true,
+    "lat": 45.93041,
+    "lon": 12.23721,
+    "descrizione": "Pieve romanica (XII sec.) con il celebre affresco del “Cristo della Domenica” sul portico. Terrazza naturale sulle colline.",
+    "media": [
+      {
+        "tipo": "immagine",
+        "url": "uploads/poi/pieve-feletto/chiesa-col-campanile-sulla-collina.jpg",
+        "titolo": "Chiesa col campanile sulla collina"
+      },
+      {
+        "tipo": "immagine",
+        "url": "uploads/poi/pieve-feletto/pianta-zenitale-di-chiesa-e-campanile.jpg",
+        "titolo": "Pianta zenitale di chiesa e campanile"
+      },
+      {
+        "tipo": "immagine",
+        "url": "uploads/poi/pieve-feletto/prospetti-e-pianta-della-chiesa-con-campanile-e-abside.jpg",
+        "titolo": "Prospetti e pianta della chiesa con campanile e abside"
+      },
+      {
+        "tipo": "immagine",
+        "url": "uploads/poi/pieve-feletto/san-pietro-di-feletto-facciata-della-pieve-foto-di-paolo-steffan.jpg",
+        "titolo": "San Pietro di Feletto - Facciata della pieve (foto Paolo Steffan)"
+      },
+      {
+        "tipo": "immagine",
+        "url": "uploads/poi/pieve-feletto/campanile-san-pietro-di-feletto.jpg",
+        "titolo": "campanile san pietro di feletto"
+      },
+      {
+        "tipo": "immagine",
+        "url": "uploads/poi/pieve-feletto/chiesa-vista-destra.jpg",
+        "titolo": "chiesa vista destra"
+      },
+      {
+        "tipo": "immagine",
+        "url": "uploads/poi/pieve-feletto/chiesa-vista-dietro.jpg",
+        "titolo": "chiesa vista dietro"
+      },
+      {
+        "tipo": "immagine",
+        "url": "uploads/poi/pieve-feletto/chiesa-vista-fronte.jpg",
+        "titolo": "chiesa vista fronte"
+      },
+      {
+        "tipo": "immagine",
+        "url": "uploads/poi/pieve-feletto/chiesa-vista-sinistra.jpg",
+        "titolo": "chiesa vista sinistra"
+      },
+      {
+        "tipo": "immagine",
+        "url": "uploads/poi/pieve-feletto/lato-san-pietro-di-feletto.jpg",
+        "titolo": "lato san pietro di feletto"
+      },
+      {
+        "tipo": "immagine",
+        "url": "uploads/poi/pieve-feletto/san-pietro-di-feletto-campanile-da-strada.jpg",
+        "titolo": "san pietro di feletto campanile da strada"
+      },
+      {
+        "tipo": "immagine",
+        "url": "uploads/poi/pieve-feletto/san-pietro-di-feletto-campanile.jpg",
+        "titolo": "san pietro di feletto campanile"
+      },
+      {
+        "tipo": "immagine",
+        "url": "uploads/poi/pieve-feletto/san-pietro-di-feletto-da-alto.jpg",
+        "titolo": "san pietro di feletto da alto"
+      },
+      {
+        "tipo": "immagine",
+        "url": "uploads/poi/pieve-feletto/san-pietro-di-feletto-dal-basso.jpg",
+        "titolo": "san pietro di feletto dal basso"
+      },
+      {
+        "tipo": "immagine",
+        "url": "uploads/poi/pieve-feletto/san-pietro-di-feletto.jpg",
+        "titolo": "san pietro di feletto"
+      },
+      {
+        "tipo": "immagine",
+        "url": "uploads/poi/pieve-feletto/san-pietro-di-felettolato-sinistro.jpg",
+        "titolo": "san pietro di felettolato sinistro"
+      },
+      {
+        "tipo": "immagine",
+        "url": "uploads/poi/pieve-feletto/veduta-aerea.jpg",
+        "titolo": "veduta aerea"
+      }
+    ],
+    "modello": {
+      "tipo": "pieve",
+      "glb": "modelli/pieve-san-pietro-di-feletto.glb",
+      "scala": 1,
+      "rotazione": 0
+    },
+    "ordine": 87,
+    "copertina": "uploads/poi/pieve-feletto/chiesa-col-campanile-sulla-collina.jpg"
+  },
+  {
+    "id": "castello-collalto",
+    "nome": "Castello di Collalto",
+    "tipo": "monumento",
+    "categoria": "Castelli",
+    "livello": 2,
+    "visibile": true,
+    "lat": 45.87352,
+    "lon": 12.19682,
+    "descrizione": "Ruderi del castello duecentesco dei conti di Collalto, distrutto nella Grande Guerra; il borgo conserva il suo impianto.",
+    "media": [
+      {
+        "tipo": "immagine",
+        "url": "uploads/poi/castello-collalto/castello-di-collalto-2022-23.jpg",
+        "titolo": "Castello di Collalto 2022 23"
+      },
+      {
+        "tipo": "immagine",
+        "url": "uploads/poi/castello-collalto/collalto-susegana-castello.jpg",
+        "titolo": "Collalto (Susegana), castello"
+      }
+    ],
+    "modello": {
+      "tipo": "castello",
+      "glb": null,
+      "scala": 1,
+      "rotazione": 0
+    },
+    "ordine": 88,
+    "copertina": "uploads/poi/castello-collalto/castello-di-collalto-2022-23.jpg"
+  },
+  {
+    "id": "castello-san-salvatore",
+    "nome": "Castello di San Salvatore",
+    "tipo": "monumento",
+    "categoria": "Castelli",
+    "livello": 2,
+    "visibile": true,
+    "lat": 45.85074,
+    "lon": 12.23488,
+    "descrizione": "Grande castello dei Collalto sopra Susegana, affacciato sul Piave.",
+    "media": [
+      {
+        "tipo": "immagine",
+        "url": "uploads/poi/castello-san-salvatore/castello-di-san-salvatore.jpg",
+        "titolo": "Castello di San Salvatore"
+      },
+      {
+        "tipo": "immagine",
+        "url": "uploads/poi/castello-san-salvatore/paolo-monti-serie-fotografica-beic-6364221.jpg",
+        "titolo": "Paolo Monti - Serie fotografica - BEIC 6364221"
+      },
+      {
+        "tipo": "immagine",
+        "url": "uploads/poi/castello-san-salvatore/susegana-19-marzo-1995-03.jpg",
+        "titolo": "Susegana, 19 marzo 1995 03"
+      },
+      {
+        "tipo": "immagine",
+        "url": "uploads/poi/castello-san-salvatore/susegana-19-marzo-1995-20.jpg",
+        "titolo": "Susegana, 19 marzo 1995 20"
+      },
+      {
+        "tipo": "immagine",
+        "url": "uploads/poi/castello-san-salvatore/susegana-veduta-ottocentesca-del-castello-di-san-salvatore.jpg",
+        "titolo": "Susegana-veduta ottocentesca del Castello di San Salvatore"
+      }
+    ],
+    "modello": {
+      "tipo": "castello",
+      "glb": null,
+      "scala": 1,
+      "rotazione": 0
+    },
+    "ordine": 89,
+    "copertina": "uploads/poi/castello-san-salvatore/castello-di-san-salvatore.jpg"
+  },
+  {
+    "id": "campanile-roganzuolo",
+    "nome": "Campanile di Castello Roganzuolo",
+    "tipo": "monumento",
+    "categoria": "Abbazie e chiese",
+    "livello": 2,
+    "visibile": true,
+    "lat": 45.92324,
+    "lon": 12.33711,
+    "descrizione": "La chiesa con il campanile sul colle del vecchio castello; all’interno opere di Tiziano e bottega.",
+    "media": [
+      {
+        "tipo": "immagine",
+        "url": "uploads/poi/campanile-roganzuolo/castel-campanil-2008-07-15.jpg",
+        "titolo": "Castel-Campanil 2008-07-15"
+      },
+      {
+        "tipo": "immagine",
+        "url": "uploads/poi/campanile-roganzuolo/castello-roganzuolo-torre-campanaria-2011-foto-di-paolo-steffan.jpg",
+        "titolo": "Castello Roganzuolo - Torre campanaria (2011) (foto Paolo Steffan)"
+      }
+    ],
+    "modello": {
+      "tipo": "campanile",
+      "glb": null,
+      "scala": 1,
+      "rotazione": 0
+    },
+    "ordine": 90,
+    "copertina": "uploads/poi/campanile-roganzuolo/castel-campanil-2008-07-15.jpg"
+  },
+  {
+    "id": "san-vigilio",
+    "nome": "Chiesa di San Vigilio",
+    "tipo": "monumento",
+    "categoria": "Abbazie e chiese",
+    "livello": 2,
+    "visibile": true,
+    "lat": 45.89817,
+    "lon": 12.09335,
+    "descrizione": "Chiesetta romanica sul colle sopra Col San Martino, tra i cipressi: il simbolo delle colline del Prosecco.",
+    "media": [
+      {
+        "tipo": "immagine",
+        "url": "uploads/poi/san-vigilio/chiesa-di-san-vigilio.jpg",
+        "titolo": "Chiesa di San Vigilio"
+      },
+      {
+        "tipo": "immagine",
+        "url": "uploads/poi/san-vigilio/farra-di-soligo-colsanmartino3.jpg",
+        "titolo": "Farra di Soligo-Colsanmartino3"
+      }
+    ],
+    "modello": {
+      "tipo": "chiesa",
+      "glb": null,
+      "scala": 1,
+      "rotazione": 0
+    },
+    "ordine": 91,
+    "copertina": "uploads/poi/san-vigilio/chiesa-di-san-vigilio.jpg"
+  },
+  {
+    "id": "abbazia-santa-bona",
+    "nome": "Abbazia di Santa Bona",
+    "tipo": "monumento",
+    "categoria": "Abbazie e chiese",
+    "livello": 2,
+    "visibile": true,
+    "lat": 45.864,
+    "lon": 12.04,
+    "descrizione": "Abbazia benedettina del XII secolo sulla riva del Piave a Vidor, segnata sulla mappa ufficiale della Strada.",
+    "media": [
+      {
+        "tipo": "immagine",
+        "url": "uploads/poi/abbazia-santa-bona/abbazia-di-vidor.jpg",
+        "titolo": "Abbazia di Vidor"
+      },
+      {
+        "tipo": "immagine",
+        "url": "uploads/poi/abbazia-santa-bona/chiostro-abbazia-vidor.jpg",
+        "titolo": "Chiostro Abbazia Vidor"
+      },
+      {
+        "tipo": "immagine",
+        "url": "uploads/poi/abbazia-santa-bona/interno-abbazia-vidor.jpg",
+        "titolo": "Interno Abbazia Vidor"
+      },
+      {
+        "tipo": "immagine",
+        "url": "uploads/poi/abbazia-santa-bona/interno-abbazia-vidor-1.jpg",
+        "titolo": "Interno Abbazia Vidor 1"
+      }
+    ],
+    "modello": {
+      "tipo": "abbazia",
+      "glb": null,
+      "scala": 1,
+      "rotazione": 0
+    },
+    "ordine": 92,
+    "copertina": "uploads/poi/abbazia-santa-bona/abbazia-di-vidor.jpg"
+  }
+]

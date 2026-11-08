@@ -1,0 +1,94 @@
+<!doctype html>
+<html lang="it">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Backend · Mappa turistica del Prosecco</title>
+<link rel="stylesheet" href="admin.css">
+</head>
+<body>
+<header>
+  <a class="marchio" href="/">← Mappa</a>
+  <h1>Backend della Mappa turistica del Prosecco</h1>
+  <nav id="schede" class="nascosto">
+    <button data-s="poi" class="attivo">Punti di interesse</button>
+    <button data-s="itinerari">Itinerari e audio</button>
+    <button data-s="foto360">Foto 360</button>
+    <button data-s="impostazioni">Livelli e impostazioni</button>
+  </nav>
+  <button id="esci" class="nascosto">Esci</button>
+</header>
+
+<main>
+  <section id="login">
+    <form id="login-form" class="scheda">
+      <h2>Accesso riservato</h2>
+      <p>Inserisci la password del backend (variabile <code>ADMIN_PASSWORD</code> nel file <code>.env</code>; predefinita <code>prosecco</code>).</p>
+      <input type="password" id="password" placeholder="Password" autocomplete="current-password" required>
+      <button type="submit" class="primario">Entra</button>
+      <p id="login-errore" class="errore"></p>
+    </form>
+  </section>
+
+  <section id="s-poi" class="nascosto">
+    <div class="barra">
+      <input type="search" id="poi-cerca" placeholder="Cerca un punto di interesse…">
+      <select id="poi-filtro-liv"><option value="">Tutti i livelli</option><option value="1">Livello 1</option><option value="2">Livello 2</option><option value="3">Livello 3</option><option value="mon">Monumenti con 3D</option></select>
+      <button id="poi-nuovo" class="primario">+ Nuovo punto</button>
+    </div>
+    <div class="due-colonne">
+      <div id="poi-lista" class="lista"></div>
+      <div id="poi-form" class="scheda vuota">Seleziona un punto di interesse dall'elenco, oppure creane uno nuovo.</div>
+    </div>
+  </section>
+
+  <section id="s-itinerari" class="nascosto">
+    <div class="barra"><span class="nota">I tracciati seguono la rete stradale di OpenStreetMap (OSRM). Le tappe sono id di punti di interesse oppure coordinate "lon,lat".</span><button id="it-nuovo" class="primario">+ Nuovo itinerario</button></div>
+    <div class="due-colonne">
+      <div id="it-lista" class="lista"></div>
+      <div id="it-form" class="scheda vuota">Seleziona un itinerario.</div>
+    </div>
+  </section>
+
+  <section id="s-foto360" class="nascosto">
+    <div class="barra"><span class="nota">Foto equirettangolari (2:1), aeree o a terra. I collegamenti creano le frecce per passare da una foto all'altra.</span><button id="f-nuova" class="primario">+ Nuova foto 360</button></div>
+    <div class="due-colonne">
+      <div id="f-lista" class="lista"></div>
+      <div id="f-form" class="scheda vuota">Seleziona una foto 360.</div>
+    </div>
+  </section>
+
+  <section id="s-impostazioni" class="nascosto">
+    <form id="cfg-form" class="scheda">
+      <h2>Scale importance code (livelli)</h2>
+      <p>Le scritte compaiono progressivamente avvicinando la camera. Qui si imposta la distanza (in metri) della camera sotto la quale compaiono i livelli 2 e 3; il livello 1 è sempre visibile. Il livello di ciascun luogo si cambia nella scheda del punto di interesse.</p>
+      <label>Livello 2 visibile sotto <input type="number" name="liv2" min="1000" step="500"> m</label>
+      <label>Livello 3 visibile sotto <input type="number" name="liv3" min="500" step="500"> m</label>
+      <h2>Plastico</h2>
+      <label>Esagerazione verticale <input type="number" name="esagerazione" min="1" max="4" step="0.1"></label>
+      <label>Modelli 3D: fattore di distanza <input type="number" name="fattoreDistanza" min="0.005" max="0.2" step="0.005"> <small>(dimensione = distanza × fattore; 0,035 ⇒ a 30 km un modello appare largo 1 km)</small></label>
+      <label>Titolo della mappa <input type="text" name="titolo"></label>
+      <h2>Mappe sovrapponibili</h2>
+      <p>Riquadro geografico del plastico e delle mappe fornite (le tre mappe GRANDE sono screenshot in Web Mercator con lo stesso inquadramento). Per spostare o scalare le mappe, correggi i quattro bordi.</p>
+      <div class="griglia4">
+        <label>Ovest (lon) <input type="number" name="w" step="0.0001"></label>
+        <label>Est (lon) <input type="number" name="e" step="0.0001"></label>
+        <label>Nord (lat) <input type="number" name="n" step="0.0001"></label>
+        <label>Sud (lat) <input type="number" name="s" step="0.0001"></label>
+      </div>
+      <p class="nota">Attenzione: cambiando il riquadro, il rilievo e la mappa dei colori vanno rigenerati con <code>npm run dati --solo=terreno</code> e <code>--solo=colori</code> (altrimenti restano riferiti al riquadro precedente).</p>
+      <button class="primario">Salva impostazioni</button>
+      <p id="cfg-esito" class="esito"></p>
+    </form>
+    <div class="scheda">
+      <h2>Copia di sicurezza</h2>
+      <p>Scarica o ripristina l'intero contenuto (punti di interesse, itinerari, foto 360, impostazioni). I file multimediali restano nella cartella <code>uploads/</code>.</p>
+      <div class="azioni"><button id="esporta">Scarica JSON</button><label class="bottone">Ripristina da JSON <input type="file" id="importa" accept="application/json" hidden></label></div>
+    </div>
+  </div>
+  </section>
+</main>
+<div id="toast"></div>
+<script type="module" src="admin.js"></script>
+</body>
+</html>

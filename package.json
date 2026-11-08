@@ -1,0 +1,23 @@
+{
+  "name": "mappa-turistica-prosecco",
+  "version": "0.1.0",
+  "description": "Mappa turistica 3D interattiva del territorio del Prosecco: plastico con rilievo, punti di interesse a 3 livelli, itinerari animati, audio geolocalizzati, foto 360 e backend di gestione",
+  "scripts": {
+    "start": "node server.mjs",
+    "dati": "node tools/build-data.mjs",
+    "materiali": "node tools/importa-materiali.mjs",
+    "dev": "node server.mjs"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "@turf/turf": "^7.4.0",
+    "express": "^4.22.3",
+    "multer": "^1.4.5-lts.2",
+    "sharp": "^0.33.5",
+    "three": "^0.170.0"
+  },
+  "private": true,
+  "type": "module"
+}
