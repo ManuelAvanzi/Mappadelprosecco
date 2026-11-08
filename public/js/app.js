@@ -79,6 +79,7 @@ class App {
     this.orologio = new THREE.Clock();
     this.anima();
     $('#caricamento').classList.add('via');
+    setTimeout(() => $('#caricamento')?.remove(), 900);
     window.__mappa = this; // per il collaudo dalla console
   }
 

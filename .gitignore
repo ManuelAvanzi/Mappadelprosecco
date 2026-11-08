@@ -1,6 +1,9 @@
 node_modules/
 data/cache/
+data/backup/
+# i file caricati dal backend restano fuori dal repo, tranne le foto dei 15 monumenti importate dai materiali
 uploads/*
 !uploads/.gitkeep
+!uploads/poi/
 .env
 *.log
