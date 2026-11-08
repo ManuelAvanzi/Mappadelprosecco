@@ -29,7 +29,7 @@ export class Terreno {
     this.base = Math.floor(hmin / 50) * 50 - 60; // quota del basamento (m)
 
     onProgress('Modellazione delle colline…');
-    const mobile = Math.min(innerWidth, innerHeight) < 760 || /Android|iPhone|iPad/i.test(navigator.userAgent);
+    const mobile = /Android|iPhone|iPad/i.test(navigator.userAgent) || (navigator.maxTouchPoints > 1 && Math.min(innerWidth, innerHeight) < 760);
     const segX = mobile ? 384 : 768;
     const segZ = Math.round(segX * this.geo.altezza / this.geo.larghezza);
     const geom = new THREE.PlaneGeometry(this.geo.larghezza, this.geo.altezza, segX, segZ);
@@ -45,7 +45,7 @@ export class Terreno {
     this.materiale = new THREE.MeshStandardMaterial({ color: 0xffffff, roughness: 0.95, metalness: 0 });
     this.mesh = new THREE.Mesh(geom, this.materiale);
     this.mesh.name = 'terreno';
-    this.mesh.receiveShadow = true;
+    this.mesh.receiveShadow = true; this.mesh.castShadow = true;
     this.gruppo.add(this.mesh);
 
     // mappa sovrapposta (trasparente) sulla stessa geometria

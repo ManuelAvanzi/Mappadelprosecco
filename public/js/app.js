@@ -8,6 +8,9 @@ import { Modelli } from './modelli.js';
 import { Itinerari, Percorso } from './itinerari.js';
 import { PannelloPoi } from './poi.js';
 import { Foto360 } from './foto360.js';
+import { Ambiente } from './ambiente.js';
+import { creaPost } from './post.js';
+import { Vista } from './vista.js';
 
 const $ = (s) => document.querySelector(s);
 const esc = (s) => String(s ?? '').replace(/[&<>"]/g, (c) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c]));
@@ -24,8 +27,6 @@ class App {
 
     // scena, renderer, camere
     this.scena = new THREE.Scene();
-    this.scena.background = new THREE.Color(0xdfe8ee);
-    this.scena.fog = new THREE.Fog(0xdfe8ee, this.geo.larghezza * 1.6, this.geo.larghezza * 4);
     this.renderer = new THREE.WebGLRenderer({ antialias: true, powerPreference: 'high-performance' });
     this.renderer.setPixelRatio(Math.min(devicePixelRatio, 2));
     this.renderer.setSize(innerWidth, innerHeight);
@@ -43,15 +44,16 @@ class App {
     this.controls.minZoom = 0.35; this.controls.maxZoom = 60; this.controls.screenSpacePanning = false;
     this.controls.touches = { ONE: THREE.TOUCH.ROTATE, TWO: THREE.TOUCH.DOLLY_PAN };
 
-    // luci: sole da sud-ovest + cielo
-    this.scena.add(new THREE.HemisphereLight(0xdfe9f3, 0x8a7a5a, 0.9));
-    const sole = new THREE.DirectionalLight(0xfff2dc, 2.1); sole.position.set(-this.geo.larghezza * 0.4, this.geo.larghezza * 0.5, this.geo.altezza * 0.6); this.scena.add(sole);
-    const riempi = new THREE.DirectionalLight(0xcfe0ff, 0.5); riempi.position.set(this.geo.larghezza * 0.5, this.geo.larghezza * 0.3, -this.geo.altezza); this.scena.add(riempi);
-
-    // terreno
+    // terreno, poi ambiente (tavolo, cielo, luci) e post-produzione
     this.terreno = new Terreno(this.geo, this.cfg);
+    if (this.cfg.vista?.esagerazione) this.terreno.esagerazione = this.cfg.vista.esagerazione;
     await this.terreno.carica(prog);
     this.scena.add(this.terreno.gruppo);
+    prog('Ambiente e luci…');
+    this.ambiente = new Ambiente(this.scena, this.renderer, this.terreno, this.geo);
+    this.post = creaPost(this.renderer); this.post.setSize(innerWidth, innerHeight);
+    this.vista = new Vista(this, $('#vista-corpo'));
+    this.vista.applica();
 
     // etichette, modelli, itinerari, foto 360
     prog('Punti di interesse…');
@@ -99,15 +101,19 @@ class App {
     cam.lookAt(t); this.controls.update();
     $('#btn-proiezione').classList.toggle('attivo', cam.isOrthographicCamera);
   }
-  /** Veduta aerea: tutto il territorio da sud, in assonometria */
+  /** Veduta aerea: tutto il territorio da sud (o dalla rotazione scelta), in assonometria o prospettiva secondo la Visualizzazione */
   vedutaAerea(subito = false) {
     this.esciPercorso();
     this.modalita = 'aerea'; this.menuAttivo('aerea');
-    this.usaCamera(this.camOrto);
+    const v = this.vista.valori;
+    const orto = v.proiezione !== 'prospettiva';
+    this.camProsp.fov = v.focale; this.camProsp.updateProjectionMatrix();
+    this.usaCamera(orto ? this.camOrto : this.camProsp);
     const t = new THREE.Vector3(0, this.terreno.quotaMin * this.terreno.esagerazione, 0);
-    const el = THREE.MathUtils.degToRad(42);
-    const pos = new THREE.Vector3(0, Math.sin(el), Math.cos(el)).multiplyScalar(this.geo.larghezza * 1.2).add(t);
-    this.volaCamera(pos, t, subito ? 0 : 1.2, 1);
+    const el = THREE.MathUtils.degToRad(v.elevazione), az = THREE.MathUtils.degToRad(v.azimut);
+    const d = orto ? this.geo.larghezza * 1.2 : (this.geo.larghezza * 0.62 / Math.tan(THREE.MathUtils.degToRad(v.focale) / 2)) / v.zoom;
+    const pos = new THREE.Vector3(Math.sin(az) * Math.cos(el), Math.sin(el), Math.cos(az) * Math.cos(el)).multiplyScalar(d).add(t);
+    this.volaCamera(pos, t, subito ? 0 : 1.2, orto ? v.zoom : undefined);
   }
   volaCamera(pos, target, durata = 1.2, zoom) {
     const cam = this.camera;
@@ -151,6 +157,8 @@ class App {
     $('#dettaglio-chiudi').addEventListener('click', () => this.chiudiDettaglio());
     $('#btn-proiezione').addEventListener('click', () => this.usaCamera(this.camera.isOrthographicCamera ? this.camProsp : this.camOrto));
     $('#btn-mappe').addEventListener('click', () => (this.pannelloAperto === 'mappe' ? this.chiudiPannello() : this.apriPannello('mappe')));
+    $('#btn-vista').addEventListener('click', () => this.mostraVista($('#vista').classList.contains('chiuso')));
+    $('#vista-chiudi').addEventListener('click', () => this.mostraVista(false));
     // percorso animato
     $('#percorso-play').addEventListener('click', () => this.percorso.play());
     $('#percorso-indietro').addEventListener('click', () => { this.percorso.vaiA(0); this.percorso.play(false); });
@@ -188,6 +196,7 @@ class App {
     if (vola || this.camera.isOrthographicCamera) this.volaA(p, p.modello ? 1400 : 2600);
   }
   chiudiDettaglio() { $('#dettaglio').classList.add('nascosto'); }
+  mostraVista(apri) { $('#vista').classList.toggle('chiuso', !apri); $('#btn-vista').classList.toggle('attivo', apri); if (apri) this.chiudiDettaglio(); }
 
   renderItinerari(corpo) {
     corpo.innerHTML = '';
@@ -245,13 +254,12 @@ class App {
       '<h3>Mappa sovrapposta</h3><label class="riga-opz"><span>Mappa</span><select id="sovra"><option value="">nessuna</option>' + mappe.map((m) => `<option value="${esc(m.id)}" ${this.terreno.sovraAttiva === m.id ? 'selected' : ''}>${esc(m.nome)}</option>`).join('') + '</select></label>' +
       `<label class="riga-opz"><span>Opacità</span><input type="range" id="sovra-op" min="0" max="1" step="0.05" value="${this.terreno.materialeSovra.opacity || 0.6}"></label>` +
       '<h3>Plastico</h3>' +
-      `<label class="riga-opz"><span>Esagerazione del rilievo</span><input type="range" id="esag" min="1" max="3" step="0.1" value="${this.terreno.esagerazione}"></label>` +
       `<label class="riga-opz"><span>Mostra tutte le scritte</span><input type="checkbox" id="tutte" ${this.etichette.mostraTutte ? 'checked' : ''}></label>` +
+      '<p class="vuoto">Esagerazione del rilievo, luci, effetti e inquadratura si regolano nel pannello Visualizzazione (icona dei cursori in alto a destra).</p>' +
       '<p class="vuoto">Le mappe stradale, del rilievo e satellitare sono quelle fornite; la mappa dei colori è ricavata in vettoriale da OpenStreetMap (vigneti, boschi, centri abitati, acque, strade).</p>';
     corpo.querySelectorAll('input[name=mappa]').forEach((r) => r.addEventListener('change', () => { const m = mappe.find((x) => x.id === r.value); this.terreno.impostaMappa(m.id, m.file); }));
     corpo.querySelector('#sovra').addEventListener('change', (e) => { const m = mappe.find((x) => x.id === e.target.value); this.terreno.impostaSovrapposta(m?.id, m?.file, +corpo.querySelector('#sovra-op').value); });
     corpo.querySelector('#sovra-op').addEventListener('input', (e) => this.terreno.opacitaSovrapposta(+e.target.value));
-    corpo.querySelector('#esag').addEventListener('change', (e) => this.impostaEsagerazione(+e.target.value));
     corpo.querySelector('#tutte').addEventListener('change', (e) => (this.etichette.mostraTutte = e.target.checked));
   }
   impostaEsagerazione(e) {
@@ -259,13 +267,15 @@ class App {
     for (const v of this.etichette.voci) { const d = v.userData.dato; v.position.copy(this.terreno.posizione(d.lon, d.lat, v.userData.tipo === 'audio' ? 14 : v.userData.tipo === 'foto360' ? (d.tipo === 'aerea' ? 120 : 10) : d.modello ? 24 : 6)); }
     for (const p of this.modelli.voci) p.position.copy(this.terreno.posizione(p.userData.poi.lon, p.userData.poi.lat));
     this.itinerari.gruppo.clear(); this.itinerari.linee.clear(); this.itinerari.carica(this.itinerariDati);
+    const yb = this.terreno.base * this.terreno.esagerazione - this.geo.larghezza * 0.012 * 0.6 - 2;
+    this.ambiente.tavolo.position.y = yb; this.ambiente.ombraContatto.position.y = yb + 1.5;
   }
 
   ridimensiona() {
     const asp = innerWidth / innerHeight;
     this.camProsp.aspect = asp; this.camProsp.updateProjectionMatrix();
     const h = this.camOrto.top; this.camOrto.left = -h * asp; this.camOrto.right = h * asp; this.camOrto.updateProjectionMatrix();
-    this.renderer.setSize(innerWidth, innerHeight); this.etichette.ridimensiona(); this.itinerari.ridimensiona();
+    this.renderer.setSize(innerWidth, innerHeight); this.post.setSize(innerWidth, innerHeight); this.etichette.ridimensiona(); this.itinerari.ridimensiona();
   }
   anima() {
     requestAnimationFrame(() => this.anima());
@@ -275,7 +285,9 @@ class App {
     const dist = this.modalita === 'percorso' ? 1500 : this.distanzaEquivalente();
     this.etichette.aggiorna(dist, this.modalita, this.camera);
     this.modelli.aggiorna(this.modalita === 'percorso' ? 0 : dist);
-    this.renderer.render(this.scena, this.camera);
+    this.ambiente.aggiorna(this.orologio.elapsedTime);
+    if (this.vista.valori.effetti) this.post.render(this.scena, this.camera, 0.5, this.modalita === 'percorso' ? 0 : 1);
+    else this.renderer.render(this.scena, this.camera);
     this.etichette.render(this.scena, this.camera);
   }
 }

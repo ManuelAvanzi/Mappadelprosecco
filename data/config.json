@@ -53,8 +53,8 @@
   },
   "colori": {
     "file": "colori.jpg",
-    "larghezza": 3072,
-    "altezza": 1974
+    "larghezza": 4096,
+    "altezza": 2632
   },
   "calibrazione": {
     "metodo": "registrazione automatica su vettori OSM (tema strade)",

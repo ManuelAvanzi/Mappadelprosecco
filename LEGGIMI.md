@@ -22,6 +22,9 @@ public/                    la webapp
   js/poi.js                elenco per categorie e scheda con media
   js/foto360.js            visore 360 con frecce
   js/geo.js                proiezione Web Mercator locale
+  js/ambiente.js           tavolo, fondale (studio/cielo con sole e nuvole), luce per ora del giorno, ombre, ombra di contatto
+  js/post.js               post-produzione (miniatura tilt-shift, bagliore, vignetta, saturazione, contrasto, temperatura, grana)
+  js/vista.js              pannello Visualizzazione con i cursori e il salvataggio del predefinito (config.vista)
   admin/                   backend (login con password, schede POI / Itinerari e audio / Foto 360 / Impostazioni)
   mappe/                   le tre mappe fornite ridotte a 4096 px (generate da tools/importa-materiali.mjs)
   modelli/                 GLB dei monumenti (pieve-san-pietro-di-feletto.glb fornito, versione leggera)
@@ -79,6 +82,15 @@ Nell'anteprima del Code tab il server si chiama `mappa-prosecco` (porta 5800). N
 - **Monumenti**: i 15 delle cartelle immagini; modelli procedurali per categoria (castello, abbazia, chiesa, pieve, campanile,
   villa, loggia, mulino, grotta, lago); la Pieve di San Pietro di Feletto usa il GLB Meshy fornito (quello da 0,6 MB; quello da
   11 MB è troppo pesante per il web).
+
+## 4b. Visualizzazione (pannello con i cursori)
+
+Icona dei cursori in alto a destra. Quattro sezioni: **Ambiente** (fondale studio o cielo, tavolo su cui appoggia il plastico,
+nuvole, foschia), **Luce** (ora del giorno che muove il sole e scalda i colori, forza del sole e della luce diffusa, esposizione,
+ombre), **Effetti** (miniatura tilt-shift, vignettatura, saturazione, contrasto, temperatura, bagliore, contorni, grana) e
+**Inquadratura** (assonometria/prospettiva, altezza e rotazione della camera, ingrandimento, focale, esagerazione del rilievo).
+"Veduta aerea con questi valori" riporta la camera; "Salva come predefinito" chiede la password del backend e scrive `vista` in
+`data/config.json`: da quel momento è la visualizzazione iniziale per tutti. Su telefono effetti e ombre partono spenti.
 
 ## 5. Backend
 

@@ -276,7 +276,7 @@ async function colori(bbox, terr, cfg) {
     acque: `[out:json][timeout:180];(way["natural"="water"](${bb});relation["natural"="water"](${bb});way["waterway"~"^(river|stream|canal)$"](${bb});way["landuse"="reservoir"](${bb});relation["waterway"="riverbank"](${bb}););out body;>;out skel qt;`,
     strade: `[out:json][timeout:180];(way["highway"~"^(motorway|trunk|primary|secondary|tertiary)$"](${bb});way["railway"="rail"](${bb}););out body;>;out skel qt;`,
   };
-  const W = 3072, H = Math.round((W * terr.H) / terr.W);
+  const W = 4096, H = Math.round((W * terr.H) / terr.W), k = W / 3072; // k: spessori delle linee tarati a 3072 px
   const [mx0, my0] = [mercX(bbox.w), mercY(bbox.n)], [mx1, my1] = [mercX(bbox.e), mercY(bbox.s)];
   const toPx = (c) => [((mercX(c[0]) - mx0) / (mx1 - mx0)) * W, ((mercY(c[1]) - my0) / (my1 - my0)) * H];
   const tela = new Tela(W, H);
@@ -311,13 +311,13 @@ async function colori(bbox, terr, cfg) {
     }
     for (const l of linee) {
       const t = l.tags, pts = l.punti.map(toPx);
-      if (t.waterway === 'river') tela.linea(pts, 5, hex(COLORI.fiume));
-      else if (t.waterway === 'stream' || t.waterway === 'canal') tela.linea(pts, 2, hex(COLORI.torrente));
-      else if (t.railway === 'rail') tela.linea(pts, 2.5, hex(COLORI.ferrovia));
-      else if (t.highway === 'motorway') { tela.linea(pts, 9, hex(COLORI.stradaBordo)); tela.linea(pts, 6, hex(COLORI.autostrada)); }
-      else if (t.highway === 'trunk' || t.highway === 'primary') { tela.linea(pts, 7, hex(COLORI.stradaBordo)); tela.linea(pts, 4.5, hex(COLORI.strada)); }
-      else if (t.highway === 'secondary') { tela.linea(pts, 5, hex(COLORI.stradaBordo)); tela.linea(pts, 3, hex(COLORI.strada)); }
-      else if (t.highway === 'tertiary') { tela.linea(pts, 3.5, hex(COLORI.stradaBordo)); tela.linea(pts, 2, hex(COLORI.strada)); }
+      if (t.waterway === 'river') tela.linea(pts, 5 * k, hex(COLORI.fiume));
+      else if (t.waterway === 'stream' || t.waterway === 'canal') tela.linea(pts, 2 * k, hex(COLORI.torrente));
+      else if (t.railway === 'rail') tela.linea(pts, 2.5 * k, hex(COLORI.ferrovia));
+      else if (t.highway === 'motorway') { tela.linea(pts, 9 * k, hex(COLORI.stradaBordo)); tela.linea(pts, 6 * k, hex(COLORI.autostrada)); }
+      else if (t.highway === 'trunk' || t.highway === 'primary') { tela.linea(pts, 7 * k, hex(COLORI.stradaBordo)); tela.linea(pts, 4.5 * k, hex(COLORI.strada)); }
+      else if (t.highway === 'secondary') { tela.linea(pts, 5 * k, hex(COLORI.stradaBordo)); tela.linea(pts, 3 * k, hex(COLORI.strada)); }
+      else if (t.highway === 'tertiary') { tela.linea(pts, 3.5 * k, hex(COLORI.stradaBordo)); tela.linea(pts, 2 * k, hex(COLORI.strada)); }
     }
   }
   await sharp(Buffer.from(tela.px.buffer), { raw: { width: W, height: H, channels: 3 } }).jpeg({ quality: 88 }).toFile(path.join(DATA, 'colori.jpg'));

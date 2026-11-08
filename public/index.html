@@ -23,6 +23,9 @@
     <button class="icona" id="btn-proiezione" title="Assonometria / prospettiva" aria-label="Cambia proiezione">
       <svg viewBox="0 0 24 24"><path d="M4 8l8-4 8 4-8 4-8-4zM4 8v8l8 4 8-4V8M12 12v8" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/></svg>
     </button>
+    <button class="icona" id="btn-vista" title="Visualizzazione: luce, effetti, inquadratura" aria-label="Visualizzazione">
+      <svg viewBox="0 0 24 24"><path d="M4 7h10M18 7h2M4 12h3M11 12h9M4 17h12M20 17h0" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/><circle cx="16" cy="7" r="2" fill="none" stroke="currentColor" stroke-width="1.6"/><circle cx="9" cy="12" r="2" fill="none" stroke="currentColor" stroke-width="1.6"/><circle cx="18" cy="17" r="2" fill="none" stroke="currentColor" stroke-width="1.6"/></svg>
+    </button>
     <button class="icona" id="btn-mappe" title="Mappe sovrapponibili" aria-label="Mappe sovrapponibili">
       <svg viewBox="0 0 24 24"><path d="M3 7l6-3 6 3 6-3v13l-6 3-6-3-6 3V7zM9 4v13M15 7v13" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/></svg>
     </button>
@@ -54,6 +57,11 @@
 <aside id="pannello" class="chiuso" aria-live="polite">
   <div class="pannello-testa"><h2 id="pannello-titolo"></h2><button class="icona" id="pannello-chiudi" aria-label="Chiudi"><svg viewBox="0 0 24 24"><path d="M6 6l12 12M18 6L6 18" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg></button></div>
   <div id="pannello-corpo"></div>
+</aside>
+
+<aside id="vista" class="chiuso" aria-label="Visualizzazione">
+  <div class="pannello-testa"><h2>Visualizzazione</h2><button class="icona" id="vista-chiudi" aria-label="Chiudi"><svg viewBox="0 0 24 24"><path d="M6 6l12 12M18 6L6 18" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg></button></div>
+  <div id="vista-corpo"></div>
 </aside>
 
 <div id="percorso" class="nascosto">

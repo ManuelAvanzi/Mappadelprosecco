@@ -78,6 +78,25 @@ button { cursor: pointer; }
 .riga-opz { display: flex; align-items: center; justify-content: space-between; gap: 10px; padding: 8px 8px; font-size: 13.5px; }
 .riga-opz input[type=range] { width: 130px; }
 
+/* Pannello Visualizzazione (cursori) */
+#vista { position: fixed; top: 86px; right: 18px; bottom: 96px; width: 330px; max-width: calc(100vw - 36px); background: rgba(250, 247, 240, .96); backdrop-filter: blur(10px); border-radius: 18px; box-shadow: var(--ombra); display: flex; flex-direction: column; z-index: 8; transition: transform .3s, opacity .3s; }
+#vista.chiuso { transform: translateX(30px); opacity: 0; pointer-events: none; }
+#vista-corpo { overflow: auto; padding: 6px 12px 14px; flex: 1; }
+#vista-corpo details { border-bottom: 1px solid var(--bordo); padding: 4px 0 8px; }
+#vista-corpo summary { cursor: pointer; font-size: 12px; text-transform: uppercase; letter-spacing: .08em; color: var(--verde); font-weight: 700; padding: 8px 4px; list-style: none; display: flex; justify-content: space-between; }
+#vista-corpo summary::after { content: "+"; color: var(--grigio); font-weight: 400; }
+#vista-corpo details[open] summary::after { content: "–"; }
+.ctrl { display: grid; grid-template-columns: 1fr auto; gap: 2px 8px; align-items: center; padding: 5px 4px; font-size: 13px; }
+.ctrl span { color: var(--inchiostro); }
+.ctrl output { font-size: 12px; color: var(--grigio); font-variant-numeric: tabular-nums; }
+.ctrl input[type=range] { grid-column: 1 / -1; width: 100%; accent-color: var(--verde); margin: 0; }
+.ctrl select { grid-column: 1 / -1; border: 1px solid var(--bordo); border-radius: 8px; padding: 5px 8px; background: #fff; font-size: 13px; }
+.ctrl.check { grid-template-columns: 1fr auto; }
+.ctrl.check input { width: 18px; height: 18px; accent-color: var(--verde); }
+.ctrl.spento { opacity: .4; pointer-events: none; }
+#vista-corpo .azioni { flex-direction: column; align-items: stretch; margin-top: 10px; }
+#vista-corpo .azioni .bottone { justify-content: center; }
+
 /* Barra del percorso animato */
 #percorso { position: fixed; left: 50%; bottom: 92px; transform: translateX(-50%); width: min(680px, calc(100vw - 32px)); background: rgba(250, 247, 240, .96); backdrop-filter: blur(10px); border-radius: 18px; box-shadow: var(--ombra); padding: 10px 14px; z-index: 6; }
 #percorso.nascosto, .nascosto { display: none !important; }
@@ -148,6 +167,8 @@ button { cursor: pointer; }
   #pannello { top: auto; left: 8px; right: 8px; bottom: 84px; width: auto; max-width: none; max-height: 52vh; }
   #pannello.chiuso { transform: translateY(30px); }
   #dettaglio { top: auto; left: 8px; right: 8px; bottom: 84px; width: auto; max-width: none; max-height: 70vh; }
+  #vista { top: auto; left: 8px; right: 8px; bottom: 84px; width: auto; max-width: none; max-height: 60vh; }
+  #vista.chiuso { transform: translateY(30px); }
   #percorso { bottom: 84px; width: calc(100vw - 16px); padding: 8px 10px; }
   .velocita { display: none; }
   #attribuzione { display: none; }
