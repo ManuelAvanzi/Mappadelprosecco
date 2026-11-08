@@ -29,7 +29,7 @@ export class Terreno {
     this.base = Math.floor(hmin / 50) * 50 - 60; // quota del basamento (m)
 
     onProgress('Modellazione delle colline…');
-    const mobile = /Android|iPhone|iPad/i.test(navigator.userAgent) || (navigator.maxTouchPoints > 1 && Math.min(innerWidth, innerHeight) < 760);
+    const mobile = /Android|iPhone|iPad/i.test(navigator.userAgent) || (matchMedia('(pointer: coarse)').matches && navigator.maxTouchPoints > 1);
     const segX = mobile ? 384 : 768;
     const segZ = Math.round(segX * this.geo.altezza / this.geo.larghezza);
     const geom = new THREE.PlaneGeometry(this.geo.larghezza, this.geo.altezza, segX, segZ);
@@ -76,7 +76,10 @@ export class Terreno {
       uVigne: { value: new THREE.Vector4(0.55, 0.62, 0.18, 0.3) }, uVigneP: { value: new THREE.Vector4(1, 1, 8, 0) },
       // boschi: tinta + forza; proprietà: chiazze, rilievo delle chiome, scala delle chiome (m)
       uBoschi: { value: new THREE.Vector4(0.08, 0.2, 0.05, 0.4) }, uBoschiP: { value: new THREE.Vector4(1, 1, 140, 0) },
+      // dettaglio a bassa quota (dettaglio.js): fino a 4 tasselli colore + maschera, con il rettangolo UV che coprono (u0, v0, du, dv), e la fusione
+      uDettMix: { value: 0 },
     };
+    for (let i = 0; i < 4; i++) { this.uniformi[`tD${i}`] = { value: null }; this.uniformi[`tM${i}`] = { value: null }; this.uniformi[`uDR${i}`] = { value: new THREE.Vector4(0, 0, 0, 0) }; }
     this.fase = 0; this.velocitaOnde = 1; this.ultimoT = 0;
     new THREE.TextureLoader().load('data/' + (this.cfg.maschera?.file || 'maschera.png'), (t) => { t.colorSpace = THREE.NoColorSpace; t.minFilter = THREE.LinearMipmapLinearFilter; this.uniformi.tMask.value = t; this.uniformi.uHasMask.value = 1; }, undefined, () => {});
     mat.onBeforeCompile = (sh) => {
@@ -85,14 +88,25 @@ export class Terreno {
       sh.fragmentShader = `
         uniform float uTime, uViv, uHasMask; uniform sampler2D tMask; varying vec3 vPosW;
         uniform vec4 uAcqua, uAcquaP, uVigne, uVigneP, uBoschi, uBoschiP;
+        uniform sampler2D tD0, tD1, tD2, tD3, tM0, tM1, tM2, tM3; uniform vec4 uDR0, uDR1, uDR2, uDR3; uniform float uDettMix;
         float hashv(vec2 p) { return fract(sin(dot(p, vec2(127.1, 311.7))) * 43758.5453); }
         float noisev(vec2 p) { vec2 i = floor(p), f = fract(p); f = f * f * (3.0 - 2.0 * f); return mix(mix(hashv(i), hashv(i + vec2(1, 0)), f.x), mix(hashv(i + vec2(0, 1)), hashv(i + vec2(1, 1)), f.x), f.y); }
+        bool dentroDett(vec4 r, vec2 uv, out vec2 t) { t = (uv - r.xy) / max(r.zw, vec2(1e-6)); return r.z > 0.0 && t.x >= 0.0 && t.x <= 1.0 && t.y >= 0.0 && t.y <= 1.0; }
         vec3 vMaskVal;
       ` + sh.fragmentShader
         .replace('#include <map_fragment>', `#include <map_fragment>
           vMaskVal = vec3(0.0);
           #ifdef USE_MAP
-          if (uHasMask > 0.5) vMaskVal = texture2D(tMask, vMapUv).rgb * uViv;
+          if (uHasMask > 0.5) vMaskVal = texture2D(tMask, vMapUv).rgb;
+          if (uDettMix > 0.001) { // tassello ad alta risoluzione sotto la camera: sostituisce colore e maschera
+            vec2 td; vec3 cd = vec3(0.0), md = vec3(0.0); bool okd = false;
+            if (dentroDett(uDR0, vMapUv, td)) { cd = texture2D(tD0, td).rgb; md = texture2D(tM0, td).rgb; okd = true; }
+            else if (dentroDett(uDR1, vMapUv, td)) { cd = texture2D(tD1, td).rgb; md = texture2D(tM1, td).rgb; okd = true; }
+            else if (dentroDett(uDR2, vMapUv, td)) { cd = texture2D(tD2, td).rgb; md = texture2D(tM2, td).rgb; okd = true; }
+            else if (dentroDett(uDR3, vMapUv, td)) { cd = texture2D(tD3, td).rgb; md = texture2D(tM3, td).rgb; okd = true; }
+            if (okd) { diffuseColor.rgb = mix(diffuseColor.rgb, cd, uDettMix); vMaskVal = mix(vMaskVal, md, uDettMix); }
+          }
+          vMaskVal *= uViv;
           #endif
           float pxm = fwidth(vPosW.x) + 0.001; // metri per pixel sullo schermo
           if (vMaskVal.g > 0.01) { // vigneti: screziatura e filari (spariscono da lontano)

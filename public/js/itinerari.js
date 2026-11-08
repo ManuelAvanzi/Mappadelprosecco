@@ -5,7 +5,7 @@ import { LineMaterial } from 'three/addons/lines/LineMaterial.js';
 import { LineGeometry } from 'three/addons/lines/LineGeometry.js';
 import { distanzaM } from './geo.js';
 
-const QUOTA_LINEA = 18; // m sopra il terreno (unità scena)
+const QUOTA_LINEA = 24; // m sopra il terreno (unità scena): abbastanza da non affiorare tra i vertici del plastico
 
 export class Itinerari {
   constructor(scena, terreno, geo, cfg) {
@@ -20,7 +20,7 @@ export class Itinerari {
   carica(lista) {
     this.lista = lista.filter((i) => i.visibile !== false && i.geometria?.length > 1);
     for (const it of this.lista) {
-      const pts = this.campiona(it.geometria, 60);
+      const pts = this.campiona(it.geometria, 25);
       const pos = []; for (const p of pts) pos.push(p.x, p.y, p.z);
       const g = new LineGeometry(); g.setPositions(pos);
       const m = new LineMaterial({ color: new THREE.Color(it.colore || '#c62828'), linewidth: 3, worldUnits: false, transparent: true, opacity: 0.9, depthTest: true });

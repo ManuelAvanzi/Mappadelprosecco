@@ -1,12 +1,12 @@
 // Pannello "Visualizzazione": cursori per ambiente, luce, effetti e inquadratura, con salvataggio del predefinito nel backend.
 import { OPZIONI } from './ambiente.js';
 
-const mobile = /Android|iPhone|iPad/i.test(navigator.userAgent) || (navigator.maxTouchPoints > 1 && Math.min(innerWidth, innerHeight) < 760);
+const mobile = /Android|iPhone|iPad/i.test(navigator.userAgent) || (matchMedia('(pointer: coarse)').matches && navigator.maxTouchPoints > 1);
 export const PREDEFINITI = {
   fondale: 'cielo', tavolo: 'legno', nuvole: 0.3, nebbia: 0.5,
   ora: 15.5, sole: 1, ambiente: 1, ombre: !mobile, esposizione: 1.05,
   effetti: !mobile, miniatura: 0.35, vignetta: 0.25, saturazione: 1.1, contrasto: 1.05, temperatura: 0, bagliore: 0.15, contorni: 0, grana: 0,
-  proiezione: 'orto', elevazione: 42, azimut: 0, zoom: 1, focale: 45, esagerazione: 1.7, vivacita: 0.7,
+  proiezione: 'orto', elevazione: 42, azimut: 0, zoom: 1, focale: 45, esagerazione: 1.7, vivacita: 0.7, dettaglio: !mobile,
   acquaTinta: '#8fc0e4', acquaForza: 0.45, acquaLucentezza: 0.88, acquaOnde: 1, acquaVelocita: 1, acquaScala: 38,
   vigneTinta: '#c3cf78', vigneForza: 0.3, vigneScrezio: 1, vigneFilari: 1, vignePasso: 8,
   boscoTinta: '#4b7a3d', boscoForza: 0.4, boscoChiazze: 1, boscoRilievo: 1, boscoScala: 140,
@@ -21,6 +21,7 @@ const SCHEMA = [
     ['tavolo', 'Tavolo', 'select', Object.fromEntries([...OPZIONI.tavolo, 'nessuno'].map((k) => [k, NOMI_TAVOLO[k] || k]))],
     ['nuvole', 'Nuvole', 'range', 0, 1, 0.05, (v) => Math.round(v * 100)],
     ['nebbia', 'Foschia in lontananza', 'range', 0, 1, 0.05, (v) => Math.round(v * 100)],
+    ['dettaglio', 'Dettaglio a bassa quota', 'check'],
   ]],
   ['Acqua e vegetazione', [
     ['vivacita', 'Vivacità generale', 'range', 0, 1.5, 0.05, pct],
@@ -123,6 +124,8 @@ export class Vista {
     if (k === 'esagerazione') this.app.impostaEsagerazione(v.esagerazione);
     this.app.terreno.impostaVivacita(v.vivacita ?? 0.7);
     this.app.terreno.impostaVegetazione(v);
+    this.app.dettaglio?.abilita(v.dettaglio ?? true);
+    this.corpo.querySelector('[data-k=dettaglio]')?.classList.toggle('spento', !this.app.dettaglio?.disponibile);
     if (k && CAMERA.has(k)) this.app.vedutaAerea(true);
     this.corpo.querySelector('[data-k=focale]')?.classList.toggle('spento', v.proiezione !== 'prospettiva');
     for (const kk of ['miniatura', 'vignetta', 'saturazione', 'contrasto', 'temperatura', 'bagliore', 'contorni', 'grana']) this.corpo.querySelector(`[data-k=${kk}]`)?.classList.toggle('spento', !v.effetti);

@@ -100,5 +100,21 @@
     "larghezza": 2048,
     "altezza": 1316,
     "canali": "R acqua, G vigneti, B boschi"
+  },
+  "dettaglio": {
+    "cartella": "dettaglio",
+    "griglia": 4,
+    "larghezza": 4096,
+    "altezza": 2632,
+    "maschera": 2048,
+    "temi": [
+      "boschi",
+      "vigneti",
+      "abitati",
+      "acque",
+      "stradine",
+      "strade"
+    ],
+    "generato": "2026-11-08T17:01:15.939Z"
   }
 }

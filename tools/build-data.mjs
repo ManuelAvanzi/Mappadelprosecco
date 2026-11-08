@@ -6,7 +6,7 @@
 //     strade e ferrovie, resi in colori semplificati                          -> data/vettori.json (riassunto)
 //   - Calibrazione delle tre mappe fornite (screenshot Google in Web Mercator) -> data/config.json (bbox del plastico)
 //
-// Uso:  node tools/build-data.mjs [--no-cache] [--forza] [--solo=terreno|colori|luoghi|itinerari]
+// Uso:  node tools/build-data.mjs [--no-cache] [--forza] [--solo=terreno|colori|dettaglio|luoghi|itinerari]
 //   --forza riscrive anche poi.json / itinerari.json (ATTENZIONE: perde le modifiche fatte dal backend)
 
 import fs from 'node:fs';
@@ -266,40 +266,44 @@ export const COLORI = {
   autostrada: '#f4b26b', strada: '#ffffff', stradaBordo: '#c9c1b2', ferrovia: '#8a8a8a',
 };
 
-async function colori(bbox, terr, cfg) {
-  log('Colori: vettori OpenStreetMap (Overpass)…');
+/** Scarica (o legge dalla cache) i temi OpenStreetMap e li converte in poligoni/linee. `stradine` aggiunge la viabilità minore (solo per il dettaglio). */
+async function caricaTemi(bbox, stradine = false) {
   const bb = `${bbox.s},${bbox.w},${bbox.n},${bbox.e}`;
-  const temi = {
+  const query = {
     vigneti: `[out:json][timeout:180];(way["landuse"="vineyard"](${bb});relation["landuse"="vineyard"](${bb}););out body;>;out skel qt;`,
     boschi: `[out:json][timeout:240];(way["natural"="wood"](${bb});relation["natural"="wood"](${bb});way["landuse"="forest"](${bb});relation["landuse"="forest"](${bb});way["landuse"="orchard"](${bb});way["natural"="scrub"](${bb}););out body;>;out skel qt;`,
     abitati: `[out:json][timeout:180];(way["landuse"~"^(residential|industrial|commercial|retail)$"](${bb});relation["landuse"~"^(residential|industrial|commercial|retail)$"](${bb}););out body;>;out skel qt;`,
     acque: `[out:json][timeout:180];(way["natural"="water"](${bb});relation["natural"="water"](${bb});way["waterway"~"^(river|stream|canal)$"](${bb});way["landuse"="reservoir"](${bb});relation["waterway"="riverbank"](${bb}););out body;>;out skel qt;`,
     strade: `[out:json][timeout:180];(way["highway"~"^(motorway|trunk|primary|secondary|tertiary)$"](${bb});way["railway"="rail"](${bb}););out body;>;out skel qt;`,
+    stradine: `[out:json][timeout:300];(way["highway"~"^(unclassified|residential|living_street|primary_link|secondary_link|tertiary_link)$"](${bb}););out body;>;out skel qt;`,
   };
-  const W = 4096, H = Math.round((W * terr.H) / terr.W), k = W / 3072; // k: spessori delle linee tarati a 3072 px
-  const [mx0, my0] = [mercX(bbox.w), mercY(bbox.n)], [mx1, my1] = [mercX(bbox.e), mercY(bbox.s)];
-  const toPx = (c) => [((mercX(c[0]) - mx0) / (mx1 - mx0)) * W, ((mercY(c[1]) - my0) / (my1 - my0)) * H];
-  const tela = new Tela(W, H);
-  // base: tinta per fascia altimetrica
-  const cp = hex(COLORI.pianura), cc = hex(COLORI.collina), cm = hex(COLORI.montagna), cr = hex(COLORI.roccia);
-  for (let j = 0; j < H; j++) for (let i = 0; i < W; i++) {
-    const h = terr.quote[Math.floor((j * terr.H) / H) * terr.W + Math.floor((i * terr.W) / W)];
-    const c = h < 180 ? cp : h < 500 ? cc : h < 1100 ? cm : cr;
-    const o = (j * W + i) * 3; tela.px[o] = c[0]; tela.px[o + 1] = c[1]; tela.px[o + 2] = c[2];
-  }
-  // maschera per lo shader del terreno: R = acqua, G = vigneti, B = boschi (data/maschera.png, metà risoluzione)
-  const Wm = 2048, Hm = Math.round((Wm * H) / W), km = Wm / W;
-  const toPxM = (c) => { const p = toPx(c); return [p[0] * km, p[1] * km]; };
-  const mAcqua = new Tela(Wm, Hm, 1), mVigne = new Tela(Wm, Hm, 1), mBoschi = new Tela(Wm, Hm, 1);
-  const riassunto = {};
-  const ordine = ['boschi', 'vigneti', 'abitati', 'acque', 'strade'];
+  const ordine = ['boschi', 'vigneti', 'abitati', 'acque', ...(stradine ? ['stradine'] : []), 'strade'];
+  const temi = [], riassunto = {};
   for (const tema of ordine) {
     let j;
-    try { j = await overpass('overpass_' + tema, temi[tema]); }
+    try { j = await overpass('overpass_' + tema, query[tema]); }
     catch (e) { log(`  ${tema}: Overpass non disponibile (${e.message}), salto`); continue; }
-    const { poligoni, linee } = osmGeometrie(j);
-    riassunto[tema] = { poligoni: poligoni.length, linee: linee.length };
-    log(`  ${tema}: ${poligoni.length} poligoni, ${linee.length} linee`);
+    const g = osmGeometrie(j);
+    riassunto[tema] = { poligoni: g.poligoni.length, linee: g.linee.length };
+    log(`  ${tema}: ${g.poligoni.length} poligoni, ${g.linee.length} linee`);
+    temi.push({ tema, ...g });
+  }
+  return { temi, riassunto };
+}
+
+/**
+ * Disegna i temi su una tela a colori e sulle tre maschere (acqua, vigneti, boschi).
+ * ctx: { tela, mAcqua, mVigne, mBoschi, toPx, toPxM, k, km, terr, campione } — `campione(i, j)` dà la quota del pixel (i, j) per la tinta di base.
+ */
+function disegna(ctx, temi) {
+  const { tela, mAcqua, mVigne, mBoschi, toPx, toPxM, k, km } = ctx;
+  const cp = hex(COLORI.pianura), cc = hex(COLORI.collina), cm = hex(COLORI.montagna), cr = hex(COLORI.roccia);
+  for (let j = 0; j < tela.h; j++) for (let i = 0; i < tela.w; i++) {
+    const h = ctx.campione(i, j);
+    const c = h < 180 ? cp : h < 500 ? cc : h < 1100 ? cm : cr;
+    const o = (j * tela.w + i) * 3; tela.px[o] = c[0]; tela.px[o + 1] = c[1]; tela.px[o + 2] = c[2];
+  }
+  for (const { tema, poligoni, linee } of temi) {
     for (const p of poligoni) {
       const t = p.tags;
       let col = null;
@@ -326,17 +330,67 @@ async function colori(bbox, terr, cfg) {
       else if (t.highway === 'trunk' || t.highway === 'primary') { tela.linea(pts, 7 * k, hex(COLORI.stradaBordo)); tela.linea(pts, 4.5 * k, hex(COLORI.strada)); }
       else if (t.highway === 'secondary') { tela.linea(pts, 5 * k, hex(COLORI.stradaBordo)); tela.linea(pts, 3 * k, hex(COLORI.strada)); }
       else if (t.highway === 'tertiary') { tela.linea(pts, 3.5 * k, hex(COLORI.stradaBordo)); tela.linea(pts, 2 * k, hex(COLORI.strada)); }
+      else if (tema === 'stradine') { tela.linea(pts, 2.2 * k, hex(COLORI.stradaBordo)); tela.linea(pts, 1.2 * k, hex(COLORI.strada)); }
     }
   }
-  await sharp(Buffer.from(tela.px.buffer), { raw: { width: W, height: H, channels: 3 } }).jpeg({ quality: 88 }).toFile(path.join(DATA, 'colori.jpg'));
-  const mask = Buffer.alloc(Wm * Hm * 3);
-  for (let i = 0; i < Wm * Hm; i++) { mask[i * 3] = mAcqua.px[i]; mask[i * 3 + 1] = mVigne.px[i]; mask[i * 3 + 2] = mBoschi.px[i]; }
-  await sharp(mask, { raw: { width: Wm, height: Hm, channels: 3 } }).png({ compressionLevel: 9 }).toFile(path.join(DATA, 'maschera.png'));
+}
+
+/** Mappa dei colori semplificati (data/colori.jpg) e maschera acqua/vigneti/boschi (data/maschera.png) per tutto il plastico. */
+async function colori(bbox, terr, cfg) {
+  log('Colori: vettori OpenStreetMap (Overpass)…');
+  const W = 4096, H = Math.round((W * terr.H) / terr.W), k = W / 3072; // k: spessori delle linee tarati a 3072 px
+  const [mx0, my0] = [mercX(bbox.w), mercY(bbox.n)], [mx1, my1] = [mercX(bbox.e), mercY(bbox.s)];
+  const toPx = (c) => [((mercX(c[0]) - mx0) / (mx1 - mx0)) * W, ((mercY(c[1]) - my0) / (my1 - my0)) * H];
+  const Wm = 2048, Hm = Math.round((Wm * H) / W), km = Wm / W;
+  const toPxM = (c) => { const p = toPx(c); return [p[0] * km, p[1] * km]; };
+  const ctx = {
+    tela: new Tela(W, H), mAcqua: new Tela(Wm, Hm, 1), mVigne: new Tela(Wm, Hm, 1), mBoschi: new Tela(Wm, Hm, 1), toPx, toPxM, k, km,
+    campione: (i, j) => terr.quote[Math.floor((j * terr.H) / H) * terr.W + Math.floor((i * terr.W) / W)],
+  };
+  const { temi, riassunto } = await caricaTemi(bbox);
+  disegna(ctx, temi);
+  await sharp(Buffer.from(ctx.tela.px.buffer), { raw: { width: W, height: H, channels: 3 } }).jpeg({ quality: 88 }).toFile(path.join(DATA, 'colori.jpg'));
+  await sharp(unisciMaschere(ctx), { raw: { width: Wm, height: Hm, channels: 3 } }).png({ compressionLevel: 9 }).toFile(path.join(DATA, 'maschera.png'));
   cfg.maschera = { file: 'maschera.png', larghezza: Wm, altezza: Hm, canali: 'R acqua, G vigneti, B boschi' };
   scriviJSON(path.join(DATA, 'vettori.json'), { generato: new Date().toISOString(), larghezza: W, altezza: H, temi: riassunto, colori: COLORI, fonte: 'OpenStreetMap (ODbL) via Overpass' });
   cfg.colori = { file: 'colori.jpg', larghezza: W, altezza: H };
   log(`  colori.jpg ${W}×${H}`);
 }
+function unisciMaschere({ mAcqua, mVigne, mBoschi }) {
+  const n = mAcqua.w * mAcqua.h, mask = Buffer.alloc(n * 3);
+  for (let i = 0; i < n; i++) { mask[i * 3] = mAcqua.px[i]; mask[i * 3 + 1] = mVigne.px[i]; mask[i * 3 + 2] = mBoschi.px[i]; }
+  return mask;
+}
+
+// ── 5. Dettaglio: tasselli ad alta risoluzione per la bassa quota ──────
+/**
+ * Lo stesso disegno della mappa dei colori, ma su una griglia G×G di tasselli da `W` px ciascuno (risoluzione G volte
+ * maggiore, ≈ 2,5 m/px con G = 4) più la viabilità minore. La webapp carica solo i 4 tasselli intorno alla camera quando è
+ * bassa (percorso animato, zoom forte) e li fonde sulla mappa di base. Uscita: data/dettaglio/colori-x-y.jpg e maschera-x-y.png.
+ */
+async function dettaglio(bbox, terr, cfg) {
+  const G = 4, W = 4096, H = Math.round((W * terr.H) / terr.W), Wm = 2048, Hm = Math.round((Wm * H) / W), km = Wm / W;
+  const k = (W * G) / 3072; // spessori delle linee: stessi metri della mappa di base
+  log(`Dettaglio: ${G}×${G} tasselli da ${W}×${H} px (${((cfgLarghezzaM(bbox) / (W * G))).toFixed(1)} m/px)…`);
+  const dir = path.join(DATA, 'dettaglio'); fs.mkdirSync(dir, { recursive: true });
+  const { temi, riassunto } = await caricaTemi(bbox, true);
+  const [mx0, my0] = [mercX(bbox.w), mercY(bbox.n)], [mx1, my1] = [mercX(bbox.e), mercY(bbox.s)];
+  for (let ty = 0; ty < G; ty++) for (let tx = 0; tx < G; tx++) {
+    const toPx = (c) => [((mercX(c[0]) - mx0) / (mx1 - mx0)) * W * G - tx * W, ((mercY(c[1]) - my0) / (my1 - my0)) * H * G - ty * H];
+    const toPxM = (c) => { const p = toPx(c); return [p[0] * km, p[1] * km]; };
+    const ctx = {
+      tela: new Tela(W, H), mAcqua: new Tela(Wm, Hm, 1), mVigne: new Tela(Wm, Hm, 1), mBoschi: new Tela(Wm, Hm, 1), toPx, toPxM, k, km,
+      campione: (i, j) => terr.quote[Math.min(terr.H - 1, Math.floor(((ty * H + j) * terr.H) / (H * G))) * terr.W + Math.min(terr.W - 1, Math.floor(((tx * W + i) * terr.W) / (W * G)))],
+    };
+    disegna(ctx, temi);
+    await sharp(Buffer.from(ctx.tela.px.buffer), { raw: { width: W, height: H, channels: 3 } }).jpeg({ quality: 84 }).toFile(path.join(dir, `colori-${tx}-${ty}.jpg`));
+    await sharp(unisciMaschere(ctx), { raw: { width: Wm, height: Hm, channels: 3 } }).png({ compressionLevel: 9 }).toFile(path.join(dir, `maschera-${tx}-${ty}.png`));
+    log(`  tassello ${tx},${ty} pronto`);
+  }
+  cfg.dettaglio = { cartella: 'dettaglio', griglia: G, larghezza: W, altezza: H, maschera: Wm, temi: Object.keys(riassunto), generato: new Date().toISOString() };
+  log(`  dettaglio: ${G * G} tasselli in data/dettaglio`);
+}
+const cfgLarghezzaM = (bbox) => (mercX(bbox.e) - mercX(bbox.w)) * Math.cos(((bbox.n + bbox.s) / 2) * Math.PI / 180);
 
 // ── Main ────────────────────────────────────────────────────────────────
 const t0 = Date.now();
@@ -362,7 +416,8 @@ const feats = (!SOLO || SOLO === 'luoghi' || SOLO === 'itinerari') ? await geoco
 if (!SOLO || SOLO === 'luoghi') generaPoi(feats);
 if (!SOLO || SOLO === 'itinerari') await itinerari(feats);
 let terr = null;
-if (!SOLO || SOLO === 'terreno' || SOLO === 'colori') terr = await terreno(cfg.bbox, cfg);
+if (!SOLO || SOLO === 'terreno' || SOLO === 'colori' || SOLO === 'dettaglio') terr = await terreno(cfg.bbox, cfg);
 if (!SOLO || SOLO === 'colori') await colori(cfg.bbox, terr, cfg);
+if (!SOLO || SOLO === 'dettaglio') await dettaglio(cfg.bbox, terr, cfg);
 scriviJSON(cfgFile, cfg);
 log(`fatto in ${((Date.now() - t0) / 1000).toFixed(0)} s`);

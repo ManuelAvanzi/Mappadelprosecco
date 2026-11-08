@@ -7,3 +7,4 @@ uploads/*
 !uploads/poi/
 .env
 *.log
+data/dettaglio/

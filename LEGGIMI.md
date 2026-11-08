@@ -22,6 +22,7 @@ public/                    la webapp
   js/poi.js                elenco per categorie e scheda con media
   js/foto360.js            visore 360 con frecce
   js/geo.js                proiezione Web Mercator locale
+  js/dettaglio.js          dettaglio a bassa quota: carica i 4 tasselli intorno al punto osservato e li passa allo shader del terreno
   js/ambiente.js           tavolo, fondale (studio/cielo con sole e nuvole), luce per ora del giorno, ombre, ombra di contatto
   js/post.js               post-produzione (miniatura tilt-shift, bagliore, vignetta, saturazione, contrasto, temperatura, grana)
   js/vista.js              pannello Visualizzazione con i cursori e il salvataggio del predefinito (config.vista)
@@ -36,6 +37,7 @@ data/                      dati del plastico (tutti rigenerabili con `npm run da
   altimetria.png           rilievo 1536×987 in codifica terrarium (quota = R·256 + G + B/256 − 32768)
   colori.jpg               mappa dei colori 4096×2632 rasterizzata dai vettori OpenStreetMap
   maschera.png             R acqua, G vigneti, B boschi (2048 px): guida lo shader che anima acqua e vegetazione
+  dettaglio/               16 tasselli ad alta risoluzione (colori-x-y.jpg 4096 px ≈ 2,4 m/px + maschera-x-y.png) per la bassa quota
   luoghi.geojson           geocodifica dei luoghi (solo per la generazione iniziale)
   cache/                   risposte scaricate (Nominatim, OSRM, Overpass, tile): si può cancellare
   backup/                  copia precedente di ogni file salvato dal backend
@@ -53,7 +55,7 @@ AVVIA.bat                  avvio con doppio clic su Windows
 
 1. `npm install` (una volta).
 2. `npm run dati` (una volta; ~6 minuti con Internet). Ricrea `data/`. **Non** sovrascrive `poi.json`, `itinerari.json`,
-   `config.json` già esistenti (per rifarli: `--forza`, perdendo le modifiche del backend). Opzioni: `--solo=terreno|colori|luoghi|itinerari`, `--no-cache`.
+   `config.json` già esistenti (per rifarli: `--forza`, perdendo le modifiche del backend). Opzioni: `--solo=terreno|colori|dettaglio|luoghi|itinerari`, `--no-cache`.
 3. `npm run materiali -- "<cartella materiali estratti>"` (facoltativo, già fatto): copia le tre mappe GRANDE ridotte, il GLB
    della pieve e le foto dei 15 monumenti dentro `uploads/poi/<id>/`, aggiungendole ai media dei POI.
 4. `npm start` → http://localhost:5800. Backend su http://localhost:5800/admin (password `prosecco`, cambiabile con
@@ -77,6 +79,12 @@ Nell'anteprima del Code tab il server si chiama `mappa-prosecco` (porta 5800). N
   strade principali, ferrovie) rasterizzati con tavolozza "mappa di carta" (`COLORI` in build-data.mjs). La base cambia tinta per
   fascia altimetrica. Questa è la "mappa dei colori semplificati in vettoriale" chiesta dal brief; la mappa satellitare fornita è
   comunque sovrapponibile.
+- **Dettaglio a bassa quota**: `node tools/build-data.mjs --solo=dettaglio` ridisegna gli stessi vettori su una griglia 4×4 di
+  tasselli da 4096 px (≈ 2,4 m/px invece di 10) aggiungendo la viabilità minore (`highway` residential/unclassified), in
+  `data/dettaglio/`. La webapp (`dettaglio.js`) carica solo i 4 tasselli intorno al punto osservato quando la camera scende sotto
+  i 9 km di distanza equivalente (percorso animato, zoom forte) e lo shader del terreno li fonde sulla mappa di base, maschera
+  compresa. Si spegne con "Dettaglio a bassa quota" (Ambiente); su telefono parte spento. Richiede Overpass raggiungibile per il
+  tema `stradine` (se fallisce, i tasselli vengono comunque generati senza).
 - **Luoghi**: i tre livelli del brief sono in `tools/luoghi.mjs` (`LIVELLI`); ogni luogo prende il livello più basso in cui compare.
   Le coordinate stimate sono affinate con Nominatim (91/93 trovate; Molinetto della Croda e Abbazia di Santa Bona restano stimate).
 - **Itinerari**: tappe dalla mappa ufficiale Strada del Prosecco (PDF Touring fornito); tracciato su strada con OSRM.
@@ -118,8 +126,8 @@ I valori si salvano con "Salva come predefinito" insieme al resto (`vista` in co
 ## 6. Limiti noti / prossimi passi
 
 - Il riquadro è modificabile anche a mano dal backend (Impostazioni), ma poi richiede la rigenerazione di terreno e colori.
-- La texture dei colori (13 m/px) è sfocata a bassa quota nel percorso animato: si può aumentare `W` in `colori()` (es. 6144)
-  o aggiungere tile raster per lo zoom alto.
+- A bassa quota la mappa di base (10 m/px) è integrata dai tasselli di dettaglio (2,4 m/px); i tasselli pesano ~1 MB l'uno
+  e ne vengono scaricati 4 alla volta.
 - Nessuna foto 360 è ancora caricata (il committente non ne ha fornite): si aggiungono dal backend.
 - Gli audio geolocalizzati vanno registrati e caricati dal backend.
 - Non c'è ancora un deploy online: il server è un Express semplice, pubblicabile su Fly/Render come gli altri progetti

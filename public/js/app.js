@@ -11,6 +11,7 @@ import { Foto360 } from './foto360.js';
 import { Ambiente } from './ambiente.js';
 import { creaPost } from './post.js';
 import { Vista } from './vista.js';
+import { Dettaglio } from './dettaglio.js';
 
 const $ = (s) => document.querySelector(s);
 const esc = (s) => String(s ?? '').replace(/[&<>"]/g, (c) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c]));
@@ -49,6 +50,7 @@ class App {
     if (this.cfg.vista?.esagerazione) this.terreno.esagerazione = this.cfg.vista.esagerazione;
     await this.terreno.carica(prog);
     this.scena.add(this.terreno.gruppo);
+    this.dettaglio = new Dettaglio(this.terreno, this.cfg); this.dettaglio.impostaRenderer(this.renderer);
     prog('Ambiente e luci…');
     this.ambiente = new Ambiente(this.scena, this.renderer, this.terreno, this.geo);
     this.post = creaPost(this.renderer); this.post.setSize(innerWidth, innerHeight);
@@ -86,6 +88,17 @@ class App {
   }
 
   // ── camere ──
+  /** coordinate UV (u verso est, v verso sud) del punto del plastico che la camera guarda: il bersaglio dei controlli, o nel percorso il terreno davanti alla camera */
+  puntoOsservato() {
+    let p = this.controls.target;
+    if (this.modalita === 'percorso') {
+      const dir = this.camera.getWorldDirection(new THREE.Vector3());
+      p = this.camera.position.clone();
+      for (let s = 0; s < 60; s++) { p.addScaledVector(dir, 25); if (p.y <= this.terreno.quotaLocale(p.x, p.z)) break; }
+    }
+    const [lon, lat] = this.geo.aGeo(p.x, p.z);
+    return this.geo.aUV(lon, lat);
+  }
   distanzaEquivalente() {
     if (this.camera.isOrthographicCamera) return (this.camera.top - this.camera.bottom) / this.camera.zoom / (2 * Math.tan((FOV * Math.PI) / 360));
     return this.camera.position.distanceTo(this.controls.target);
@@ -286,6 +299,7 @@ class App {
     this.etichette.aggiorna(dist, this.modalita, this.camera);
     this.modelli.aggiorna(this.modalita === 'percorso' ? 0 : dist);
     this.ambiente.aggiorna(this.orologio.elapsedTime); this.terreno.aggiorna(this.orologio.elapsedTime);
+    { const [u, v] = this.puntoOsservato(); this.dettaglio.aggiorna(u, v, dist); }
     if (this.vista.valori.effetti) this.post.render(this.scena, this.camera, 0.5, this.modalita === 'percorso' ? 0 : 1);
     else this.renderer.render(this.scena, this.camera);
     this.etichette.render(this.scena, this.camera);
