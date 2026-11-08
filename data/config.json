@@ -67,5 +67,38 @@
       "n": 46.018856,
       "s": 45.789202
     }
+  },
+  "vista": {
+    "fondale": "cielo",
+    "tavolo": "nessuno",
+    "nuvole": 0.2,
+    "nebbia": 0.75,
+    "ora": 19,
+    "sole": 0.9,
+    "ambiente": 0.85,
+    "ombre": true,
+    "esposizione": 1.15,
+    "effetti": true,
+    "miniatura": 0.65,
+    "vignetta": 0.6,
+    "saturazione": 1.24,
+    "contrasto": 1.24,
+    "temperatura": 0.05,
+    "bagliore": 0.1,
+    "contorni": 0.05,
+    "grana": 0,
+    "proiezione": "orto",
+    "elevazione": 39,
+    "azimut": -5,
+    "zoom": 1,
+    "focale": 45,
+    "esagerazione": 1.7,
+    "vivacita": 0.7
+  },
+  "maschera": {
+    "file": "maschera.png",
+    "larghezza": 2048,
+    "altezza": 1316,
+    "canali": "R acqua, G vigneti, B boschi"
   }
 }

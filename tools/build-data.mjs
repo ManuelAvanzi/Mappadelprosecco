@@ -287,6 +287,10 @@ async function colori(bbox, terr, cfg) {
     const c = h < 180 ? cp : h < 500 ? cc : h < 1100 ? cm : cr;
     const o = (j * W + i) * 3; tela.px[o] = c[0]; tela.px[o + 1] = c[1]; tela.px[o + 2] = c[2];
   }
+  // maschera per lo shader del terreno: R = acqua, G = vigneti, B = boschi (data/maschera.png, metà risoluzione)
+  const Wm = 2048, Hm = Math.round((Wm * H) / W), km = Wm / W;
+  const toPxM = (c) => { const p = toPx(c); return [p[0] * km, p[1] * km]; };
+  const mAcqua = new Tela(Wm, Hm, 1), mVigne = new Tela(Wm, Hm, 1), mBoschi = new Tela(Wm, Hm, 1);
   const riassunto = {};
   const ordine = ['boschi', 'vigneti', 'abitati', 'acque', 'strade'];
   for (const tema of ordine) {
@@ -308,10 +312,14 @@ async function colori(bbox, terr, cfg) {
       else if (t.natural === 'water' || t.waterway === 'riverbank' || t.landuse === 'reservoir') col = COLORI.acqua;
       if (!col) continue;
       tela.poligono(p.anelli.map((a) => a.map(toPx)), hex(col));
+      const anelliM = p.anelli.map((a) => a.map(toPxM));
+      if (col === COLORI.acqua) mAcqua.poligono(anelliM, [255]);
+      else if (col === COLORI.vigneto) mVigne.poligono(anelliM, [255]);
+      else if (col === COLORI.bosco || col === COLORI.frutteto || col === COLORI.prato) mBoschi.poligono(anelliM, [255]);
     }
     for (const l of linee) {
       const t = l.tags, pts = l.punti.map(toPx);
-      if (t.waterway === 'river') tela.linea(pts, 5 * k, hex(COLORI.fiume));
+      if (t.waterway === 'river') { tela.linea(pts, 5 * k, hex(COLORI.fiume)); mAcqua.linea(l.punti.map(toPxM), 5 * km * k, [255]); }
       else if (t.waterway === 'stream' || t.waterway === 'canal') tela.linea(pts, 2 * k, hex(COLORI.torrente));
       else if (t.railway === 'rail') tela.linea(pts, 2.5 * k, hex(COLORI.ferrovia));
       else if (t.highway === 'motorway') { tela.linea(pts, 9 * k, hex(COLORI.stradaBordo)); tela.linea(pts, 6 * k, hex(COLORI.autostrada)); }
@@ -321,6 +329,10 @@ async function colori(bbox, terr, cfg) {
     }
   }
   await sharp(Buffer.from(tela.px.buffer), { raw: { width: W, height: H, channels: 3 } }).jpeg({ quality: 88 }).toFile(path.join(DATA, 'colori.jpg'));
+  const mask = Buffer.alloc(Wm * Hm * 3);
+  for (let i = 0; i < Wm * Hm; i++) { mask[i * 3] = mAcqua.px[i]; mask[i * 3 + 1] = mVigne.px[i]; mask[i * 3 + 2] = mBoschi.px[i]; }
+  await sharp(mask, { raw: { width: Wm, height: Hm, channels: 3 } }).png({ compressionLevel: 9 }).toFile(path.join(DATA, 'maschera.png'));
+  cfg.maschera = { file: 'maschera.png', larghezza: Wm, altezza: Hm, canali: 'R acqua, G vigneti, B boschi' };
   scriviJSON(path.join(DATA, 'vettori.json'), { generato: new Date().toISOString(), larghezza: W, altezza: H, temi: riassunto, colori: COLORI, fonte: 'OpenStreetMap (ODbL) via Overpass' });
   cfg.colori = { file: 'colori.jpg', larghezza: W, altezza: H };
   log(`  colori.jpg ${W}×${H}`);

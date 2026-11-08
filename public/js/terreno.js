@@ -43,6 +43,7 @@ export class Terreno {
     }
     geom.computeVertexNormals();
     this.materiale = new THREE.MeshStandardMaterial({ color: 0xffffff, roughness: 0.95, metalness: 0 });
+    this.vivacizza(this.materiale);
     this.mesh = new THREE.Mesh(geom, this.materiale);
     this.mesh.name = 'terreno';
     this.mesh.receiveShadow = true; this.mesh.castShadow = true;
@@ -60,6 +61,70 @@ export class Terreno {
     await this.impostaMappa(pred.id, pred.file);
     return this;
   }
+
+  /**
+   * Acqua e vegetazione "vive": una maschera (R acqua, G vigneti, B boschi) ricavata dagli stessi vettori guida uno shader
+   * che increspa e fa brillare l'acqua, screzia e riga i vigneti, chiazza e increspa i boschi. Tutto sfuma con la distanza
+   * per non luccicare da lontano. Il cursore "Vivacità" regola l'insieme.
+   */
+  vivacizza(mat) {
+    this.uniformi = { uTime: { value: 0 }, uViv: { value: 0.7 }, tMask: { value: null }, uHasMask: { value: 0 } };
+    new THREE.TextureLoader().load('data/' + (this.cfg.maschera?.file || 'maschera.png'), (t) => { t.colorSpace = THREE.NoColorSpace; t.minFilter = THREE.LinearMipmapLinearFilter; this.uniformi.tMask.value = t; this.uniformi.uHasMask.value = 1; }, undefined, () => {});
+    mat.onBeforeCompile = (sh) => {
+      Object.assign(sh.uniforms, this.uniformi);
+      sh.vertexShader = 'varying vec3 vPosW;\n' + sh.vertexShader.replace('#include <begin_vertex>', '#include <begin_vertex>\n vPosW = (modelMatrix * vec4(transformed, 1.0)).xyz;');
+      sh.fragmentShader = `
+        uniform float uTime, uViv, uHasMask; uniform sampler2D tMask; varying vec3 vPosW;
+        float hashv(vec2 p) { return fract(sin(dot(p, vec2(127.1, 311.7))) * 43758.5453); }
+        float noisev(vec2 p) { vec2 i = floor(p), f = fract(p); f = f * f * (3.0 - 2.0 * f); return mix(mix(hashv(i), hashv(i + vec2(1, 0)), f.x), mix(hashv(i + vec2(0, 1)), hashv(i + vec2(1, 1)), f.x), f.y); }
+        vec3 vMaskVal;
+      ` + sh.fragmentShader
+        .replace('#include <map_fragment>', `#include <map_fragment>
+          vMaskVal = vec3(0.0);
+          #ifdef USE_MAP
+          if (uHasMask > 0.5) vMaskVal = texture2D(tMask, vMapUv).rgb * uViv;
+          #endif
+          float pxm = fwidth(vPosW.x) + 0.001; // metri per pixel sullo schermo
+          if (vMaskVal.g > 0.01) { // vigneti: screziatura e filari (spariscono da lontano)
+            float n = noisev(vPosW.xz / 180.0) - 0.5;
+            float fil = 0.5 + 0.5 * sin((vPosW.x * 0.86 + vPosW.z * 0.5) * 0.8);
+            float fade = smoothstep(14.0, 3.0, pxm);
+            diffuseColor.rgb *= 1.0 + vMaskVal.g * (0.22 * n * smoothstep(220.0, 40.0, pxm) + (fil - 0.5) * 0.18 * fade);
+            diffuseColor.rgb = mix(diffuseColor.rgb, diffuseColor.rgb * vec3(1.02, 1.06, 0.9), vMaskVal.g * 0.4);
+          }
+          if (vMaskVal.b > 0.01) { // boschi: chiazze di chiome, più scure e più verdi
+            float n1 = noisev(vPosW.xz / 420.0) - 0.5, n2 = noisev(vPosW.xz / 110.0) - 0.5;
+            diffuseColor.rgb *= 1.0 + vMaskVal.b * (0.3 * n1 + 0.2 * n2 * smoothstep(160.0, 30.0, pxm));
+            diffuseColor.rgb = mix(diffuseColor.rgb, diffuseColor.rgb * vec3(0.86, 0.98, 0.8), vMaskVal.b * 0.45);
+          }
+          if (vMaskVal.r > 0.01) { // acqua: più profonda e azzurra
+            diffuseColor.rgb = mix(diffuseColor.rgb, vec3(0.30, 0.55, 0.78), vMaskVal.r * 0.45);
+          }`)
+        .replace('#include <roughnessmap_fragment>', `#include <roughnessmap_fragment>
+          roughnessFactor = mix(roughnessFactor, 0.12, vMaskVal.r);
+          roughnessFactor = mix(roughnessFactor, 1.0, vMaskVal.b * 0.3);`)
+        .replace('#include <normal_fragment_begin>', `#include <normal_fragment_begin>
+          if (vMaskVal.r > 0.01 || vMaskVal.b > 0.01) {
+            float pxn = fwidth(vPosW.x) + 0.001;
+            vec3 pert = vec3(0.0);
+            if (vMaskVal.r > 0.01) { // increspature in movimento
+              vec2 q = vPosW.xz / 38.0 + vec2(uTime * 0.05, uTime * 0.035);
+              float e = 0.35;
+              float dx = noisev(q + vec2(e, 0.0)) - noisev(q - vec2(e, 0.0)), dz = noisev(q + vec2(0.0, e)) - noisev(q - vec2(0.0, e));
+              pert += vec3(dx, 0.0, dz) * 0.9 * vMaskVal.r * smoothstep(60.0, 8.0, pxn);
+            }
+            if (vMaskVal.b > 0.01) { // rilievo delle chiome
+              vec2 q = vPosW.xz / 140.0; float e = 0.3;
+              float dx = noisev(q + vec2(e, 0.0)) - noisev(q - vec2(e, 0.0)), dz = noisev(q + vec2(0.0, e)) - noisev(q - vec2(0.0, e));
+              pert += vec3(dx, 0.0, dz) * 0.7 * vMaskVal.b * smoothstep(200.0, 25.0, pxn);
+            }
+            normal = normalize(normal + (viewMatrix * vec4(pert, 0.0)).xyz);
+          }`);
+    };
+    mat.customProgramCacheKey = () => 'terreno-vivo';
+  }
+  impostaVivacita(v) { this.uniformi.uViv.value = v; }
+  aggiorna(t) { this.uniformi.uTime.value = t; }
 
   /** quota (m, non esagerata) alle coordinate UV del riquadro, interpolazione bilineare */
   quotaUV(u, v) {

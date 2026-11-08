@@ -6,7 +6,7 @@ export const PREDEFINITI = {
   fondale: 'cielo', tavolo: 'legno', nuvole: 0.3, nebbia: 0.5,
   ora: 15.5, sole: 1, ambiente: 1, ombre: !mobile, esposizione: 1.05,
   effetti: !mobile, miniatura: 0.35, vignetta: 0.25, saturazione: 1.1, contrasto: 1.05, temperatura: 0, bagliore: 0.15, contorni: 0, grana: 0,
-  proiezione: 'orto', elevazione: 42, azimut: 0, zoom: 1, focale: 45, esagerazione: 1.7,
+  proiezione: 'orto', elevazione: 42, azimut: 0, zoom: 1, focale: 45, esagerazione: 1.7, vivacita: 0.7,
 };
 const NOMI_TAVOLO = { legno: 'legno chiaro', noce: 'noce', feltro: 'feltro verde', grigio: 'grigio studio', carta: 'carta millimetrata', nero: 'nero', nessuno: 'nessun tavolo' };
 
@@ -17,6 +17,7 @@ const SCHEMA = [
     ['tavolo', 'Tavolo', 'select', Object.fromEntries([...OPZIONI.tavolo, 'nessuno'].map((k) => [k, NOMI_TAVOLO[k] || k]))],
     ['nuvole', 'Nuvole', 'range', 0, 1, 0.05, (v) => Math.round(v * 100)],
     ['nebbia', 'Foschia in lontananza', 'range', 0, 1, 0.05, (v) => Math.round(v * 100)],
+    ['vivacita', 'Vivacità di acqua e vegetazione', 'range', 0, 1.5, 0.05, (v) => Math.round(v * 100)],
   ]],
   ['Luce', [
     ['ora', 'Ora del giorno', 'range', 5, 21, 0.25, (v) => `${String(Math.floor(v)).padStart(2, '0')}:${String(Math.round((v % 1) * 60)).padStart(2, '0')}`],
@@ -93,6 +94,7 @@ export class Vista {
     const v = this.valori;
     if (!k || !CAMERA.has(k) && k !== 'esagerazione') { this.app.ambiente.applica(v); this.app.post.setLook(v); }
     if (k === 'esagerazione') this.app.impostaEsagerazione(v.esagerazione);
+    this.app.terreno.impostaVivacita(v.vivacita ?? 0.7);
     if (k && CAMERA.has(k)) this.app.vedutaAerea(true);
     this.corpo.querySelector('[data-k=focale]')?.classList.toggle('spento', v.proiezione !== 'prospettiva');
     for (const kk of ['miniatura', 'vignetta', 'saturazione', 'contrasto', 'temperatura', 'bagliore', 'contorni', 'grana']) this.corpo.querySelector(`[data-k=${kk}]`)?.classList.toggle('spento', !v.effetti);

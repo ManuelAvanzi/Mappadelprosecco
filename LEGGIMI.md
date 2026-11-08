@@ -34,7 +34,8 @@ data/                      dati del plastico (tutti rigenerabili con `npm run da
   itinerari.json           itinerari con tracciato e audio (MODIFICABILE dal backend)
   foto360.json             foto 360 (MODIFICABILE dal backend)
   altimetria.png           rilievo 1536×987 in codifica terrarium (quota = R·256 + G + B/256 − 32768)
-  colori.jpg               mappa dei colori 3072×1974 rasterizzata dai vettori OpenStreetMap
+  colori.jpg               mappa dei colori 4096×2632 rasterizzata dai vettori OpenStreetMap
+  maschera.png             R acqua, G vigneti, B boschi (2048 px): guida lo shader che anima acqua e vegetazione
   luoghi.geojson           geocodifica dei luoghi (solo per la generazione iniziale)
   cache/                   risposte scaricate (Nominatim, OSRM, Overpass, tile): si può cancellare
   backup/                  copia precedente di ogni file salvato dal backend
@@ -91,6 +92,11 @@ ombre), **Effetti** (miniatura tilt-shift, vignettatura, saturazione, contrasto,
 **Inquadratura** (assonometria/prospettiva, altezza e rotazione della camera, ingrandimento, focale, esagerazione del rilievo).
 "Veduta aerea con questi valori" riporta la camera; "Salva come predefinito" chiede la password del backend e scrive `vista` in
 `data/config.json`: da quel momento è la visualizzazione iniziale per tutti. Su telefono effetti e ombre partono spenti.
+
+**Acqua e vegetazione "vive"**: lo shader del terreno (`terreno.js`, `vivacizza`) legge `data/maschera.png` e, dove c'è acqua,
+scurisce il colore, abbassa la ruvidità (riflessi del sole) e increspa la normale con un rumore in movimento; sui vigneti aggiunge
+screziature e filari, sui boschi chiazze di chiome con un leggero rilievo. Tutto sfuma con la distanza (fwidth) per non sfarfallare
+nella veduta aerea. Il cursore "Vivacità" (Ambiente) regola l'insieme, 0 = colori piatti.
 
 ## 5. Backend
 

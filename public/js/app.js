@@ -285,7 +285,7 @@ class App {
     const dist = this.modalita === 'percorso' ? 1500 : this.distanzaEquivalente();
     this.etichette.aggiorna(dist, this.modalita, this.camera);
     this.modelli.aggiorna(this.modalita === 'percorso' ? 0 : dist);
-    this.ambiente.aggiorna(this.orologio.elapsedTime);
+    this.ambiente.aggiorna(this.orologio.elapsedTime); this.terreno.aggiorna(this.orologio.elapsedTime);
     if (this.vista.valori.effetti) this.post.render(this.scena, this.camera, 0.5, this.modalita === 'percorso' ? 0 : 1);
     else this.renderer.render(this.scena, this.camera);
     this.etichette.render(this.scena, this.camera);
