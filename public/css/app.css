@@ -166,12 +166,12 @@ button { cursor: pointer; }
   .marchio h1 { font-size: 14px; }
   #menu { left: 8px; right: 8px; transform: none; justify-content: space-around; padding: 4px; border-radius: 16px; }
   #menu button { min-width: 0; flex: 1; padding: 7px 4px; font-size: 10.5px; }
-  #pannello { top: auto; left: 8px; right: 8px; bottom: 84px; width: auto; max-width: none; max-height: 52vh; }
+  #pannello { top: auto; left: 8px; right: 8px; bottom: 96px; width: auto; max-width: none; max-height: 52vh; }
   #pannello.chiuso { transform: translateY(30px); }
-  #dettaglio { top: auto; left: 8px; right: 8px; bottom: 84px; width: auto; max-width: none; max-height: 70vh; }
-  #vista { top: auto; left: 8px; right: 8px; bottom: 84px; width: auto; max-width: none; max-height: 60vh; }
+  #dettaglio { top: auto; left: 8px; right: 8px; bottom: 96px; width: auto; max-width: none; max-height: 70vh; }
+  #vista { top: auto; left: 8px; right: 8px; bottom: 96px; width: auto; max-width: none; max-height: 60vh; }
   #vista.chiuso { transform: translateY(30px); }
-  #percorso { bottom: 84px; width: calc(100vw - 16px); padding: 8px 10px; }
+  #percorso { bottom: 96px; width: calc(100vw - 16px); padding: 8px 10px; }
   .velocita { display: none; }
   #attribuzione { display: none; }
 }

@@ -51,7 +51,8 @@ export class Dettaglio {
    */
   aggiorna(u, v, dist) {
     const U = this.terreno.uniformi; if (!U?.uDettMix) return;
-    const mix = this.attivo ? 1 - THREE.MathUtils.smoothstep(dist, DIST_PIENO, DIST_ZERO) : 0;
+    // i tasselli ridisegnano la mappa dei colori: con un'altra mappa principale (stradale, satellite…) non vanno sovrapposti
+    const mix = this.attivo && this.terreno.mappaAttiva === 'colori' ? 1 - THREE.MathUtils.smoothstep(dist, DIST_PIENO, DIST_ZERO) : 0;
     if (mix <= 0.001) { this.livello = 0; U.uDettMix.value = 0; return; }
     const G = this.cfg.griglia;
     // blocco 2×2 di tasselli più vicino al punto osservato: il tassello che lo contiene più il vicino dal lato più prossimo

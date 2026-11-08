@@ -259,7 +259,7 @@ function renderCfg() {
 $('#cfg-form').addEventListener('submit', async (e) => {
   e.preventDefault(); const f = e.target;
   try {
-    await api('PUT', 'config', { titolo: f.titolo.value, livelli: { 2: +f.liv2.value, 3: +f.liv3.value }, esagerazione: +f.esagerazione.value, modelli: { ...(stato.cfg.modelli || {}), fattoreDistanza: +f.fattoreDistanza.value }, bbox: { w: +f.w.value, e: +f.e.value, n: +f.n.value, s: +f.s.value } });
+    await api('PUT', 'config', { titolo: f.titolo.value, livelli: { 2: +f.liv2.value, 3: +f.liv3.value }, esagerazione: +f.esagerazione.value, vista: { ...(stato.cfg.vista || {}), esagerazione: +f.esagerazione.value }, modelli: { ...(stato.cfg.modelli || {}), fattoreDistanza: +f.fattoreDistanza.value }, bbox: { w: +f.w.value, e: +f.e.value, n: +f.n.value, s: +f.s.value } });
     $('#cfg-esito').textContent = 'Impostazioni salvate: ricarica la mappa per vederle.'; await ricarica();
   } catch (err) { toast(err.message, true); }
 });

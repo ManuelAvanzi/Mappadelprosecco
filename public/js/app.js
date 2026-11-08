@@ -124,9 +124,11 @@ class App {
     this.usaCamera(orto ? this.camOrto : this.camProsp);
     const t = new THREE.Vector3(0, this.terreno.quotaMin * this.terreno.esagerazione, 0);
     const el = THREE.MathUtils.degToRad(v.elevazione), az = THREE.MathUtils.degToRad(v.azimut);
-    const d = orto ? this.geo.larghezza * 1.2 : (this.geo.larghezza * 0.62 / Math.tan(THREE.MathUtils.degToRad(v.focale) / 2)) / v.zoom;
+    // su schermi stretti (telefono in verticale) il plastico, più largo che alto, deve entrare in larghezza: si allarga l'inquadratura
+    const fit = Math.min(1, (innerWidth / innerHeight) / 1.4);
+    const d = orto ? this.geo.larghezza * 1.2 : (this.geo.larghezza * 0.62 / Math.tan(THREE.MathUtils.degToRad(v.focale) / 2)) / (v.zoom * fit);
     const pos = new THREE.Vector3(Math.sin(az) * Math.cos(el), Math.sin(el), Math.cos(az) * Math.cos(el)).multiplyScalar(d).add(t);
-    this.volaCamera(pos, t, subito ? 0 : 1.2, orto ? v.zoom : undefined);
+    this.volaCamera(pos, t, subito ? 0 : 1.2, orto ? v.zoom * fit : undefined);
   }
   volaCamera(pos, target, durata = 1.2, zoom) {
     const cam = this.camera;
@@ -168,7 +170,13 @@ class App {
     });
     $('#pannello-chiudi').addEventListener('click', () => { this.chiudiPannello(); this.menuAttivo(this.modalita === 'aerea' ? 'aerea' : null); });
     $('#dettaglio-chiudi').addEventListener('click', () => this.chiudiDettaglio());
-    $('#btn-proiezione').addEventListener('click', () => this.usaCamera(this.camera.isOrthographicCamera ? this.camProsp : this.camOrto));
+    $('#btn-proiezione').addEventListener('click', () => {
+      if (this.modalita === 'percorso') return; // nel percorso la camera è sempre prospettica
+      const orto = !this.camera.isOrthographicCamera;
+      this.vista.valori.proiezione = orto ? 'orto' : 'prospettiva'; // tiene allineato il pannello Visualizzazione
+      const sel = $('#vista-corpo [data-k=proiezione] select'); if (sel) { sel.value = this.vista.valori.proiezione; this.vista.applica(); }
+      this.usaCamera(orto ? this.camOrto : this.camProsp);
+    });
     $('#btn-mappe').addEventListener('click', () => (this.pannelloAperto === 'mappe' ? this.chiudiPannello() : this.apriPannello('mappe')));
     $('#btn-vista').addEventListener('click', () => this.mostraVista($('#vista').classList.contains('chiuso')));
     $('#vista-chiudi').addEventListener('click', () => this.mostraVista(false));
@@ -247,6 +255,7 @@ class App {
     this.modalita = 'percorso'; this.menuAttivo(null);
     this.itinerari.seleziona(it.id); this.etichette.impostaVisibiliAudio(it.id);
     this.camera = this.camProsp; this.controls.object = this.camProsp; this.controls.enabled = false;
+    $('#btn-proiezione').classList.remove('attivo'); $('#btn-proiezione').classList.add('spento');
     this.percorso.velocita = +$('#percorso-velocita').value; this.percorso.quota = +$('#percorso-quota').value;
     this.percorso.avvia(it);
     $('#percorso').classList.remove('nascosto');
@@ -254,7 +263,7 @@ class App {
   esciPercorso(resetSelezione = true) {
     if (this.modalita !== 'percorso') return;
     this.percorso.ferma();
-    $('#percorso').classList.add('nascosto');
+    $('#percorso').classList.add('nascosto'); $('#btn-proiezione').classList.remove('spento');
     this.controls.enabled = true;
     this.controls.target.copy(this.percorso.mira); this.controls.update();
     this.modalita = 'libera';

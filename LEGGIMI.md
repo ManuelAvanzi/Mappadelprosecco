@@ -116,7 +116,7 @@ I valori si salvano con "Salva come predefinito" insieme al resto (`vista` in co
   descrizione, modello 3D (forma, scala, rotazione, GLB caricabile), media (immagini, video o link YouTube, audio, foto 360),
   copertina. "Visibile" spento = tappa di servizio per gli itinerari senza scritta.
 - **Itinerari e audio**: nome, colore, descrizione, tappe (id di POI o `lon,lat`), ricalcolo del tracciato su strada, audio
-  geolocalizzati (file, posizione, raggio in metri).
+  geolocalizzati (file, posizione, raggio in metri). Se un file audio manca o non si carica, il percorso mostra "Audio non disponibile" e riparte da solo.
 - **Foto 360**: immagine equirettangolare 2:1, tipo aerea/terra, posizione, POI collegato, direzione iniziale, collegamenti
   (frecce) con direzione in gradi (se vuota è calcolata dalle coordinate), anche reciproci.
 - **Impostazioni**: soglie dei livelli (distanza camera in metri), esagerazione, fattore dei modelli, titolo, riquadro mappe;

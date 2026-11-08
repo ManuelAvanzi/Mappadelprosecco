@@ -71,10 +71,10 @@
       <h2>Mappe sovrapponibili</h2>
       <p>Riquadro geografico del plastico e delle mappe fornite (le tre mappe GRANDE sono screenshot in Web Mercator con lo stesso inquadramento). Per spostare o scalare le mappe, correggi i quattro bordi.</p>
       <div class="griglia4">
-        <label>Ovest (lon) <input type="number" name="w" step="0.0001"></label>
-        <label>Est (lon) <input type="number" name="e" step="0.0001"></label>
-        <label>Nord (lat) <input type="number" name="n" step="0.0001"></label>
-        <label>Sud (lat) <input type="number" name="s" step="0.0001"></label>
+        <label>Ovest (lon) <input type="number" name="w" step="any"></label>
+        <label>Est (lon) <input type="number" name="e" step="any"></label>
+        <label>Nord (lat) <input type="number" name="n" step="any"></label>
+        <label>Sud (lat) <input type="number" name="s" step="any"></label>
       </div>
       <p class="nota">Attenzione: cambiando il riquadro, il rilievo e la mappa dei colori vanno rigenerati con <code>npm run dati --solo=terreno</code> e <code>--solo=colori</code> (altrimenti restano riferiti al riquadro precedente).</p>
       <button class="primario">Salva impostazioni</button>

@@ -70,6 +70,8 @@ export class Percorso {
     this.audioAscoltati = new Set(); this.audioInCorso = null;
     this.player = ui.audioPlayer;
     this.player.addEventListener('ended', () => this.riprendiDopoAudio());
+    // se il file audio manca o non si carica, l'animazione non deve restare bloccata
+    this.player.addEventListener('error', () => { if (this.audioInCorso) { this.ui.audioTitolo.textContent = 'Audio non disponibile'; setTimeout(() => this.riprendiDopoAudio(), 1200); } });
     this.posCam = new THREE.Vector3(); this.mira = new THREE.Vector3();
   }
   avvia(it) {
@@ -85,7 +87,7 @@ export class Percorso {
     this.camera.position.copy(this.posCam); this.camera.lookAt(this.mira);
   }
   ferma() { this.attivo = false; this.inCorso = false; this.player.pause(); this.ui.audio.classList.add('nascosto'); }
-  play(v) { this.inCorso = v ?? !this.inCorso; this.ui.play.classList.toggle('in-corso', this.inCorso); if (this.inCorso && this.audioInCorso) { this.player.pause(); this.audioInCorso = null; this.ui.audio.classList.add('nascosto'); } }
+  play(v) { this.inCorso = v ?? !this.inCorso; this.ui.play.classList.toggle('in-corso', this.inCorso); this.ui.play.setAttribute('aria-label', this.inCorso ? 'Pausa' : 'Avvia'); this.ui.play.title = this.inCorso ? 'Pausa' : 'Avvia'; if (this.inCorso && this.audioInCorso) { this.player.pause(); this.audioInCorso = null; this.ui.audio.classList.add('nascosto'); } }
   vaiA(frazione) { this.s = frazione * this.lunghezza; this.posCam.copy(this.cameraPer(this.s, true)); }
   /** punto geo alla distanza s lungo il percorso */
   puntoGeo(s) {
