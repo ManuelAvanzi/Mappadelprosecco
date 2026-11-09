@@ -77,7 +77,12 @@ export class PannelloPoi {
 export function lightbox(imgs, i = 0) {
   let idx = i;
   const box = document.createElement('div'); box.id = 'lightbox';
-  const mostra = () => { const m = imgs[idx]; box.innerHTML = `<img src="${esc(url(m.url))}" alt=""><div class="didascalia">${esc(m.titolo || '')} ${imgs.length > 1 ? `· ${idx + 1}/${imgs.length}` : ''}</div><button class="icona" aria-label="Chiudi"><svg viewBox="0 0 24 24"><path d="M6 6l12 12M18 6L6 18" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg></button>`; };
+  const mostra = () => {
+    const m = imgs[idx];
+    // credito e licenza (foto da Wikimedia Commons o di altri autori): obbligatori per le licenze CC
+    const credito = m.credito ? `<div class="credito">${m.fonteUrl ? `<a href="${esc(m.fonteUrl)}" target="_blank" rel="noopener">${esc(m.credito)}</a>` : esc(m.credito)}</div>` : '';
+    box.innerHTML = `<img src="${esc(url(m.url))}" alt=""><div class="didascalia">${esc(m.titolo || '')} ${imgs.length > 1 ? `· ${idx + 1}/${imgs.length}` : ''}${credito}</div><button class="icona" aria-label="Chiudi"><svg viewBox="0 0 24 24"><path d="M6 6l12 12M18 6L6 18" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg></button>`;
+  };
   mostra();
   box.addEventListener('click', (e) => { if (e.target.tagName === 'IMG' && imgs.length > 1) { idx = (idx + 1) % imgs.length; mostra(); } else box.remove(); });
   const tast = (e) => { if (e.key === 'Escape') { box.remove(); removeEventListener('keydown', tast); } if (e.key === 'ArrowRight') { idx = (idx + 1) % imgs.length; mostra(); } if (e.key === 'ArrowLeft') { idx = (idx - 1 + imgs.length) % imgs.length; mostra(); } };

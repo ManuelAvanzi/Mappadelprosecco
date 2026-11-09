@@ -136,6 +136,8 @@ button { cursor: pointer; }
 #lightbox { position: fixed; inset: 0; background: rgba(20, 20, 16, .92); display: grid; place-items: center; z-index: 50; }
 #lightbox img { max-width: 94vw; max-height: 90vh; border-radius: 8px; box-shadow: 0 10px 50px rgba(0,0,0,.5); }
 #lightbox .didascalia { position: absolute; bottom: 16px; left: 0; right: 0; text-align: center; color: #fff; font-size: 13px; }
+#lightbox .credito { font-size: 11px; opacity: .75; margin-top: 4px; }
+#lightbox .credito a { color: #fff; text-decoration: underline dotted; }
 #lightbox button { position: absolute; top: 14px; right: 14px; }
 
 /* Visore 360 */

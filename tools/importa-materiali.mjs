@@ -18,8 +18,9 @@ const SRC = process.argv[2];
 if (!SRC || !fs.existsSync(SRC)) { console.error('Indica la cartella dei materiali estratti.'); process.exit(1); }
 const log = (...a) => console.log('[materiali]', ...a);
 
-// 1. Mappe fornite
-const MAPPE = { stradale: 'MAPPA STRADALE GRANDE.jpg', rilievo: 'MAPPA RILIEVO GRANDE.jpg', satellite: 'MAPPA SATELLITE GRANDE.jpg' };
+// 1. Mappe fornite (solo con --mappe: sono screenshot di Google Maps, utili per la calibrazione ma NON pubblicabili;
+//    la webapp pubblica usa la mappa vettoriale OSM e il satellite Sentinel-2 di tools/satellite.mjs)
+const MAPPE = process.argv.includes('--mappe') ? { stradale: 'MAPPA STRADALE GRANDE.jpg', rilievo: 'MAPPA RILIEVO GRANDE.jpg', satellite: 'MAPPA SATELLITE GRANDE.jpg' } : {};
 fs.mkdirSync(path.join(ROOT, 'public/mappe'), { recursive: true });
 for (const [id, nome] of Object.entries(MAPPE)) {
   const src = path.join(SRC, nome), dst = path.join(ROOT, 'public/mappe', id + '.jpg');

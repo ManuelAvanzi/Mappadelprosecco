@@ -5,6 +5,14 @@
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, viewport-fit=cover">
 <title>Mappa turistica del Prosecco</title>
 <meta name="description" content="Plastico 3D interattivo delle colline del Prosecco: punti di interesse, itinerari animati, audio geolocalizzati e foto 360.">
+<meta name="theme-color" content="#4d6b2f">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Mappa turistica del Prosecco">
+<meta property="og:description" content="Plastico 3D interattivo delle colline di Conegliano Valdobbiadene: borghi, castelli, abbazie e itinerari della Strada del Prosecco.">
+<meta property="og:image" content="anteprima.jpg">
+<meta property="og:locale" content="it_IT">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="icon" href="icona.svg" type="image/svg+xml">
 <link rel="stylesheet" href="css/app.css">
 <script type="importmap">
 { "imports": { "three": "/vendor/three/build/three.module.js", "three/addons/": "/vendor/three/examples/jsm/" } }
@@ -89,7 +97,7 @@
 </div>
 
 <div id="caricamento"><div class="spinner"></div><p id="caricamento-testo">Costruzione del plastico…</p></div>
-<div id="attribuzione">Rilievo: Mapzen/AWS Terrain Tiles · Vettori: © OpenStreetMap (ODbL) · Tracciati: OSRM</div>
+<div id="attribuzione">Rilievo: <a href="https://registry.opendata.aws/terrain-tiles/" target="_blank" rel="noopener">Mapzen/AWS Terrain Tiles</a> · Mappa: © <a href="https://www.openstreetmap.org/copyright" target="_blank" rel="noopener">OpenStreetMap</a> (ODbL) · Tracciati: OSRM · Satellite: <a href="https://s2maps.eu" target="_blank" rel="noopener">Sentinel-2 cloudless</a> by EOX (CC BY 4.0) · Foto: autori e licenze nelle schede</div>
 
 <script type="module" src="js/app.js"></script>
 </body>

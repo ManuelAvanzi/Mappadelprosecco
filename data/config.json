@@ -24,22 +24,15 @@
       "id": "colori",
       "nome": "Mappa dei colori (vettoriale)",
       "file": "data/colori.jpg",
-      "predefinita": true
-    },
-    {
-      "id": "stradale",
-      "nome": "Mappa stradale",
-      "file": "mappe/stradale.jpg"
-    },
-    {
-      "id": "rilievo",
-      "nome": "Mappa del rilievo",
-      "file": "mappe/rilievo.jpg"
+      "predefinita": true,
+      "attribuzione": "© OpenStreetMap contributors (ODbL), colori vettoriali del progetto"
     },
     {
       "id": "satellite",
-      "nome": "Mappa satellitare",
-      "file": "mappe/satellite.jpg"
+      "nome": "Satellite (Sentinel-2, 2016)",
+      "file": "mappe/satellite.jpg",
+      "attribuzione": "Sentinel-2 cloudless 2016 © EOX IT Services GmbH, dati Copernicus Sentinel modificati (CC BY 4.0)",
+      "fonte": "https://s2maps.eu"
     }
   ],
   "terreno": {

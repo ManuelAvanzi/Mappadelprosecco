@@ -27,7 +27,8 @@ public/                    la webapp
   js/post.js               post-produzione (miniatura tilt-shift, bagliore, vignetta, saturazione, contrasto, temperatura, grana)
   js/vista.js              pannello Visualizzazione con i cursori e il salvataggio del predefinito (config.vista)
   admin/                   backend (login con password, schede POI / Itinerari e audio / Foto 360 / Impostazioni)
-  mappe/                   le tre mappe fornite ridotte a 4096 px (generate da tools/importa-materiali.mjs)
+  mappe/                   satellite.jpg: mosaico Sentinel-2 cloudless 2016 (EOX, CC BY 4.0) generato da tools/satellite.mjs
+  icona.svg, anteprima.jpg icona del sito e immagine per le anteprime social (meta Open Graph in index.html)
   modelli/                 GLB dei monumenti (pieve-san-pietro-di-feletto.glb fornito, versione leggera)
 data/                      dati del plastico (tutti rigenerabili con `npm run dati`)
   config.json              riquadro geografico, soglie dei livelli, esagerazione, mappe sovrapponibili
@@ -45,8 +46,11 @@ uploads/                   file caricati (foto dei monumenti, audio, foto 360, G
 tools/
   luoghi.mjs               ELENCO CURATO: i tre livelli del brief, coordinate stimate, i 15 monumenti, gli itinerari (tappe)
   build-data.mjs           costruzione dati (vedi §4)
-  importa-materiali.mjs    importa mappe, GLB e foto dei monumenti dalla cartella dei materiali
-  calibra-mappe.mjs        calibrazione automatica delle mappe fornite sui vettori OSM (vedi §4)
+  importa-materiali.mjs    importa GLB e foto dei monumenti dalla cartella dei materiali (le mappe Google solo con --mappe)
+  calibra-mappe.mjs        calibrazione automatica delle mappe fornite sui vettori OSM (vedi §4; richiede le mappe Google importate con --mappe)
+  satellite.mjs            scarica il mosaico satellitare libero Sentinel-2 (EOX) sul riquadro e aggiorna config.mappe
+  crediti.mjs              cerca le foto dei monumenti su Wikimedia Commons e scrive autore e licenza nei media dei POI
+Dockerfile, render.yaml    pubblicazione (vedi §7); .env.example: variabili d'ambiente
   geometria.mjs            funzioni condivise: Mercator, Overpass → poligoni/linee, rasterizzatore
 AVVIA.bat                  avvio con doppio clic su Windows
 ```
@@ -56,8 +60,10 @@ AVVIA.bat                  avvio con doppio clic su Windows
 1. `npm install` (una volta).
 2. `npm run dati` (una volta; ~6 minuti con Internet). Ricrea `data/`. **Non** sovrascrive `poi.json`, `itinerari.json`,
    `config.json` già esistenti (per rifarli: `--forza`, perdendo le modifiche del backend). Opzioni: `--solo=terreno|colori|dettaglio|luoghi|itinerari`, `--no-cache`.
-3. `npm run materiali -- "<cartella materiali estratti>"` (facoltativo, già fatto): copia le tre mappe GRANDE ridotte, il GLB
-   della pieve e le foto dei 15 monumenti dentro `uploads/poi/<id>/`, aggiungendole ai media dei POI.
+3. `npm run materiali -- "<cartella materiali estratti>"` (facoltativo, già fatto): copia il GLB della pieve e le foto dei
+   15 monumenti dentro `uploads/poi/<id>/`, aggiungendole ai media dei POI. Con `--mappe` copia anche le tre mappe GRANDE
+   (screenshot Google Maps): servono solo alla calibrazione e **non vanno pubblicate** (termini d'uso Google).
+   `node tools/satellite.mjs` genera invece il satellite pubblicabile; `node tools/crediti.mjs` aggiorna i crediti delle foto.
 4. `npm start` → http://localhost:5800. Backend su http://localhost:5800/admin (password `prosecco`, cambiabile con
    `ADMIN_PASSWORD=...` in un file `.env` nella cartella del progetto).
 
@@ -91,6 +97,14 @@ Nell'anteprima del Code tab il server si chiama `mappa-prosecco` (porta 5800). N
 - **Monumenti**: i 15 delle cartelle immagini; modelli procedurali per categoria (castello, abbazia, chiesa, pieve, campanile,
   villa, loggia, mulino, grotta, lago); la Pieve di San Pietro di Feletto usa il GLB Meshy fornito (quello da 0,6 MB; quello da
   11 MB è troppo pesante per il web).
+- **Satellite**: mosaico senza nuvole Sentinel-2 del 2016 di EOX IT Services (dati Copernicus), licenza CC BY 4.0 valida anche
+  per uso commerciale con l'attribuzione (già nel pannello Mappe e nella riga in basso). Gli anni dal 2017 in poi sono
+  CC BY-NC-SA, quindi non utilizzabili su un sito promozionale. Le ortofoto AGEA della Regione Veneto e del Geoportale Nazionale
+  sono state scartate: le prime sono "tutti i diritti riservati", il WMS nazionale restituisce immagini vuote.
+- **Foto dei monumenti**: 61 su 75 vengono da Wikimedia Commons (licenze CC BY, CC BY-SA 2.0–4.0 e pubblico dominio): autore e
+  licenza sono nel campo `credito` di ogni media (scritti da `tools/crediti.mjs`) e compaiono nel visore a tutto schermo con
+  il link alla pagina di origine. Le 14 senza credito sono le foto della pieve di San Pietro di Feletto (del committente) e la
+  veduta ottocentesca del castello di San Salvatore: da confermare con il committente prima della pubblicazione.
 
 ## 4b. Visualizzazione (pannello con i cursori)
 
@@ -123,7 +137,27 @@ I valori si salvano con "Salva come predefinito" insieme al resto (`vista` in co
   esporta/ripristina JSON.
 - Ogni salvataggio fa una copia in `data/backup/`. Il token di accesso vive in memoria del server: riavviando il server bisogna rifare il login.
 
-## 6. Limiti noti / prossimi passi
+## 6. Sicurezza
+
+- Login del backend: confronto a tempo costante, massimo 5 tentativi sbagliati per indirizzo poi 15 minuti di attesa, token
+  valido 12 ore (in memoria: il riavvio del server scollega tutti).
+- In produzione (`NODE_ENV=production`) il backend si attiva solo se `ADMIN_PASSWORD` ha almeno 8 caratteri e non è quella
+  predefinita; altrimenti `/api/login` risponde 503 e la mappa pubblica funziona lo stesso.
+- Caricamenti: solo immagini, video, audio e GLB (controllo sull'estensione), massimo 300 MB; intestazioni `nosniff`,
+  `X-Frame-Options`, `Referrer-Policy`; nessun cookie, quindi nessun banner.
+
+## 7. Pubblicazione (Render)
+
+Il repository è su GitHub (`ManuelAvanzi/Mappadelprosecco`) e contiene `Dockerfile` e `render.yaml` (Blueprint).
+1. Su Render: New → Blueprint → scegliere il repository. Crea il servizio web `mappa-prosecco` (piano Starter, Francoforte) con un
+   disco da 1 GB montato in `/var/dati`; `DATA_DIR` e `UPLOADS_DIR` puntano lì, così dati e file caricati sopravvivono ai deploy.
+   Al primo avvio il server copia sul disco i dati del repository (plastico, POI, foto): poi comandano quelli sul disco.
+2. Nel pannello Environment impostare `ADMIN_PASSWORD` (almeno 8 caratteri). Senza, il backend resta spento.
+3. Ogni `git push` su `main` rifà il deploy. I tasselli di dettaglio (`data/dettaglio`, 21 MB) sono nel repository apposta.
+4. Controllo: `https://<servizio>.onrender.com/salute` risponde `{"ok":true,"admin":true}`.
+Per un dominio proprio: Render → Settings → Custom Domains, poi un record CNAME dal gestore del dominio.
+
+## 8. Limiti noti / prossimi passi
 
 - Il riquadro è modificabile anche a mano dal backend (Impostazioni), ma poi richiede la rigenerazione di terreno e colori.
 - A bassa quota la mappa di base (10 m/px) è integrata dai tasselli di dettaglio (2,4 m/px); i tasselli pesano ~1 MB l'uno

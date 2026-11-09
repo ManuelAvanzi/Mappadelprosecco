@@ -278,7 +278,8 @@ class App {
       '<h3>Plastico</h3>' +
       `<label class="riga-opz"><span>Mostra tutte le scritte</span><input type="checkbox" id="tutte" ${this.etichette.mostraTutte ? 'checked' : ''}></label>` +
       '<p class="vuoto">Esagerazione del rilievo, luci, effetti e inquadratura si regolano nel pannello Visualizzazione (icona dei cursori in alto a destra).</p>' +
-      '<p class="vuoto">Le mappe stradale, del rilievo e satellitare sono quelle fornite; la mappa dei colori è ricavata in vettoriale da OpenStreetMap (vigneti, boschi, centri abitati, acque, strade).</p>';
+      '<h3>Fonti</h3>' + mappe.filter((m) => m.attribuzione).map((m) => `<p class="vuoto"><b>${esc(m.nome)}</b>: ${esc(m.attribuzione)}${m.fonte ? ` · <a href="${esc(m.fonte)}" target="_blank" rel="noopener">fonte</a>` : ''}</p>`).join('') +
+      '<p class="vuoto">Rilievo: Mapzen/AWS Terrain Tiles (SRTM, EU-DEM). Tracciati su strada: OSRM su dati OpenStreetMap.</p>';
     corpo.querySelectorAll('input[name=mappa]').forEach((r) => r.addEventListener('change', () => { const m = mappe.find((x) => x.id === r.value); this.terreno.impostaMappa(m.id, m.file); }));
     corpo.querySelector('#sovra').addEventListener('change', (e) => { const m = mappe.find((x) => x.id === e.target.value); this.terreno.impostaSovrapposta(m?.id, m?.file, +corpo.querySelector('#sovra-op').value); });
     corpo.querySelector('#sovra-op').addEventListener('input', (e) => this.terreno.opacitaSovrapposta(+e.target.value));

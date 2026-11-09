@@ -8,19 +8,37 @@ import crypto from 'node:crypto';
 import { fileURLToPath } from 'node:url';
 
 const ROOT = path.dirname(fileURLToPath(import.meta.url));
-const DATA = path.join(ROOT, 'data');
-const UPLOADS = path.join(ROOT, 'uploads');
-fs.mkdirSync(UPLOADS, { recursive: true });
 
 // .env minimale
 if (fs.existsSync(path.join(ROOT, '.env'))) for (const riga of fs.readFileSync(path.join(ROOT, '.env'), 'utf8').split(/\r?\n/)) {
   const m = riga.match(/^\s*([A-Z_]+)\s*=\s*(.*)\s*$/); if (m && !process.env[m[1]]) process.env[m[1]] = m[2].replace(/^"|"$/g, '');
 }
+
+// Cartelle dei dati e dei file caricati. In hosting (Render, Docker) si spostano su un disco persistente con DATA_DIR e
+// UPLOADS_DIR: al primo avvio vengono riempite con il contenuto del repository (dati del plastico, foto dei monumenti).
+const DATA = process.env.DATA_DIR ? path.resolve(process.env.DATA_DIR) : path.join(ROOT, 'data');
+const UPLOADS = process.env.UPLOADS_DIR ? path.resolve(process.env.UPLOADS_DIR) : path.join(ROOT, 'uploads');
+const semina = (da, a) => {
+  if (path.resolve(da) === path.resolve(a) || !fs.existsSync(da)) return;
+  fs.mkdirSync(a, { recursive: true });
+  for (const f of fs.readdirSync(da, { withFileTypes: true })) {
+    if (f.name === 'cache' || f.name === 'backup') continue;
+    const s = path.join(da, f.name), d = path.join(a, f.name);
+    if (f.isDirectory()) semina(s, d); else if (!fs.existsSync(d)) fs.copyFileSync(s, d);
+  }
+};
+semina(path.join(ROOT, 'data'), DATA); semina(path.join(ROOT, 'uploads'), UPLOADS);
+fs.mkdirSync(UPLOADS, { recursive: true });
 const argPort = process.argv.indexOf('--port');
 const PORT = +(argPort > 0 ? process.argv[argPort + 1] : process.env.PORT || 5800);
 const PASSWORD = process.env.ADMIN_PASSWORD || 'prosecco';
+const PRODUZIONE = process.env.NODE_ENV === 'production';
+// in produzione il backend si attiva solo con una password impostata (mai quella predefinita)
+const ADMIN_ATTIVO = !(PRODUZIONE && (PASSWORD === 'prosecco' || PASSWORD.length < 8));
 
 const app = express();
+app.disable('x-powered-by');
+app.use((req, res, next) => { res.set({ 'X-Content-Type-Options': 'nosniff', 'X-Frame-Options': 'SAMEORIGIN', 'Referrer-Policy': 'strict-origin-when-cross-origin' }); next(); });
 app.use(express.json({ limit: '20mb' }));
 
 // ── Dati su file JSON (semplici, versionabili, modificabili anche a mano) ──
@@ -37,15 +55,27 @@ const scrivi = (k, v) => {
 };
 
 // ── Autenticazione admin: token in memoria dopo il login ──
-const tokens = new Set();
+const tokens = new Map(); // token → scadenza (ms)
+const DURATA_TOKEN = 12 * 3600 * 1000;
+// tentativi di login per indirizzo: dopo 5 errori si aspetta 15 minuti
+const tentativi = new Map();
+const ipDi = (req) => (req.get('x-forwarded-for') || '').split(',')[0].trim() || req.ip || req.socket.remoteAddress || '?';
+const confrontoSicuro = (a, b) => { const x = Buffer.from(String(a)), y = Buffer.from(String(b)); return x.length === y.length && crypto.timingSafeEqual(x, y); };
 app.post('/api/login', (req, res) => {
-  if ((req.body?.password || '') !== PASSWORD) return res.status(401).json({ errore: 'Password errata' });
-  const t = crypto.randomBytes(24).toString('hex'); tokens.add(t);
+  if (!ADMIN_ATTIVO) return res.status(503).json({ errore: 'Backend disattivato: imposta ADMIN_PASSWORD (almeno 8 caratteri) sul server' });
+  const ip = ipDi(req), t0 = tentativi.get(ip) || { n: 0, fino: 0 };
+  if (t0.fino > Date.now()) return res.status(429).json({ errore: `Troppi tentativi: riprova tra ${Math.ceil((t0.fino - Date.now()) / 60000)} minuti` });
+  if (!confrontoSicuro(req.body?.password || '', PASSWORD)) {
+    t0.n++; if (t0.n >= 5) { t0.n = 0; t0.fino = Date.now() + 15 * 60000; } tentativi.set(ip, t0);
+    return res.status(401).json({ errore: 'Password errata' });
+  }
+  tentativi.delete(ip);
+  const t = crypto.randomBytes(24).toString('hex'); tokens.set(t, Date.now() + DURATA_TOKEN);
   res.json({ token: t });
 });
 const admin = (req, res, next) => {
   const t = req.get('x-admin-token') || req.query.token;
-  if (t && tokens.has(t)) return next();
+  if (t && tokens.has(t)) { if (tokens.get(t) > Date.now()) return next(); tokens.delete(t); }
   res.status(401).json({ errore: 'Accesso riservato: effettua il login nel backend' });
 };
 
@@ -82,10 +112,12 @@ const storage = multer.diskStorage({
   destination: (req, file, cb) => { const d = path.join(UPLOADS, (req.query.cartella || 'media').replace(/[^a-z0-9/_-]/gi, '')); fs.mkdirSync(d, { recursive: true }); cb(null, d); },
   filename: (req, file, cb) => cb(null, Date.now().toString(36) + '-' + file.originalname.normalize('NFD').replace(/[̀-ͯ]/g, '').replace(/[^a-zA-Z0-9._-]+/g, '-')),
 });
-const upload = multer({ storage, limits: { fileSize: 300 * 1024 * 1024 } });
+// solo tipi di file previsti: immagini, video, audio, modelli GLB (niente script o pagine)
+const ESTENSIONI = /\.(jpe?g|png|webp|gif|avif|mp4|webm|mov|m4v|mp3|m4a|aac|ogg|oga|wav|flac|glb)$/i;
+const upload = multer({ storage, limits: { fileSize: 300 * 1024 * 1024 }, fileFilter: (req, file, cb) => cb(null, ESTENSIONI.test(file.originalname)) });
 app.post('/api/upload', admin, upload.single('file'), (req, res) => {
-  if (!req.file) return res.status(400).json({ errore: 'nessun file' });
-  res.json({ url: path.relative(ROOT, req.file.path).replace(/\\/g, '/'), nome: req.file.originalname, dimensione: req.file.size, tipo: req.file.mimetype });
+  if (!req.file) return res.status(400).json({ errore: 'nessun file, oppure tipo di file non ammesso (immagini, video, audio, GLB)' });
+  res.json({ url: 'uploads/' + path.relative(UPLOADS, req.file.path).replace(/\\/g, '/'), nome: req.file.originalname, dimensione: req.file.size, tipo: req.file.mimetype });
 });
 
 // Ricalcolo del tracciato di un itinerario sulla rete stradale (OSRM, progetto OpenStreetMap)
@@ -114,7 +146,11 @@ app.use('/data', express.static(DATA, { maxAge: '1h' }));
 app.use('/uploads', express.static(UPLOADS, { maxAge: '1d' }));
 app.use(express.static(path.join(ROOT, 'public'), { extensions: ['html'] }));
 
+app.get('/salute', (req, res) => res.json({ ok: true, admin: ADMIN_ATTIVO }));
+
 app.listen(PORT, () => {
   console.log(`Mappa turistica del Prosecco → http://localhost:${PORT}   (backend: http://localhost:${PORT}/admin)`);
-  if (PASSWORD === 'prosecco') console.log('  password admin predefinita "prosecco": cambiala con ADMIN_PASSWORD nel file .env');
+  console.log(`  dati: ${DATA}   file caricati: ${UPLOADS}`);
+  if (!ADMIN_ATTIVO) console.log('  ATTENZIONE: backend DISATTIVATO perché ADMIN_PASSWORD manca o è troppo corta (produzione)');
+  else if (PASSWORD === 'prosecco') console.log('  password admin predefinita "prosecco": cambiala con ADMIN_PASSWORD nel file .env');
 });

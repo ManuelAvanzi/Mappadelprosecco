@@ -1105,32 +1105,62 @@
       {
         "tipo": "immagine",
         "url": "uploads/poi/castello-conegliano/castello-di-conegliano-fronte.jpg",
-        "titolo": "CASTELLO DI CONEGLIANO FRONTE"
+        "titolo": "CASTELLO DI CONEGLIANO FRONTE",
+        "credito": "Maicol Della Vedova, CC BY-SA 4.0, via Wikimedia Commons",
+        "licenza": "CC BY-SA 4.0",
+        "licenzaUrl": "https://creativecommons.org/licenses/by-sa/4.0",
+        "fonteUrl": "https://commons.wikimedia.org/wiki/File:CASTELLO_DI_CONEGLIANO_FRONTE.jpg",
+        "fonte": "Wikimedia Commons"
       },
       {
         "tipo": "immagine",
         "url": "uploads/poi/castello-conegliano/castel-de-conejan.jpg",
-        "titolo": "Castel de Conejan"
+        "titolo": "Castel de Conejan",
+        "credito": "Marcantonio Bevilacqua, CC BY-SA 4.0, via Wikimedia Commons",
+        "licenza": "CC BY-SA 4.0",
+        "licenzaUrl": "https://creativecommons.org/licenses/by-sa/4.0",
+        "fonteUrl": "https://commons.wikimedia.org/wiki/File:Castel_de_Conejan.jpg",
+        "fonte": "Wikimedia Commons"
       },
       {
         "tipo": "immagine",
         "url": "uploads/poi/castello-conegliano/castello-di-conegliano.jpg",
-        "titolo": "Castello Di Conegliano"
+        "titolo": "Castello Di Conegliano",
+        "credito": "TonySugamàn, CC BY-SA 4.0, via Wikimedia Commons",
+        "licenza": "CC BY-SA 4.0",
+        "licenzaUrl": "https://creativecommons.org/licenses/by-sa/4.0",
+        "fonteUrl": "https://commons.wikimedia.org/wiki/File:Castello_Di_Conegliano.jpg",
+        "fonte": "Wikimedia Commons"
       },
       {
         "tipo": "immagine",
         "url": "uploads/poi/castello-conegliano/castello-di-conegliano-01.jpg",
-        "titolo": "Castello di Conegliano 01"
+        "titolo": "Castello di Conegliano 01",
+        "credito": "Marchetto da Trieste, CC BY-SA 4.0, via Wikimedia Commons",
+        "licenza": "CC BY-SA 4.0",
+        "licenzaUrl": "https://creativecommons.org/licenses/by-sa/4.0",
+        "fonteUrl": "https://commons.wikimedia.org/wiki/File:Castello_di_Conegliano_01.jpg",
+        "fonte": "Wikimedia Commons"
       },
       {
         "tipo": "immagine",
         "url": "uploads/poi/castello-conegliano/conegliano-castello-2007.jpg",
-        "titolo": "Conegliano Castello 2007"
+        "titolo": "Conegliano Castello 2007",
+        "credito": "Vaghestelledellorsa, Paolo Steffan, CC BY-SA 3.0, via Wikimedia Commons",
+        "licenza": "CC BY-SA 3.0",
+        "licenzaUrl": "https://creativecommons.org/licenses/by-sa/3.0",
+        "fonteUrl": "https://commons.wikimedia.org/wiki/File:Conegliano_Castello_2007.jpg",
+        "fonte": "Wikimedia Commons"
       },
       {
         "tipo": "immagine",
         "url": "uploads/poi/castello-conegliano/conegliano-vista-dal-castello.jpg",
-        "titolo": "Conegliano vista dal Castello"
+        "titolo": "Conegliano vista dal Castello",
+        "credito": "Paolo Steffan (Paolo Steffan at it.wikipedia), CC BY-SA 3.0, via Wikimedia Commons",
+        "licenza": "CC BY-SA 3.0",
+        "licenzaUrl": "http://creativecommons.org/licenses/by-sa/3.0/",
+        "fonteUrl": "https://commons.wikimedia.org/wiki/File:Conegliano_vista_dal_Castello.jpg",
+        "fonte": "Wikimedia Commons"
       }
     ],
     "modello": {
@@ -1156,42 +1186,82 @@
       {
         "tipo": "immagine",
         "url": "uploads/poi/villa-dei-cedri/3840px-villa-dei-cedri-valdobbiadene-abc3.jpg",
-        "titolo": "3840px-Villa dei Cedri - Valdobbiadene abc3"
+        "titolo": "3840px-Villa dei Cedri - Valdobbiadene abc3",
+        "credito": "Patafisik, CC BY-SA 4.0, via Wikimedia Commons",
+        "licenza": "CC BY-SA 4.0",
+        "licenzaUrl": "https://creativecommons.org/licenses/by-sa/4.0",
+        "fonteUrl": "https://commons.wikimedia.org/wiki/File:Villa_dei_Cedri_-_Valdobbiadene_abc3.jpg",
+        "fonte": "Wikimedia Commons"
       },
       {
         "tipo": "immagine",
         "url": "uploads/poi/villa-dei-cedri/valdobiadene-schloss-bildid-15673094.jpg",
-        "titolo": "Valdobiadene, Schloss. (BildID 15673094)"
+        "titolo": "Valdobiadene, Schloss. (BildID 15673094)",
+        "credito": "K.u.k. Kriegspressequartier, Lichtbildstelle - Wien, Public domain, via Wikimedia Commons",
+        "licenza": "Public domain",
+        "licenzaUrl": null,
+        "fonteUrl": "https://commons.wikimedia.org/wiki/File:Valdobiadene,_Schloss._(BildID_15673094).jpg",
+        "fonte": "Wikimedia Commons"
       },
       {
         "tipo": "immagine",
         "url": "uploads/poi/villa-dei-cedri/villa-dei-cedri-esterno-dettaglio-affreschi-valdobbiadene-01.jpg",
-        "titolo": "Villa dei Cedri, esterno, dettaglio affreschi (Valdobbiadene) 01"
+        "titolo": "Villa dei Cedri, esterno, dettaglio affreschi (Valdobbiadene) 01",
+        "credito": "Threecharlie, CC BY-SA 4.0, via Wikimedia Commons",
+        "licenza": "CC BY-SA 4.0",
+        "licenzaUrl": "https://creativecommons.org/licenses/by-sa/4.0",
+        "fonteUrl": "https://commons.wikimedia.org/wiki/File:Villa_dei_Cedri,_esterno,_dettaglio_affreschi_(Valdobbiadene)_01.jpg",
+        "fonte": "Wikimedia Commons"
       },
       {
         "tipo": "immagine",
         "url": "uploads/poi/villa-dei-cedri/villa-dei-cedri-valdobbiadene-parco-01.jpg",
-        "titolo": "Villa dei Cedri (Valdobbiadene) - Parco 01"
+        "titolo": "Villa dei Cedri (Valdobbiadene) - Parco 01",
+        "credito": "Threecharlie, CC BY-SA 4.0, via Wikimedia Commons",
+        "licenza": "CC BY-SA 4.0",
+        "licenzaUrl": "https://creativecommons.org/licenses/by-sa/4.0",
+        "fonteUrl": "https://commons.wikimedia.org/wiki/File:Villa_dei_Cedri_(Valdobbiadene)_-_Parco_01.jpg",
+        "fonte": "Wikimedia Commons"
       },
       {
         "tipo": "immagine",
         "url": "uploads/poi/villa-dei-cedri/villa-dei-cedri-valdobbiadene-abc21.jpg",
-        "titolo": "Villa dei Cedri - Valdobbiadene abc21"
+        "titolo": "Villa dei Cedri - Valdobbiadene abc21",
+        "credito": "Patafisik, CC BY-SA 4.0, via Wikimedia Commons",
+        "licenza": "CC BY-SA 4.0",
+        "licenzaUrl": "https://creativecommons.org/licenses/by-sa/4.0",
+        "fonteUrl": "https://commons.wikimedia.org/wiki/File:Villa_dei_Cedri_-_Valdobbiadene_abc21.jpg",
+        "fonte": "Wikimedia Commons"
       },
       {
         "tipo": "immagine",
         "url": "uploads/poi/villa-dei-cedri/villa-dei-cedri-valdobbiadene-abc5.jpg",
-        "titolo": "Villa dei Cedri - Valdobbiadene abc5"
+        "titolo": "Villa dei Cedri - Valdobbiadene abc5",
+        "credito": "Patafisik, CC BY-SA 4.0, via Wikimedia Commons",
+        "licenza": "CC BY-SA 4.0",
+        "licenzaUrl": "https://creativecommons.org/licenses/by-sa/4.0",
+        "fonteUrl": "https://commons.wikimedia.org/wiki/File:Villa_dei_Cedri_-_Valdobbiadene_abc5.jpg",
+        "fonte": "Wikimedia Commons"
       },
       {
         "tipo": "immagine",
         "url": "uploads/poi/villa-dei-cedri/villa-dei-cedri-valdobbiadene-abc6.jpg",
-        "titolo": "Villa dei Cedri - Valdobbiadene abc6"
+        "titolo": "Villa dei Cedri - Valdobbiadene abc6",
+        "credito": "Patafisik, CC BY-SA 4.0, via Wikimedia Commons",
+        "licenza": "CC BY-SA 4.0",
+        "licenzaUrl": "https://creativecommons.org/licenses/by-sa/4.0",
+        "fonteUrl": "https://commons.wikimedia.org/wiki/File:Villa_dei_Cedri_-_Valdobbiadene_abc6.jpg",
+        "fonte": "Wikimedia Commons"
       },
       {
         "tipo": "immagine",
         "url": "uploads/poi/villa-dei-cedri/villa-dei-cedri-valdobbiadene-abc8.jpg",
-        "titolo": "Villa dei Cedri - Valdobbiadene abc8"
+        "titolo": "Villa dei Cedri - Valdobbiadene abc8",
+        "credito": "Patafisik, CC BY-SA 4.0, via Wikimedia Commons",
+        "licenza": "CC BY-SA 4.0",
+        "licenzaUrl": "https://creativecommons.org/licenses/by-sa/4.0",
+        "fonteUrl": "https://commons.wikimedia.org/wiki/File:Villa_dei_Cedri_-_Valdobbiadene_abc8.jpg",
+        "fonte": "Wikimedia Commons"
       }
     ],
     "modello": {
@@ -1217,42 +1287,82 @@
       {
         "tipo": "immagine",
         "url": "uploads/poi/abbazia-follina/abbazia-di-santa-maria-di-follina-wikiraduno-alle-colline-del-prosecco-abc10.jpg",
-        "titolo": "Abbazia di Santa Maria di Follina - wikiraduno Alle colline del prosecco abc10"
+        "titolo": "Abbazia di Santa Maria di Follina - wikiraduno Alle colline del prosecco abc10",
+        "credito": "Patafisik, CC BY-SA 4.0, via Wikimedia Commons",
+        "licenza": "CC BY-SA 4.0",
+        "licenzaUrl": "https://creativecommons.org/licenses/by-sa/4.0",
+        "fonteUrl": "https://commons.wikimedia.org/wiki/File:Abbazia_di_Santa_Maria_di_Follina_-_wikiraduno_Alle_colline_del_prosecco_abc10.jpg",
+        "fonte": "Wikimedia Commons"
       },
       {
         "tipo": "immagine",
         "url": "uploads/poi/abbazia-follina/basilica-follina-interno-01.jpg",
-        "titolo": "Basilica Follina interno 01"
+        "titolo": "Basilica Follina interno 01",
+        "credito": "Civvì, CC BY-SA 4.0, via Wikimedia Commons",
+        "licenza": "CC BY-SA 4.0",
+        "licenzaUrl": "https://creativecommons.org/licenses/by-sa/4.0",
+        "fonteUrl": "https://commons.wikimedia.org/wiki/File:Basilica_Follina_interno_01.jpg",
+        "fonte": "Wikimedia Commons"
       },
       {
         "tipo": "immagine",
         "url": "uploads/poi/abbazia-follina/basilica-di-follina-e-scalinata-del-borromeo.jpg",
-        "titolo": "Basilica di Follina e scalinata del Borromeo"
+        "titolo": "Basilica di Follina e scalinata del Borromeo",
+        "credito": "Amidavegre, CC BY-SA 4.0, via Wikimedia Commons",
+        "licenza": "CC BY-SA 4.0",
+        "licenzaUrl": "https://creativecommons.org/licenses/by-sa/4.0",
+        "fonteUrl": "https://commons.wikimedia.org/wiki/File:Basilica_di_Follina_e_scalinata_del_Borromeo.jpg",
+        "fonte": "Wikimedia Commons"
       },
       {
         "tipo": "immagine",
         "url": "uploads/poi/abbazia-follina/follinaabbazia1.jpg",
-        "titolo": "FollinaAbbazia1"
+        "titolo": "FollinaAbbazia1",
+        "credito": "mararie, CC BY-SA 2.0, via Wikimedia Commons",
+        "licenza": "CC BY-SA 2.0",
+        "licenzaUrl": "https://creativecommons.org/licenses/by-sa/2.0",
+        "fonteUrl": "https://commons.wikimedia.org/wiki/File:FollinaAbbazia1.jpg",
+        "fonte": "Wikimedia Commons"
       },
       {
         "tipo": "immagine",
         "url": "uploads/poi/abbazia-follina/follinaabbazia2.jpg",
-        "titolo": "FollinaAbbazia2"
+        "titolo": "FollinaAbbazia2",
+        "credito": "mararie, CC BY-SA 2.0, via Wikimedia Commons",
+        "licenza": "CC BY-SA 2.0",
+        "licenzaUrl": "https://creativecommons.org/licenses/by-sa/2.0",
+        "fonteUrl": "https://commons.wikimedia.org/wiki/File:FollinaAbbazia2.jpg",
+        "fonte": "Wikimedia Commons"
       },
       {
         "tipo": "immagine",
         "url": "uploads/poi/abbazia-follina/follinachiostro.jpg",
-        "titolo": "FollinaChiostro"
+        "titolo": "FollinaChiostro",
+        "credito": "Lawrence Murray from Perth, Australia, CC BY 2.0, via Wikimedia Commons",
+        "licenza": "CC BY 2.0",
+        "licenzaUrl": "https://creativecommons.org/licenses/by/2.0",
+        "fonteUrl": "https://commons.wikimedia.org/wiki/File:FollinaChiostro.jpg",
+        "fonte": "Wikimedia Commons"
       },
       {
         "tipo": "immagine",
         "url": "uploads/poi/abbazia-follina/follina-facciata-abbazia.jpg",
-        "titolo": "Follina Facciata abbazia"
+        "titolo": "Follina Facciata abbazia",
+        "credito": "Vaghestelledellorsa, CC BY-SA 3.0, via Wikimedia Commons",
+        "licenza": "CC BY-SA 3.0",
+        "licenzaUrl": "https://creativecommons.org/licenses/by-sa/3.0",
+        "fonteUrl": "https://commons.wikimedia.org/wiki/File:Follina_Facciata_abbazia.JPG",
+        "fonte": "Wikimedia Commons"
       },
       {
         "tipo": "immagine",
         "url": "uploads/poi/abbazia-follina/follina-scorcio-complesso-abbaziale-1.jpg",
-        "titolo": "Follina scorcio complesso abbaziale"
+        "titolo": "Follina scorcio complesso abbaziale",
+        "credito": "Amidavegre, CC BY-SA 4.0, via Wikimedia Commons",
+        "licenza": "CC BY-SA 4.0",
+        "licenzaUrl": "https://creativecommons.org/licenses/by-sa/4.0",
+        "fonteUrl": "https://commons.wikimedia.org/wiki/File:Follina_scorcio_complesso_abbaziale.jpg",
+        "fonte": "Wikimedia Commons"
       }
     ],
     "modello": {
@@ -1283,12 +1393,22 @@
       {
         "tipo": "immagine",
         "url": "uploads/poi/castelbrando/castelbrando.jpg",
-        "titolo": "Castelbrando"
+        "titolo": "Castelbrando",
+        "credito": "Alessio Milan from Italy, CC BY-SA 2.0, via Wikimedia Commons",
+        "licenza": "CC BY-SA 2.0",
+        "licenzaUrl": "https://creativecommons.org/licenses/by-sa/2.0",
+        "fonteUrl": "https://commons.wikimedia.org/wiki/File:Castelbrando.jpg",
+        "fonte": "Wikimedia Commons"
       },
       {
         "tipo": "immagine",
         "url": "uploads/poi/castelbrando/castelbrando2.jpg",
-        "titolo": "Castelbrando2"
+        "titolo": "Castelbrando2",
+        "credito": "Alessio Milan from Italy, CC BY-SA 2.0, via Wikimedia Commons",
+        "licenza": "CC BY-SA 2.0",
+        "licenzaUrl": "https://creativecommons.org/licenses/by-sa/2.0",
+        "fonteUrl": "https://commons.wikimedia.org/wiki/File:Castelbrando2.jpg",
+        "fonte": "Wikimedia Commons"
       },
       {
         "tipo": "immagine",
@@ -1298,12 +1418,22 @@
       {
         "tipo": "immagine",
         "url": "uploads/poi/castelbrando/castelbrando-funicolare-cison.jpg",
-        "titolo": "Castelbrando Funicolare Cison"
+        "titolo": "Castelbrando Funicolare Cison",
+        "credito": "Simonemb, CC BY-SA 4.0, via Wikimedia Commons",
+        "licenza": "CC BY-SA 4.0",
+        "licenzaUrl": "https://creativecommons.org/licenses/by-sa/4.0",
+        "fonteUrl": "https://commons.wikimedia.org/wiki/File:Castelbrando_Funicolare_Cison.jpg",
+        "fonte": "Wikimedia Commons"
       },
       {
         "tipo": "immagine",
         "url": "uploads/poi/castelbrando/castelbrando-cison-di-valmarino.jpg",
-        "titolo": "Castelbrando cison di valmarino"
+        "titolo": "Castelbrando cison di valmarino",
+        "credito": "Castel29, CC BY-SA 4.0, via Wikimedia Commons",
+        "licenza": "CC BY-SA 4.0",
+        "licenzaUrl": "https://creativecommons.org/licenses/by-sa/4.0",
+        "fonteUrl": "https://commons.wikimedia.org/wiki/File:Castelbrando_cison_di_valmarino.jpg",
+        "fonte": "Wikimedia Commons"
       }
     ],
     "modello": {
@@ -1329,7 +1459,12 @@
       {
         "tipo": "immagine",
         "url": "uploads/poi/loggia-serravalle/4472vittoriovenetologgiaserravalle.jpg",
-        "titolo": "4472VittorioVenetoLoggiaSerravalle"
+        "titolo": "4472VittorioVenetoLoggiaSerravalle",
+        "credito": "Geobia, CC BY-SA 4.0, via Wikimedia Commons",
+        "licenza": "CC BY-SA 4.0",
+        "licenzaUrl": "https://creativecommons.org/licenses/by-sa/4.0",
+        "fonteUrl": "https://commons.wikimedia.org/wiki/File:4472VittorioVenetoLoggiaSerravalle.jpg",
+        "fonte": "Wikimedia Commons"
       }
     ],
     "modello": {
@@ -1355,37 +1490,72 @@
       {
         "tipo": "immagine",
         "url": "uploads/poi/grotte-caglieron/grotte-del-caglieron-1.jpg",
-        "titolo": "Grotte del Caglieron 1"
+        "titolo": "Grotte del Caglieron 1",
+        "credito": "Paolo176 at Italian Wikipedia, Public domain, via Wikimedia Commons",
+        "licenza": "Public domain",
+        "licenzaUrl": null,
+        "fonteUrl": "https://commons.wikimedia.org/wiki/File:Grotte_del_Caglieron_1.JPG",
+        "fonte": "Wikimedia Commons"
       },
       {
         "tipo": "immagine",
         "url": "uploads/poi/grotte-caglieron/grotte-del-caglieron-2.jpg",
-        "titolo": "Grotte del Caglieron 2"
+        "titolo": "Grotte del Caglieron 2",
+        "credito": "Paolo176 at Italian Wikipedia, Public domain, via Wikimedia Commons",
+        "licenza": "Public domain",
+        "licenzaUrl": null,
+        "fonteUrl": "https://commons.wikimedia.org/wiki/File:Grotte_del_Caglieron_2.JPG",
+        "fonte": "Wikimedia Commons"
       },
       {
         "tipo": "immagine",
         "url": "uploads/poi/grotte-caglieron/grotte-del-caglieron-3.jpg",
-        "titolo": "Grotte del Caglieron 3"
+        "titolo": "Grotte del Caglieron 3",
+        "credito": "Paolo176 at Italian Wikipedia, Public domain, via Wikimedia Commons",
+        "licenza": "Public domain",
+        "licenzaUrl": null,
+        "fonteUrl": "https://commons.wikimedia.org/wiki/File:Grotte_del_Caglieron_3.JPG",
+        "fonte": "Wikimedia Commons"
       },
       {
         "tipo": "immagine",
         "url": "uploads/poi/grotte-caglieron/grotte-del-caglieron-4.jpg",
-        "titolo": "Grotte del Caglieron 4"
+        "titolo": "Grotte del Caglieron 4",
+        "credito": "Paolo176 at Italian Wikipedia, Public domain, via Wikimedia Commons",
+        "licenza": "Public domain",
+        "licenzaUrl": null,
+        "fonteUrl": "https://commons.wikimedia.org/wiki/File:Grotte_del_Caglieron_4.JPG",
+        "fonte": "Wikimedia Commons"
       },
       {
         "tipo": "immagine",
         "url": "uploads/poi/grotte-caglieron/grotte-del-caglieron-5.jpg",
-        "titolo": "Grotte del Caglieron 5"
+        "titolo": "Grotte del Caglieron 5",
+        "credito": "Paolo176 at Italian Wikipedia, Public domain, via Wikimedia Commons",
+        "licenza": "Public domain",
+        "licenzaUrl": null,
+        "fonteUrl": "https://commons.wikimedia.org/wiki/File:Grotte_del_Caglieron_5.JPG",
+        "fonte": "Wikimedia Commons"
       },
       {
         "tipo": "immagine",
         "url": "uploads/poi/grotte-caglieron/grotte-del-caglieron-6.jpg",
-        "titolo": "Grotte del Caglieron 6"
+        "titolo": "Grotte del Caglieron 6",
+        "credito": "Paolo176 at Italian Wikipedia, Public domain, via Wikimedia Commons",
+        "licenza": "Public domain",
+        "licenzaUrl": null,
+        "fonteUrl": "https://commons.wikimedia.org/wiki/File:Grotte_del_Caglieron_6.JPG",
+        "fonte": "Wikimedia Commons"
       },
       {
         "tipo": "immagine",
         "url": "uploads/poi/grotte-caglieron/grotte-del-caglieron-7.jpg",
-        "titolo": "Grotte del Caglieron 7"
+        "titolo": "Grotte del Caglieron 7",
+        "credito": "Paolo176 at Italian Wikipedia, Public domain, via Wikimedia Commons",
+        "licenza": "Public domain",
+        "licenzaUrl": null,
+        "fonteUrl": "https://commons.wikimedia.org/wiki/File:Grotte_del_Caglieron_7.JPG",
+        "fonte": "Wikimedia Commons"
       }
     ],
     "modello": {
@@ -1411,17 +1581,32 @@
       {
         "tipo": "immagine",
         "url": "uploads/poi/laghi-revine/lago-di-lago.jpg",
-        "titolo": "Lago di Lago"
+        "titolo": "Lago di Lago",
+        "credito": "Laghi di Revine, CC BY-SA 4.0, via Wikimedia Commons",
+        "licenza": "CC BY-SA 4.0",
+        "licenzaUrl": "https://creativecommons.org/licenses/by-sa/4.0",
+        "fonteUrl": "https://commons.wikimedia.org/wiki/File:Lago_di_Lago.jpeg",
+        "fonte": "Wikimedia Commons"
       },
       {
         "tipo": "immagine",
         "url": "uploads/poi/laghi-revine/lago-di-santa-maria.jpg",
-        "titolo": "Lago di Santa Maria"
+        "titolo": "Lago di Santa Maria",
+        "credito": "Laghi di Revine, CC BY-SA 4.0, via Wikimedia Commons",
+        "licenza": "CC BY-SA 4.0",
+        "licenzaUrl": "https://creativecommons.org/licenses/by-sa/4.0",
+        "fonteUrl": "https://commons.wikimedia.org/wiki/File:Lago_di_Santa_Maria.jpeg",
+        "fonte": "Wikimedia Commons"
       },
       {
         "tipo": "immagine",
         "url": "uploads/poi/laghi-revine/revine.jpg",
-        "titolo": "Revine"
+        "titolo": "Revine",
+        "credito": "Frassionsistematiche, CC BY 3.0, via Wikimedia Commons",
+        "licenza": "CC BY 3.0",
+        "licenzaUrl": "https://creativecommons.org/licenses/by/3.0",
+        "fonteUrl": "https://commons.wikimedia.org/wiki/File:Revine.jpg",
+        "fonte": "Wikimedia Commons"
       }
     ],
     "modello": {
@@ -1447,17 +1632,32 @@
       {
         "tipo": "immagine",
         "url": "uploads/poi/molinetto-croda/molinetto-della-croda-front.jpg",
-        "titolo": "Molinetto della Croda (Front)"
+        "titolo": "Molinetto della Croda (Front)",
+        "credito": "Piave, CC BY-SA 3.0, via Wikimedia Commons",
+        "licenza": "CC BY-SA 3.0",
+        "licenzaUrl": "http://creativecommons.org/licenses/by-sa/3.0/",
+        "fonteUrl": "https://commons.wikimedia.org/wiki/File:Molinetto_della_Croda_(Front).jpg",
+        "fonte": "Wikimedia Commons"
       },
       {
         "tipo": "immagine",
         "url": "uploads/poi/molinetto-croda/molinetto-della-croda-refrontolo.jpg",
-        "titolo": "Molinetto della Croda (Refrontolo)"
+        "titolo": "Molinetto della Croda (Refrontolo)",
+        "credito": "The original uploader was Piave at Italian Wikipedia., CC BY-SA 3.0, via Wikimedia Commons",
+        "licenza": "CC BY-SA 3.0",
+        "licenzaUrl": "http://creativecommons.org/licenses/by-sa/3.0/",
+        "fonteUrl": "https://commons.wikimedia.org/wiki/File:Molinetto_della_Croda_(Refrontolo).JPG",
+        "fonte": "Wikimedia Commons"
       },
       {
         "tipo": "immagine",
         "url": "uploads/poi/molinetto-croda/refrontolo-molinetto-della-croda-fono.jpg",
-        "titolo": "Refrontolo Molinetto della Croda FoNo"
+        "titolo": "Refrontolo Molinetto della Croda FoNo",
+        "credito": "Chfono, CC BY-SA 3.0, via Wikimedia Commons",
+        "licenza": "CC BY-SA 3.0",
+        "licenzaUrl": "https://creativecommons.org/licenses/by-sa/3.0",
+        "fonteUrl": "https://commons.wikimedia.org/wiki/File:Refrontolo_Molinetto_della_Croda_FoNo.jpg",
+        "fonte": "Wikimedia Commons"
       }
     ],
     "modello": {
@@ -1483,7 +1683,12 @@
       {
         "tipo": "immagine",
         "url": "uploads/poi/villa-brandolini/solighetto-2008-04-25-villa.jpg",
-        "titolo": "Solighetto 2008-04-25 Villa"
+        "titolo": "Solighetto 2008-04-25 Villa",
+        "credito": "Vaghestelledellorsa, CC BY-SA 3.0, via Wikimedia Commons",
+        "licenza": "CC BY-SA 3.0",
+        "licenzaUrl": "https://creativecommons.org/licenses/by-sa/3.0",
+        "fonteUrl": "https://commons.wikimedia.org/wiki/File:Solighetto_2008-04-25_Villa.JPG",
+        "fonte": "Wikimedia Commons"
       }
     ],
     "modello": {
@@ -1524,7 +1729,12 @@
       {
         "tipo": "immagine",
         "url": "uploads/poi/pieve-feletto/san-pietro-di-feletto-facciata-della-pieve-foto-di-paolo-steffan.jpg",
-        "titolo": "San Pietro di Feletto - Facciata della pieve (foto Paolo Steffan)"
+        "titolo": "San Pietro di Feletto - Facciata della pieve (foto Paolo Steffan)",
+        "credito": "Vaghestelledellorsa, Paolo Steffan, CC BY 3.0, via Wikimedia Commons",
+        "licenza": "CC BY 3.0",
+        "licenzaUrl": "https://creativecommons.org/licenses/by/3.0",
+        "fonteUrl": "https://commons.wikimedia.org/wiki/File:San_Pietro_di_Feletto_-_Facciata_della_pieve_-_Foto_di_Paolo_Steffan.jpg",
+        "fonte": "Wikimedia Commons"
       },
       {
         "tipo": "immagine",
@@ -1589,7 +1799,12 @@
       {
         "tipo": "immagine",
         "url": "uploads/poi/pieve-feletto/veduta-aerea.jpg",
-        "titolo": "veduta aerea"
+        "titolo": "veduta aerea",
+        "credito": "Giovannacamiapc03, CC BY-SA 4.0, via Wikimedia Commons",
+        "licenza": "CC BY-SA 4.0",
+        "licenzaUrl": "https://creativecommons.org/licenses/by-sa/4.0",
+        "fonteUrl": "https://commons.wikimedia.org/wiki/File:Veduta_aerea.jpg",
+        "fonte": "Wikimedia Commons"
       }
     ],
     "modello": {
@@ -1615,12 +1830,22 @@
       {
         "tipo": "immagine",
         "url": "uploads/poi/castello-collalto/castello-di-collalto-2022-23.jpg",
-        "titolo": "Castello di Collalto 2022 23"
+        "titolo": "Castello di Collalto 2022 23",
+        "credito": "Iolanda Pensa, CC BY-SA 4.0, via Wikimedia Commons",
+        "licenza": "CC BY-SA 4.0",
+        "licenzaUrl": "https://creativecommons.org/licenses/by-sa/4.0",
+        "fonteUrl": "https://commons.wikimedia.org/wiki/File:Castello_di_Collalto_2022_23.jpg",
+        "fonte": "Wikimedia Commons"
       },
       {
         "tipo": "immagine",
         "url": "uploads/poi/castello-collalto/collalto-susegana-castello.jpg",
-        "titolo": "Collalto (Susegana), castello"
+        "titolo": "Collalto (Susegana), castello",
+        "credito": "Vaghestelledellorsa, Paolo Steffan, CC BY-SA 3.0, via Wikimedia Commons",
+        "licenza": "CC BY-SA 3.0",
+        "licenzaUrl": "https://creativecommons.org/licenses/by-sa/3.0",
+        "fonteUrl": "https://commons.wikimedia.org/wiki/File:Collalto_(Susegana),_castello.jpg",
+        "fonte": "Wikimedia Commons"
       }
     ],
     "modello": {
@@ -1646,22 +1871,42 @@
       {
         "tipo": "immagine",
         "url": "uploads/poi/castello-san-salvatore/castello-di-san-salvatore.jpg",
-        "titolo": "Castello di San Salvatore"
+        "titolo": "Castello di San Salvatore",
+        "credito": "Original uploader was Alemasetto at it.wikipedia, CC BY 2.0, via Wikimedia Commons",
+        "licenza": "CC BY 2.0",
+        "licenzaUrl": "https://creativecommons.org/licenses/by/2.0",
+        "fonteUrl": "https://commons.wikimedia.org/wiki/File:Castello_di_San_Salvatore.JPG",
+        "fonte": "Wikimedia Commons"
       },
       {
         "tipo": "immagine",
         "url": "uploads/poi/castello-san-salvatore/paolo-monti-serie-fotografica-beic-6364221.jpg",
-        "titolo": "Paolo Monti - Serie fotografica - BEIC 6364221"
+        "titolo": "Paolo Monti - Serie fotografica - BEIC 6364221",
+        "credito": "Paolo Monti, CC BY-SA 4.0, via Wikimedia Commons",
+        "licenza": "CC BY-SA 4.0",
+        "licenzaUrl": "https://creativecommons.org/licenses/by-sa/4.0",
+        "fonteUrl": "https://commons.wikimedia.org/wiki/File:Paolo_Monti_-_Serie_fotografica_-_BEIC_6364221.jpg",
+        "fonte": "Wikimedia Commons"
       },
       {
         "tipo": "immagine",
         "url": "uploads/poi/castello-san-salvatore/susegana-19-marzo-1995-03.jpg",
-        "titolo": "Susegana, 19 marzo 1995 03"
+        "titolo": "Susegana, 19 marzo 1995 03",
+        "credito": "L'Ospite Inatteso, CC BY-SA 4.0, via Wikimedia Commons",
+        "licenza": "CC BY-SA 4.0",
+        "licenzaUrl": "https://creativecommons.org/licenses/by-sa/4.0",
+        "fonteUrl": "https://commons.wikimedia.org/wiki/File:Susegana,_19_marzo_1995_03.jpg",
+        "fonte": "Wikimedia Commons"
       },
       {
         "tipo": "immagine",
         "url": "uploads/poi/castello-san-salvatore/susegana-19-marzo-1995-20.jpg",
-        "titolo": "Susegana, 19 marzo 1995 20"
+        "titolo": "Susegana, 19 marzo 1995 20",
+        "credito": "L'Ospite Inatteso, CC BY-SA 4.0, via Wikimedia Commons",
+        "licenza": "CC BY-SA 4.0",
+        "licenzaUrl": "https://creativecommons.org/licenses/by-sa/4.0",
+        "fonteUrl": "https://commons.wikimedia.org/wiki/File:Susegana,_19_marzo_1995_20.jpg",
+        "fonte": "Wikimedia Commons"
       },
       {
         "tipo": "immagine",
@@ -1692,12 +1937,22 @@
       {
         "tipo": "immagine",
         "url": "uploads/poi/campanile-roganzuolo/castel-campanil-2008-07-15.jpg",
-        "titolo": "Castel-Campanil 2008-07-15"
+        "titolo": "Castel-Campanil 2008-07-15",
+        "credito": "Paolo Steffan, CC BY-SA 3.0, via Wikimedia Commons",
+        "licenza": "CC BY-SA 3.0",
+        "licenzaUrl": "https://creativecommons.org/licenses/by-sa/3.0",
+        "fonteUrl": "https://commons.wikimedia.org/wiki/File:Castel-Campanil_2008-07-15.JPG",
+        "fonte": "Wikimedia Commons"
       },
       {
         "tipo": "immagine",
         "url": "uploads/poi/campanile-roganzuolo/castello-roganzuolo-torre-campanaria-2011-foto-di-paolo-steffan.jpg",
-        "titolo": "Castello Roganzuolo - Torre campanaria (2011) (foto Paolo Steffan)"
+        "titolo": "Castello Roganzuolo - Torre campanaria (2011) (foto Paolo Steffan)",
+        "credito": "Paolo Steffan, CC BY 3.0, via Wikimedia Commons",
+        "licenza": "CC BY 3.0",
+        "licenzaUrl": "https://creativecommons.org/licenses/by/3.0",
+        "fonteUrl": "https://commons.wikimedia.org/wiki/File:Castello_Roganzuolo_-_Torre_campanaria_(2011)_-_Foto_di_Paolo_Steffan.jpg",
+        "fonte": "Wikimedia Commons"
       }
     ],
     "modello": {
@@ -1723,12 +1978,22 @@
       {
         "tipo": "immagine",
         "url": "uploads/poi/san-vigilio/chiesa-di-san-vigilio.jpg",
-        "titolo": "Chiesa di San Vigilio"
+        "titolo": "Chiesa di San Vigilio",
+        "credito": "Original uploader was Mesfet at it.wikipedia, CC BY-SA 3.0, via Wikimedia Commons",
+        "licenza": "CC BY-SA 3.0",
+        "licenzaUrl": "http://creativecommons.org/licenses/by-sa/3.0/",
+        "fonteUrl": "https://commons.wikimedia.org/wiki/File:Chiesa_di_San_Vigilio.jpeg",
+        "fonte": "Wikimedia Commons"
       },
       {
         "tipo": "immagine",
         "url": "uploads/poi/san-vigilio/farra-di-soligo-colsanmartino3.jpg",
-        "titolo": "Farra di Soligo-Colsanmartino3"
+        "titolo": "Farra di Soligo-Colsanmartino3",
+        "credito": "The original uploader was Mesfet at Italian Wikipedia., CC BY-SA 3.0, via Wikimedia Commons",
+        "licenza": "CC BY-SA 3.0",
+        "licenzaUrl": "http://creativecommons.org/licenses/by-sa/3.0/",
+        "fonteUrl": "https://commons.wikimedia.org/wiki/File:Farra_di_Soligo-Colsanmartino3.jpg",
+        "fonte": "Wikimedia Commons"
       }
     ],
     "modello": {
@@ -1754,22 +2019,42 @@
       {
         "tipo": "immagine",
         "url": "uploads/poi/abbazia-santa-bona/abbazia-di-vidor.jpg",
-        "titolo": "Abbazia di Vidor"
+        "titolo": "Abbazia di Vidor",
+        "credito": "Colbertaldo, CC BY-SA 4.0, via Wikimedia Commons",
+        "licenza": "CC BY-SA 4.0",
+        "licenzaUrl": "https://creativecommons.org/licenses/by-sa/4.0",
+        "fonteUrl": "https://commons.wikimedia.org/wiki/File:Abbazia_di_Vidor.jpg",
+        "fonte": "Wikimedia Commons"
       },
       {
         "tipo": "immagine",
         "url": "uploads/poi/abbazia-santa-bona/chiostro-abbazia-vidor.jpg",
-        "titolo": "Chiostro Abbazia Vidor"
+        "titolo": "Chiostro Abbazia Vidor",
+        "credito": "Colbertaldo, CC BY-SA 4.0, via Wikimedia Commons",
+        "licenza": "CC BY-SA 4.0",
+        "licenzaUrl": "https://creativecommons.org/licenses/by-sa/4.0",
+        "fonteUrl": "https://commons.wikimedia.org/wiki/File:Chiostro_Abbazia_Vidor.jpg",
+        "fonte": "Wikimedia Commons"
       },
       {
         "tipo": "immagine",
         "url": "uploads/poi/abbazia-santa-bona/interno-abbazia-vidor.jpg",
-        "titolo": "Interno Abbazia Vidor"
+        "titolo": "Interno Abbazia Vidor",
+        "credito": "Colbertaldo, CC BY-SA 4.0, via Wikimedia Commons",
+        "licenza": "CC BY-SA 4.0",
+        "licenzaUrl": "https://creativecommons.org/licenses/by-sa/4.0",
+        "fonteUrl": "https://commons.wikimedia.org/wiki/File:Interno_Abbazia_Vidor.jpg",
+        "fonte": "Wikimedia Commons"
       },
       {
         "tipo": "immagine",
         "url": "uploads/poi/abbazia-santa-bona/interno-abbazia-vidor-1.jpg",
-        "titolo": "Interno Abbazia Vidor 1"
+        "titolo": "Interno Abbazia Vidor 1",
+        "credito": "Colbertaldo, CC BY-SA 4.0, via Wikimedia Commons",
+        "licenza": "CC BY-SA 4.0",
+        "licenzaUrl": "https://creativecommons.org/licenses/by-sa/4.0",
+        "fonteUrl": "https://commons.wikimedia.org/wiki/File:Interno_Abbazia_Vidor_1.jpg",
+        "fonte": "Wikimedia Commons"
       }
     ],
     "modello": {

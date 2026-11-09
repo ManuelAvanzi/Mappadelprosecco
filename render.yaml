@@ -1,0 +1,22 @@
+# Blueprint Render: un servizio web Docker con disco persistente per dati e file caricati.
+# Deploy: Render → New → Blueprint → questo repository. Poi impostare ADMIN_PASSWORD nel pannello (Environment).
+services:
+  - type: web
+    name: mappa-prosecco
+    runtime: docker
+    plan: starter          # il piano gratuito dorme e non ha dischi persistenti
+    region: frankfurt
+    healthCheckPath: /salute
+    disk:
+      name: dati
+      mountPath: /var/dati
+      sizeGB: 1
+    envVars:
+      - key: NODE_ENV
+        value: production
+      - key: DATA_DIR
+        value: /var/dati/data
+      - key: UPLOADS_DIR
+        value: /var/dati/uploads
+      - key: ADMIN_PASSWORD
+        sync: false        # da inserire a mano nel pannello Render: almeno 8 caratteri, altrimenti il backend resta spento
