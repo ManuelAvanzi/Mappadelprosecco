@@ -148,7 +148,11 @@ I valori si salvano con "Salva come predefinito" insieme al resto (`vista` in co
 
 ## 7. Pubblicazione (Render)
 
-Il repository è su GitHub (`ManuelAvanzi/Mappadelprosecco`) e contiene `Dockerfile` e `render.yaml` (Blueprint).
+**ONLINE dal 9 novembre 2026 su https://mappa-prosecco.onrender.com** (backend: `/admin`, controllo: `/salute`). Servizio Render
+`mappa-prosecco` creato dal Blueprint omonimo (piano Starter, Francoforte, disco da 1 GB in `/var/dati`). Ogni push su `main`
+rifà il deploy. La password del backend è in Render → servizio → Environment → `ADMIN_PASSWORD` (modificabile lì).
+
+Procedura seguita. Il repository è su GitHub (`ManuelAvanzi/Mappadelprosecco`) e contiene `Dockerfile` e `render.yaml` (Blueprint).
 1. Su Render: New → Blueprint → scegliere il repository. Crea il servizio web `mappa-prosecco` (piano Starter, Francoforte) con un
    disco da 1 GB montato in `/var/dati`; `DATA_DIR` e `UPLOADS_DIR` puntano lì, così dati e file caricati sopravvivono ai deploy.
    Al primo avvio il server copia sul disco i dati del repository (plastico, POI, foto): poi comandano quelli sul disco.
